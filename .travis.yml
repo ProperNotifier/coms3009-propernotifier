@@ -1,3 +1,4 @@
-language: java
+language: python
 sudo: false
-#script: mvn clean verify
+python: 3.5
+script: pytest
