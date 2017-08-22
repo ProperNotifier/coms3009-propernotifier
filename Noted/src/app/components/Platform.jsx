@@ -40,6 +40,8 @@ class Platform extends React.Component {
                     <Switch>
                           <Route exact path="/" component={Home} />
                           <Route path="/Home" component={Home} />
+			  <Route path="/index.html" component={Home} />
+
                           <Route path="/Notebook" component={Notebook}/>
                           <Route path="/Explore" component={Explore} />
                           <Route path="/Store" component={Store} />

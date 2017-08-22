@@ -2,7 +2,10 @@ var user_id=getCookie("id");
 
 if(user_id==null || user_id==""){
    window.open("login.html","_self");
-}
+}/*else{
+   window.open("index.html","_self");
+}*/
+
 
 import React from 'react';
 import {render} from 'react-dom';

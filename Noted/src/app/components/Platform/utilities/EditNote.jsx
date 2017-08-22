@@ -30,7 +30,7 @@ class EditNote extends React.Component {
 	        
 	    });*/
 	    $.ajax({
-			url: "http://localhost:8081/practical.tex",
+			url: "http://165.165.131.69:8081/practical.tex",
 			cache: false,
 			type: "GET",
 			dataType: 'text',
