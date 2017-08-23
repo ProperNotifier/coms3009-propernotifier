@@ -7,4 +7,4 @@ try:
     mode=int(raw_input('Input:'))
     print(mode)
 except ValueError:
-    print "Not a number"
+    print("Not a number")
