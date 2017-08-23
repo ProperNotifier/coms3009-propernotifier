@@ -1,20 +1,11 @@
 coms3009-propernotifier
 =======================
 
-.. image:: https://img.shields.io/coveralls/coveralls-clients/coveralls-python.svg
-    :target: https://coveralls.io/r/coveralls-clients/coveralls-python
-
-.. image:: https://img.shields.io/travis/coveralls-clients/coveralls-python/master.svg
-    :target: https://travis-ci.org/coveralls-clients/coveralls-python
-
-.. image:: https://img.shields.io/pypi/v/coveralls.svg
-    :target: https://pypi.python.org/pypi/coveralls
-
-.. image:: https://img.shields.io/pypi/pyversions/coveralls.svg
-    :target: https://pypi.python.org/pypi/coveralls/
-
-.. .. image:: https://img.shields.io/pypi/dd/coveralls.svg
-    :target: https://pypi.python.org/pypi/coveralls/
+.. image:: https://coveralls.io/repos/github/ProperNotifier/coms3009-propernotifier/badge.svg?branch=master
+    :target: https://coveralls.io/github/ProperNotifier/coms3009-propernotifier?branch=master
+    
+.. image:: https://travis-ci.org/ProperNotifier/coms3009-propernotifier.svg?branch=master
+    :target: https://travis-ci.org/ProperNotifier/coms3009-propernotifier
     
 .. image:: https://badge.fury.io/js/react-native.svg
     :target: https://badge.fury.io/js/react-native
