@@ -1,6 +1,13 @@
-language: python
-sudo: false
-python: 3.5
-script: python test.py
+matrix:
+  include:
+  - language: python
+    sudo: false
+    python: 3.5
+    script: python test.py
 
-after_success: coveralls
+    after_success: coveralls
+    
+  - language: node_js
+    node_js:
+       - 0.12
+       
