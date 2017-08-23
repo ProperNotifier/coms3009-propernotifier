@@ -1,3 +1,4 @@
+https://badge.fury.io/js/react-native.svg
 # coms3009-propernotifier
 Project for COMS3009, Software Design, at the University of the Witwatersrand
 
