@@ -31,39 +31,43 @@ class Auth extends React.Component {
     onLogin(e){
         e.preventDefault();
 
-    	/*let email=this.state.username;
+    	let email=this.state.username;
     	let password=this.state.password;
-        console.log(email);
-        console.log(password);
-        $.post("http://localhost/AvoFeed/backend/api/login.php", {
-                email: email,
-                password: password
-            },
-            function(res){
-                var auth = JSON.parse(res)[0];
-                console.log("login res: "+res);
-                console.log(auth);
-                if (auth == null){
-                    this.setState({error: 'incorrect username/password'});
-                    this.setState({password: ''});
-                }else {
-                    cookie.save('avo_user', auth.id, { path: '/' });
-                    this.props.loggeduser("USER_LOGGING_IN",auth);
-                    this.props.changeAuth("USER_LOGGED");
-                    //cookie.save('userName', auth.username, { path: '/' });
-                    /*const location = this.props.location
-                    if (location.state && location.state.nextPathname) {
-                      browserHistory.push(location.state.nextPathname)
-                    } else {
-                      browserHistory.push('/')
+        if (email=="") {
+            this.setState({error: 'Please enter email'});
+
+        }else if (password=="") {
+            this.setState({error: 'Please enter password'});
+        }else{
+            $.post("http://localhost:8081/loginuser", {
+                    email: email,
+                    password: password
+                },
+                function(res){
+                    console.log("login res: "+res);
+                    var auth = (res);
+                    console.log(auth);
+                    if ((auth == null) || (auth.length==0)){
+                        this.setState({error: 'incorrect email/password'});
+                        this.setState({password: ''});
+                        $(".form-padding")[0].reset();
+                    }else {
+                        /*cookie.save('avo_user', auth.id, { path: '/' });
+                        this.props.loggeduser("USER_LOGGING_IN",auth);
+                        this.props.changeAuth("USER_LOGGED");*/
+                        setCookie("id", ""+auth[0].id, 1);
+                        console.log("login id: "+auth[0].id);
+
+                        window.open("index.html","_self");
+                        console.log("LOGGED IN")
                     }
-                }
-            }.bind(this)
-        ); */
-        this.props.history.push('/');
-        this.props.changeAuth("LoggedIn");
-				setCookie("id", "1", 1);
-				window.open("index.html","_self");//***for mock
+                }.bind(this)
+            ); 
+            /*this.props.history.push('/');
+            this.props.changeAuth("LoggedIn");
+                    setCookie("id", "1", 1);
+                    window.open("index.html","_self");*///***for mock            
+        }
 
 
     }
@@ -73,7 +77,6 @@ class Auth extends React.Component {
 
     }
 	render () {
-        console.log("rendering")
 		return (
 			<div className="login-body">
 			  <div className="auth-body">

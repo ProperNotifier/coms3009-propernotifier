@@ -12,9 +12,9 @@ export default function (state={
 		}
 		break;
 		case "USER_LOGGED_IN":{
-			let id=action.payload;
+			/*let id=action.payload;
 			var stateRes;
-        	$.ajax({
+        	/*$.ajax({
 		    	url: "http://localhost/AvoFeed/backend/api/getuserdata.php",
 		    	data: {
 		    		id: id
@@ -31,8 +31,9 @@ export default function (state={
 	                
 	            },
 		    	async:false
-		    });
-			return stateRes;
+		    });*/
+		    console.log("LOGin");
+			return action.payload;
 		}
 		break;
 		

@@ -26,9 +26,9 @@ export const changeAuthType= function (type) {
 	}
 }
 
-export const loggeduser= function (type,id) {
+export const loggeduser= function (json) {
 	return{
-		type:type,
-		payload:id
+		type:"USER_LOGGED_IN",
+		payload:json
 	}
 }

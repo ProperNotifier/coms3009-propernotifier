@@ -1,12 +1,3 @@
-var user_id=getCookie("id");
-
-if(user_id==null || user_id==""){
-   window.open("login.html","_self");
-}/*else{
-   window.open("index.html","_self");
-}*/
-
-
 import React from 'react';
 import {render} from 'react-dom';
 import AppComponents from './components/AppComponents.jsx';
@@ -29,14 +20,3 @@ render(
     </Router>
 	</Provider>, document.getElementById('app'));
 
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0; i<ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-    }
-    return "";
-}

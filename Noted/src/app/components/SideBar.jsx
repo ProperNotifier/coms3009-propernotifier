@@ -43,13 +43,13 @@ class SideBar extends React.Component {
 		                        <img src="public/img/profile.png" className="img-circle" alt="User Image" />
 		                    </div>
 		                    <div className="pull-right info col-xs-8">
-		                        <p>Mahlekenyane</p>
-		                        <p>Tseole</p>
+		                        <p>{this.props.user.name}</p>
+		                        <p>{this.props.user.surname}</p>
 		                        
 		                    </div>
 	                	</div>
 	                	<div className="user-panel-bottom">
-		                    <p className="col-xs-12 organisation-name" style={{"width":"100%","textAlign":"center"}}>Univ. Witwatersrand</p>
+		                    <p className="col-xs-12 organisation-name" style={{"width":"100%","textAlign":"center"}}>{this.props.user.organisation}</p>
 	                	</div>
 	                </div>
 		                <ul className="sidebar-menu">

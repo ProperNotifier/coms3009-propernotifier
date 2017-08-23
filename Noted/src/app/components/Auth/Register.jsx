@@ -14,6 +14,7 @@ class Auth extends React.Component {
             name: '',
             surname: '',
             organisation: '',
+            occupation: '',
             email: '',
             password1: '',
             password2: '',
@@ -32,6 +33,9 @@ class Auth extends React.Component {
     }
     onOrganisationChange(e) {
         this.setState({organisation: e.target.value});
+    }
+    onOccupationChange(e) {
+        this.setState({occupation: e.target.value});
     }
     onEmailChange(e) {
         this.setState({email: e.target.value});
@@ -90,7 +94,7 @@ class Auth extends React.Component {
 
     onRegister(e){
 
-    	/*let name=this.state.name;
+    	let name=this.state.name;
     	let surname=this.state.surname;
     	let organisation=this.state.organisation;
     	let email=this.state.email;
@@ -99,23 +103,26 @@ class Auth extends React.Component {
     	let erre=this.state.erroremail;
     	let errp=this.state.errorpass;
 
-    	if ((name == "") || (surname == "") || (organisation == "") || (email == "") || (password1 == "") || (password2 == "")){
+    	if ((name == "") || (surname == "") || (organisation == "") || (occupation == "") || (email == "") || (password1 == "") || (password2 == "")){
     		//console.log("no post")
     		$(".btn-login").click();
     	}else if((errp =="none") && (erre == "none")){
     		console.log("Post");
-	        $.post("http://localhost/AvoFeed/backend/api/register.php", {
+	        $.post("http://165.165.131.69:8081/registeruser", {
 	                email: email,
 	                password: password1,
 	                name:name,
 	                surname:surname,
-	                organisation:organisation
+	                organisation:organisation,
+	                occupation:occupation
 
 	            },
 	            function(res){
 	            	console.log("response: "+res);
-	                if (res){
-	                	this.props.changeAuthType("AUTH_LOGIN");
+	                if (res.length>0){
+						setCookie("id", res[0].id, 1);
+						window.open("index.html","_self");
+	                	// this.props.changeAuthType("AUTH_LOGIN");
 	                }else {
 				        this.setState({erroremail:"E-mail address already in use"});
 				        $(".register-body .error-email").css({"display":"block"});
@@ -127,16 +134,14 @@ class Auth extends React.Component {
 	                      browserHistory.push(location.state.nextPathname)
 	                    } else {
 	                      browserHistory.push('/')
-	                    }
+	                    }*/
 	                }
 	            }.bind(this)
 	        );
 
-    	} 	*/
+    	} 	
     	//this.props.history.push("/Home");
-    	this.props.changeAuth("LoggedIn");
-			setCookie("id", "1", 1);
-			window.open("index.html","_self");//***for mock
+    	this.props.changeAuth("LoggedIn");//***for mock
 
 
     }
