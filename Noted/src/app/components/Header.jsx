@@ -1,5 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
+import {connect} from "react-redux";
 import SideBarToggle from './Header/SideBarToggle.jsx';
 import DropdownProfile from './Header/DropdownProfile.jsx';
 import $ from 'jquery';
@@ -66,7 +67,7 @@ class Header extends React.Component {
 	                        </li>
 	                        <li className="dropdown header-menu user user-menu" >
 	                            <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-		                            <img src="public/img/profile.png" className="img-circle" alt="User Image" />
+		                            <img src={this.props.user.image} className="img-circle" alt="User Image" />
 		                            <i className="glyphicon glyphicon-option-vertical"></i>
 	                            </a>
 	                            <DropdownProfile/>
@@ -79,5 +80,13 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+
+function mapStateToProps(state) {
+  return({
+    user:state.user    
+  });
+}
+
+
+export default connect(mapStateToProps)(Header);
 //render(<App/>, document.getElementById('app'));

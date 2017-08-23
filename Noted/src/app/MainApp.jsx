@@ -20,7 +20,7 @@ class MainApp extends React.Component {
 	render () {
 		return (
 		    <div>
-					<AppComponents/>
+					<AuthBody/>
             </div>
 	    );
 	}

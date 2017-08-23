@@ -4,10 +4,10 @@
 var mysql     =    require('mysql');
 var pool      =    mysql.createPool({
    connectionLimit : 100, //important
-   host     : 'localhost',
+   host     : '165.165.131.69',
    user     : 'root',
-   password : 'passsql',
-   database : 'AvoFeed',
+   password : 'password',
+   database : 'Noted',
    debug    :  false
 });
 
