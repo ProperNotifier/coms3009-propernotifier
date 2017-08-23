@@ -5,6 +5,6 @@ for i in range(10):
 
 try:
     mode=int(raw_input('Input:'))
-    print mode
+    print(mode)
 except ValueError:
     print "Not a number"
