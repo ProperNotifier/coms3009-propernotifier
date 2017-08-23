@@ -7,7 +7,7 @@ import $ from 'jquery';
 
 class Header extends React.Component {
 	widthShow(){
-		alert("right-side: "+$(".right-side").width()+"; innerWidth: "+window.innerWidth);
+		alert("UPLOAD IMAGE");
 	}
   render () {
     return (<header className="header">

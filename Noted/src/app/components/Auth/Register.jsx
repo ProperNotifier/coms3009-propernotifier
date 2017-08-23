@@ -97,6 +97,7 @@ class Auth extends React.Component {
     	let name=this.state.name;
     	let surname=this.state.surname;
     	let organisation=this.state.organisation;
+        let occupation=this.state.occupation;
     	let email=this.state.email;
     	let password1=this.state.password1;
     	let password2=this.state.password2;
@@ -191,6 +192,18 @@ class Auth extends React.Component {
 			                        />
 			                        <span className="error-message error-organisation col-xs-12">error</span>
 		                        </div>
+
+                                        <div className="input-group occupation">
+                                                <label className="control-label" htmlFor="occupation">Occupation:</label>
+                                                <input
+                                                    type='text'
+                                                    className='form-control'
+                                                    placeholder=''
+                                                    required
+                                                    onChange={this.onOccupationChange.bind(this)}
+                                                />
+                                                <span className="error-message error-occupation col-xs-12">error</span>
+                                        </div>
 
 		                    	<div className="input-group email">
 		                    		<label className="control-label" htmlFor="email">Email:</label>
