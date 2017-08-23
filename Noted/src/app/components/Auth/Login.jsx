@@ -39,7 +39,7 @@ class Auth extends React.Component {
         }else if (password=="") {
             this.setState({error: 'Please enter password'});
         }else{
-            $.post("http://localhost:8081/loginuser", {
+            $.post("http://165.165.131.69:8081/loginuser", {
                     email: email,
                     password: password
                 },

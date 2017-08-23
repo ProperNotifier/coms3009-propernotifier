@@ -16,8 +16,10 @@ class AllComponents extends React.Component {
 	constructor(props){
 	    super(props);
 	    console.log("IN APPPPPPPP")
+	}
+	componentWillMount(){
 	    let id=getCookie("id");
-	    $.get("http://localhost:8081/user/"+id, function(data, status){
+	    $.get("http://165.165.131.69:8081/user/"+id, function(data, status){
 	        //alert("Data: " + data + "\nStatus: " + status);
 	        console.log(data)
 	        this.props.loggeduser(data[0])

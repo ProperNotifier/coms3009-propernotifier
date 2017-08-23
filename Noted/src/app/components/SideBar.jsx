@@ -40,7 +40,7 @@ class SideBar extends React.Component {
 	                <div className="user-panel">
 	                	<div className="user-panel-top">
 		                    <div className="pull-left image col-xs-4">
-		                        <img src="public/img/profile.png" className="img-circle" alt="User Image" />
+		                        <img src={this.props.user.image} className="img-circle" alt="User Image" />
 		                    </div>
 		                    <div className="pull-right info col-xs-8">
 		                        <p>{this.props.user.name}</p>
