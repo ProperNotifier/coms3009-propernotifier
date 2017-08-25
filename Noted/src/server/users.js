@@ -2,6 +2,8 @@
  * GET customers listing.
  */
 var mysql     =    require('mysql');
+var fs = require('fs');
+
 var pool      =    mysql.createPool({
    connectionLimit : 100, //important
    host     : 'localhost',
@@ -17,6 +19,11 @@ exports.list = function(req, res){
        if (err) {
          connection.release();
          res.json({"code" : 100, "status" : "Error in connection database"});
+        let data="\n===============DATABASE CONN ERROR START===============\n";
+           data+="Error in connection database";
+           data+="\n===============DATABASE CONN ERROR END===============\n";
+        log(data);
+
          return;
        }   
 
@@ -24,8 +31,15 @@ exports.list = function(req, res){
 
          connection.query('SELECT * FROM USERS',function(err,rows){
             connection.release();
-            if(err)
+            if(err){
                console.log("Error Selecting : %s ",err );
+                let data="\n===============ERROR START===============\n";
+                   data+=err;
+                   data+="\n===============ERROR END===============\n";
+                log(data);
+
+            }
+
          
                 //res.render('customers',{page_title:"Customers - Node.js",data:rows});
                 res.json(rows);
@@ -35,6 +49,11 @@ exports.list = function(req, res){
 
        connection.on('error', function(err) {      
              res.json({"code" : 100, "status" : "Error in connection database"});
+        let data="\n===============DATABASE CONN ERROR START===============\n";
+           data+="Error in connection database";
+           data+="\n===============DATABASE CONN ERROR END===============\n";
+        log(data);
+
              return;     
        });
   });
@@ -48,6 +67,11 @@ exports.getuser = function(req, res){
        if (err) {
          connection.release();
          res.json({"code" : 100, "status" : "Error in connection database"});
+        let data="\n===============DATABASE CONN ERROR START===============\n";
+           data+="Error in connection database";
+           data+="\n===============DATABASE CONN ERROR END===============\n";
+        log(data);
+
          return;
        }   
 
@@ -58,8 +82,14 @@ exports.getuser = function(req, res){
 
          connection.query(query,[id],function(err,rows){
             connection.release();
-            if(err)
+            if(err){
                console.log("Error Selecting : %s ",err );
+        	let data="\n===============ERROR START===============\n";
+	           data+=err;
+        	   data+="\n===============ERROR END===============\n";
+	        log(data);
+
+	    }
          
                 //res.render('customers',{page_title:"Customers - Node.js",data:rows});
                 res.json(rows);
@@ -69,6 +99,11 @@ exports.getuser = function(req, res){
 
        connection.on('error', function(err) {      
              res.json({"code" : 100, "status" : "Error in connection database"});
+        let data="\n===============DATABASE CONN ERROR START===============\n";
+           data+="Error in connection database";
+           data+="\n===============DATABASE CONN ERROR END===============\n";
+        log(data);
+
              return;     
        });
   });
@@ -82,9 +117,10 @@ exports.login = function(req, res){
   pool.getConnection(function(err,connection){
        if (err) {
          connection.release();
-         res.json({"code" : 100, "status" : "Error in connection database"});
+         res.json({"code" : 100, "status" : "Error in connection database"})
          return;
-       }   
+       }
+   
 
        console.log('connected as id ' + connection.threadId);
 
@@ -93,9 +129,15 @@ exports.login = function(req, res){
 
          connection.query(query,[input.email,input.password],function(err,rows){
             connection.release();
-            if(err)
+            if(err){
                console.log("Error Selecting : %s ",err );
-         
+                let data="\n===============ERROR START===============\n";
+                   data+=err;
+                   data+="\n===============ERROR END===============\n";
+                log(data);
+
+            }
+
                 //res.render('customers',{page_title:"Customers - Node.js",data:rows});
                 res.json(rows);
                 console.log("rows answer");
@@ -105,6 +147,11 @@ exports.login = function(req, res){
 
        connection.on('error', function(err) {      
              res.json({"code" : 100, "status" : "Error in connection database"});
+        let data="\n===============DATABASE CONN ERROR START===============\n";
+           data+="Error in connection database";
+           data+="\n===============DATABASE CONN ERROR END===============\n";
+        log(data);
+
              return;     
        });
   });
@@ -119,6 +166,10 @@ exports.register = function(req, res){
        if (err) {
          connection.release();
          res.json({"code" : 100, "status" : "Error in connection database"});
+        let data="\n===============DATABASE CONN ERROR START===============\n";
+           data+="Error in connection database";
+           data+="\n===============DATABASE CONN ERROR END===============\n";
+	log(data);
          return;
        }   
 
@@ -128,8 +179,14 @@ exports.register = function(req, res){
 
          connection.query(query,[input.email,input.password,input.organisation,input.occupation,input.firstname,input.surname],function(err,rows){
            // connection.release();
-            if(err)
+            if(err){
                console.log("Error Selecting : %s ",err );
+                let data="\n===============ERROR START===============\n";
+                   data+=err;
+                   data+="\n===============ERROR END===============\n";
+                log(data);
+
+            }
 
              if (rows.length==0) {
          
@@ -139,8 +196,14 @@ exports.register = function(req, res){
 
                connection.query(query,[input.email,input.password,input.organisation,input.occupation,input.name,input.surname],function(err,rows){
                  // connection.release();
-                  if(err)
-                     console.log("Error Selecting : %s ",err );
+	            if(err){
+        	      	 console.log("Error Selecting : %s ",err );
+        	        let data="\n===============ERROR START===============\n";
+	                   data+=err;
+                	   data+="\n===============ERROR END===============\n";
+        	        log(data);
+	
+	            }
                
                       //res.render('customers',{page_title:"Customers - Node.js",data:rows});
                       // res.json(rows);
@@ -150,9 +213,15 @@ exports.register = function(req, res){
 
                        connection.query(query,[input.email,input.password],function(err,rows){
                           connection.release();
-                          if(err)
-                             console.log("Error Selecting : %s ",err );
-                       
+		            if(err){
+		               console.log("Error Selecting : %s ",err );
+                		let data="\n===============ERROR START===============\n";
+		                   data+=err;
+                		   data+="\n===============ERROR END===============\n";
+        		        log(data);
+
+		            }
+                                             
                               //res.render('customers',{page_title:"Customers - Node.js",data:rows});
                               res.json(rows);
                               console.log("rows answer");
@@ -169,8 +238,24 @@ exports.register = function(req, res){
 
        connection.on('error', function(err) {      
              res.json({"code" : 100, "status" : "Error in connection database"});
+        let data="\n===============DATABASE CONN ERROR START===============\n";
+           data+="Error in connection database";
+           data+="\n===============DATABASE CONN ERROR END===============\n";
+        log(data);
+
              return;     
        });
   });
   
 };
+function log(data){
+
+	let log="log.txt";
+	fs.appendFile(log, data, function(err) {
+	    if(err) {
+	        return console.log(err);
+	    }
+
+	    console.log("The file was saved!");
+	}); 
+}
