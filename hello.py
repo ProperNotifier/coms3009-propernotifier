@@ -1,7 +1,11 @@
-from hello import read_stdin
- 
-def test_number ():
-    assert read_stdin("8") == 8
-    
-def test_not_number ():
-	assert read_stdin("5000g") == "Not a number"
+print("Hello World")
+
+for i in range(10):
+  print("Goodbye, cruel world")
+
+def read_stdin(number):
+	try:
+		mode=int(number) #raw_input('Input:'))
+		return mode
+	except ValueError:
+		return "Not a number"
