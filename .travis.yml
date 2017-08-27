@@ -7,6 +7,6 @@ install:
   - pip install coverage
   - pip install nose
 script:
-  - nosetests --with-coverage
+  - nosetests nose_helloWorld.py --with-coverage
 after_success:
   coveralls
