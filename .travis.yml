@@ -5,8 +5,6 @@ python:
 install:
   - pip install coveralls
 script:
-  - coverage run test.py < test1.txt test
-  - coverage run test.py < test2.txt test
   - coverage run nose_helloWorld.py
 after_success:
   coveralls
