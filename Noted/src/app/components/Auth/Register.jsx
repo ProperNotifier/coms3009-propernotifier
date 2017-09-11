@@ -111,7 +111,7 @@ class Auth extends React.Component {
     		//console.log("no post")
     		$(".btn-login").click();
     	}else if((errp =="none") && (erre == "none")){
-    		console.log("Post");
+    		console.log("Post:"+HOST);
 	        $.post(HOST+"/registeruser", {
 	                email: email,
 	                password: password1,
@@ -124,7 +124,7 @@ class Auth extends React.Component {
 	            function(res){
 	            	console.log("response: "+res);
 	                if (res.length>0){
-						setCookie("id", res[0].id, 1);
+						//setCookie("id", res[0].id, 1);
 						//window.open("index.html","_self");
 			            $.post(HOST+"/registeredverify", {
 			                    email: email,

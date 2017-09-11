@@ -5,7 +5,7 @@ import cookie from 'react-cookie';
 
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {changeAuthType,changeAuth,loggeduser} from "../../actions/actions.jsx";
+import {changeAuthType,changeAuth,loggeduser,verify} from "../../actions/actions.jsx";
 
 import {HOST} from "../../../server/defaults";
 
@@ -57,11 +57,29 @@ class Auth extends React.Component {
                         /*cookie.save('avo_user', auth.id, { path: '/' });
                         this.props.loggeduser("USER_LOGGING_IN",auth);
                         this.props.changeAuth("USER_LOGGED");*/
-                        setCookie("id", ""+auth[0].id, 1);
-                        console.log("login id: "+auth[0].id);
+                        
+                        if (auth[0].verified==1) {
+                            setCookie("id", ""+auth[0].id, 1);
+                            console.log("login id: "+auth[0].id);
 
-                        window.open("index.html","_self");
-                        console.log("LOGGED IN")
+                            window.open("index.html","_self");
+                            console.log("LOGGED IN")                            
+                        } else {
+			    this.props.verify(email);
+                            $.post(HOST+"/registeredverify", {
+                                    email: email,
+                                    name: ""
+                                },
+                                function(res){
+                                    console.log("verify res: "+res);
+                                    var auth = (res);
+                                    console.log(auth);
+                                }.bind(this)
+                            );  
+                            this.props.history.push('/verify');
+                            this.props.changeAuthType("AUTH_VERIFY");
+
+                        }
                     }
                 }.bind(this)
             ); 
@@ -134,7 +152,7 @@ function mapStateToProps(state) {
 
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({changeAuthType:changeAuthType,changeAuth:changeAuth,loggeduser:loggeduser},dispatch);
+    return bindActionCreators({changeAuthType:changeAuthType,changeAuth:changeAuth,loggeduser:loggeduser,verify:verify},dispatch);
 }
 
 export default withRouter(connect(mapStateToProps,matchDispatchToProps)(Auth));

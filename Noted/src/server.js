@@ -30,7 +30,7 @@ process.on('uncaughtException', function (error) {
 
 app.get("/users",users.list);
 app.get("/user/:id",users.getuser);
-app.get('/verifyme',users.verify);
+app.post('/verifyme',users.verify);
 app.post("/loginuser",users.login);
 app.post("/registeruser",users.register);
 app.post('/registeredverify', mailer.mail);

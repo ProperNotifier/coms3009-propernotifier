@@ -124,7 +124,7 @@ exports.login = function(req, res){
 
        console.log('connected as id ' + connection.threadId);
 
-        let query=`SELECT user_id as id FROM USERS
+        let query=`SELECT user_id as id,user_verified as verified FROM USERS
             WHERE (user_email=?) AND (user_password=?)`
 
          connection.query(query,[input.email,input.password],function(err,rows){
@@ -266,10 +266,10 @@ exports.verify=function(req, res){
        }   
 
        console.log('connected as id ' + connection.threadId);
-       console.log('UPDATE USERS SET user_verified=1')
+//       console.log('UPDATE USERS SET user_verified=1')
        let query = `UPDATE USERS SET user_verified=1
             WHERE user_email=?`
-
+console.log(query+email);
          connection.query(query,[email],function(err,rows){
             connection.release();
             if(err){

@@ -22,19 +22,22 @@ class Auth extends React.Component {
         this.state = {
             email: cat_id
         }
-        console.log("in login")
+        console.log("in verified account:"+cat_id)
 	}
     componentWillMount(){
         let email=this.state.email;
         if (email=="") {
             this.props.history.replace("/login");
         } else {
+console.log(HOST)
             $.post(HOST+"/verifyme", {
                     email: email,
                 },
                 function(res){
                     //response from server
-                    console.log(res)
+                    console.log("VERIFY RES:"+res)
+                    //console.log(res)
+
                 }
             );
             this.props.history.replace("/verifiedaccount");

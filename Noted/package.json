@@ -19,6 +19,7 @@
     "jquery": "^3.2.1",
     "mysql": "^2.14.1",
     "node-express-mysql": "^1.0.6",
+    "nodemailer": "^4.1.0",
     "react": "^15.6.1",
     "react-cookie": "^2.0.8",
     "react-dom": "^15.6.1",

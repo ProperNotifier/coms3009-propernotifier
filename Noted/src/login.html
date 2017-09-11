@@ -32,21 +32,6 @@
 	<link href="public/css/login.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<button id="vim">Click</button>
-<script type="text/javascript">
-	$("#vim").on("click",function(argument) {
-		// body...
-			$.post("http://localhost:8081/registeredverify", {
-			        email: 'mahlekenyane@avospace.net',
-			        name: 'mahlekenyane',
-			    },
-			    function(res){
-			    	//response from server
-			    	console.log(res)
-			    }
-			);
-	})
-</script>
 <div id="app"></div>
 <script type="text/javascript" src="public/login.js"></script>
 <!-- <script type="text/javascript" src="public/compressed.js"></script> -->

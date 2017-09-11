@@ -34,11 +34,7 @@ class Auth extends React.Component {
                   <Route path="/login" component={Login} />
                   <Route path="/register" component={Register} />
                   <Route path="/verify" component={Verify} />
-                  <Route exact path="/verifiedaccount" component={VerifiedAccount} >
-			            <IndexRoute component={VerifiedAccount}  />
-			            <Route path="/verifiedaccount/:email" component={VerifiedAccount} />
-			        </Route>
-                  
+                  <Route path="/verifiedaccount" component={VerifiedAccount} />                  
 				</Switch>					
 			</div>
 		);
