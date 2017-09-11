@@ -248,6 +248,59 @@ exports.register = function(req, res){
   });
   
 };
+
+exports.verify=function(req, res){
+  var input = JSON.parse(JSON.stringify(req.body));
+  var email = input.email;
+
+  pool.getConnection(function(err,connection){
+       if (err) {
+         connection.release();
+         res.json({"code" : 100, "status" : "Error in connection database"});
+        let data="\n===============DATABASE CONN ERROR START===============\n";
+           data+="Error in connection database";
+           data+="\n===============DATABASE CONN ERROR END===============\n";
+        log(data);
+
+         return;
+       }   
+
+       console.log('connected as id ' + connection.threadId);
+       console.log('UPDATE USERS SET user_verified=1')
+       let query = `UPDATE USERS SET user_verified=1
+            WHERE user_email=?`
+
+         connection.query(query,[email],function(err,rows){
+            connection.release();
+            if(err){
+               console.log("Error Selecting : %s ",err );
+          let data="\n===============ERROR START===============\n";
+             data+=err;
+             data+="\n===============ERROR END===============\n";
+          log(data);
+
+      }
+         
+                //res.render('customers',{page_title:"Customers - Node.js",data:rows});
+                res.json(rows);
+                // console.log(rows);
+                           
+         });
+
+       connection.on('error', function(err) {      
+             res.json({"code" : 100, "status" : "Error in connection database"});
+        let data="\n===============DATABASE CONN ERROR START===============\n";
+           data+="Error in connection database";
+           data+="\n===============DATABASE CONN ERROR END===============\n";
+        log(data);
+
+             return;     
+       });
+  });
+  
+
+};
+
 function log(data){
 
 	let log="log.txt";

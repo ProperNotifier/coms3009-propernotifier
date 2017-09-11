@@ -7,6 +7,9 @@ export default function (state="Login",action) {
 		case "AUTH_REGISTER":
 			return "Register";
 			break;
+		case "AUTH_VERIFY":
+			return "Verify";
+			break;
 		
 	}
 

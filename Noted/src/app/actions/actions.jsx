@@ -32,3 +32,10 @@ export const loggeduser= function (json) {
 		payload:json
 	}
 }
+
+export const verify= function (json) {
+	return{
+		type:"VERIFY_THIS_EMAIL",
+		payload:json
+	}
+}

@@ -11,6 +11,8 @@ import Platform from './Platform.jsx';
 import AuthBody from './Auth.jsx';
 
 
+import {HOST} from "../../server/defaults";
+
 
 class AllComponents extends React.Component {
 	constructor(props){
@@ -19,7 +21,7 @@ class AllComponents extends React.Component {
 	}
 	componentWillMount(){
 	    let id=getCookie("id");
-	    $.get("http://165.165.131.69:8081/user/"+id, function(data, status){
+	    $.get(HOST+"/user/"+id, function(data, status){
 	        //alert("Data: " + data + "\nStatus: " + status);
 	        console.log(data)
 	        this.props.loggeduser(data[0])

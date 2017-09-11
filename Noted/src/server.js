@@ -7,6 +7,7 @@ var fs = require('fs');
 
 var path = require('path');
 var users = require('./server/users.js'); 
+var mailer = require('./server/mailer.js'); 
 var logfile="server/log.txt";
 
 app.use(bodyParser.json());
@@ -29,10 +30,31 @@ process.on('uncaughtException', function (error) {
 
 app.get("/users",users.list);
 app.get("/user/:id",users.getuser);
+app.get('/verifyme',users.verify);
 app.post("/loginuser",users.login);
 app.post("/registeruser",users.register);
+app.post('/registeredverify', mailer.mail);
 
 app.use(express.static(path.join(__dirname)));
+
+app.get("/logoblackclear",function(req,res) {
+	// body...
+  res.sendFile(path.join(__dirname, 'public/img/logoblackclear.png'))
+});
+// send all auth requests to login.html so browserHistory in React Router works
+app.get('/login', function (req, res) {
+  res.sendFile(path.join(__dirname, 'login.html'))
+});
+app.get('/register', function (req, res) {
+  res.sendFile(path.join(__dirname, 'login.html'))
+});
+app.get('/verify', function (req, res) {
+  res.sendFile(path.join(__dirname, 'login.html'))
+});
+app.get('/verifiedaccount', function (req, res) {
+  res.sendFile(path.join(__dirname, 'login.html'))
+});
+
 
 // send all requests to index.html so browserHistory in React Router works
 app.get('*', function (req, res) {

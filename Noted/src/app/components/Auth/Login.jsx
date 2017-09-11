@@ -7,6 +7,8 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {changeAuthType,changeAuth,loggeduser} from "../../actions/actions.jsx";
 
+import {HOST} from "../../../server/defaults";
+
 
 class Auth extends React.Component {
 	constructor(props){
@@ -39,7 +41,7 @@ class Auth extends React.Component {
         }else if (password=="") {
             this.setState({error: 'Please enter password'});
         }else{
-            $.post("http://165.165.131.69:8081/loginuser", {
+            $.post(HOST+"/loginuser", {
                     email: email,
                     password: password
                 },
@@ -111,7 +113,7 @@ class Auth extends React.Component {
 		                    </form>
 				       </div>
 				       <div className="acc-bottom">
-                        	   <div className="btn btn-register btn-url" to="#" onClick={this.onRegister.bind(this)}>Create an Account</div>
+                        	   <Link className="btn btn-register btn-url" to="/register" onClick={this.onRegister.bind(this)}>Create an Account</Link>
 
 				       </div>
                     </div>

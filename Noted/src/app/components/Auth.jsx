@@ -4,42 +4,20 @@ import $ from 'jquery';
 
 import Login from './Auth/Login.jsx';
 import Register from './Auth/Register.jsx';
+import Verify from './Auth/Verify.jsx';
+import VerifiedAccount from './Auth/VerifiedAccount.jsx';
 
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {changeAuth,changeAuthType,platformChange} from "../actions/actions.jsx";
 
 
-import {Redirect,Switch,Route,withRouter,Link} from 'react-router-dom';
+import {Redirect,Switch,Route,withRouter,Link,IndexRoute} from 'react-router-dom';
 
 class Auth extends React.Component {
 	constructor(props){
 		super(props);
 		//alert("location.pathname.split("+"/"+")[1].length");
-	    /*const unlisten = history.listen((location, action) => {
-		  // location is an object like window.location
-		  	  if(location.pathname.split("/").length==2){
-				    var id=location.pathname.split("/")[1]||"Dashboard";
-				    var TreeItems=["Planner","Timeline"];
-				    //alert(location.pathname.split("/")[1].length);
-
-
-				    switch(id){
-				      case "login":
-				        this.props.changeAuthType("AUTH_LOGIN");
-				        break;
-				      case "register":
-				        this.props.changeAuthType("AUTH_REGISTER");
-				        break;
-				      default:
-				        this.props.changeAuthType("AUTH_LOGIN");
-				        break;
-				    }
-			  }else{
-			  	this.props.changeAuthType("AUTH_LOGIN");
-			  }
-
-		})*/
 	}
 	componentDidMount(){
 		/*this.props.history.push("/Login");
@@ -50,8 +28,18 @@ class Auth extends React.Component {
 		console.log(this.props.authType);
 		return (
 			<div>
-					{this.props.authType=="Login"?<Login/>:""}
-					{this.props.authType=="Register"?<Register/>:""}
+				<Switch>
+                  <Route exact path="/" component={Login} />
+                  <Route exact path="/login.html" component={Login} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/register" component={Register} />
+                  <Route path="/verify" component={Verify} />
+                  <Route exact path="/verifiedaccount" component={VerifiedAccount} >
+			            <IndexRoute component={VerifiedAccount}  />
+			            <Route path="/verifiedaccount/:email" component={VerifiedAccount} />
+			        </Route>
+                  
+				</Switch>					
 			</div>
 		);
 	}

@@ -6,7 +6,10 @@ import cookie from 'react-cookie';
 
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {changeAuth,changeAuthType} from "../../actions/actions.jsx";
+import {changeAuth,changeAuthType,verify} from "../../actions/actions.jsx";
+
+import {HOST} from "../../../server/defaults";
+
 class Auth extends React.Component {
 	constructor(props){
 		super(props);
@@ -109,7 +112,7 @@ class Auth extends React.Component {
     		$(".btn-login").click();
     	}else if((errp =="none") && (erre == "none")){
     		console.log("Post");
-	        $.post("http://165.165.131.69:8081/registeruser", {
+	        $.post(HOST+"/registeruser", {
 	                email: email,
 	                password: password1,
 	                name:name,
@@ -122,27 +125,31 @@ class Auth extends React.Component {
 	            	console.log("response: "+res);
 	                if (res.length>0){
 						setCookie("id", res[0].id, 1);
-						window.open("index.html","_self");
-	                	// this.props.changeAuthType("AUTH_LOGIN");
+						//window.open("index.html","_self");
+			            $.post(HOST+"/registeredverify", {
+			                    email: email,
+			                    name: name
+			                },
+			                function(res){
+			                    console.log("verify res: "+res);
+			                    var auth = (res);
+			                    console.log(auth);
+						    	this.props.history.push("/verify");
+			                }.bind(this)
+			            ); 
+	                	this.props.changeAuthType("AUTH_VERIFY");
+	                	this.props.verify(email);
 	                }else {
 				        this.setState({erroremail:"E-mail address already in use"});
 				        $(".register-body .error-email").css({"display":"block"});
 				        $(".register-body .email input").css({"box-shadow":"0 0 5px rgba(200, 20, 38, 0.5)"});
-	                    /*cookie.save('userId', auth.id, { path: '/' });
-	                    cookie.save('userName', auth.username, { path: '/' });
-	                    const location = this.props.location
-	                    if (location.state && location.state.nextPathname) {
-	                      browserHistory.push(location.state.nextPathname)
-	                    } else {
-	                      browserHistory.push('/')
-	                    }*/
 	                }
 	            }.bind(this)
 	        );
 
-    	} 	
-    	//this.props.history.push("/Home");
-    	this.props.changeAuth("LoggedIn");//***for mock
+    	}
+	                	// this.props.changeAuthType("AUTH_VERIFY");
+	                	//this.props.verify(email); 	
 
 
     }
@@ -269,7 +276,7 @@ function mapStateToProps(state) {
 
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({changeAuthType:changeAuthType,changeAuth:changeAuth},dispatch);
+    return bindActionCreators({changeAuthType:changeAuthType,changeAuth:changeAuth,verify:verify},dispatch);
 }
 
 export default (connect(mapStateToProps,matchDispatchToProps)(Auth));

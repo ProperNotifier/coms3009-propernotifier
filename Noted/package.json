@@ -4,7 +4,8 @@
   "description": "Frontend for Noted Application",
   "main": "index.js",
   "scripts": {
-    "test": "webpack -p --watch"
+    "test": "webpack -d --watch",
+    "pack": "webpack -p"
   },
   "author": "Mahlekenyane Tseole",
   "license": "ISC",
