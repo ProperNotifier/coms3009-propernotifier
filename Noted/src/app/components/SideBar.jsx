@@ -60,17 +60,17 @@ class SideBar extends React.Component {
 		                    </li>
 		                    <li className="sidebar-menu-title Notebook">
 			                        <Link to="/Notebook" id="Notebook" onClick={()=>this.sideMenuClick("Notebook")} >
-			                            <i className="fa fa-th"></i> <span>My Notebook</span>
+			                            <i className="fa fa-folder-open"></i> <span>My Notebook</span>
 			                        </Link>
-		                    </li>
-		                    <li className="sidebar-menu-title Explore">
-		                        <Link to="/Explore" onClick={()=>this.sideMenuClick("Explore")}>
-		                            <i className="fa fa-calendar"></i> <span>Explore</span>
-		                        </Link>
 		                    </li>
 		                    <li className="sidebar-menu-title Store">
 		                        <Link to="/Store" onClick={()=>this.sideMenuClick("Store")}>
-		                            <i className="glyphicon glyphicon-stats"></i> <span>Store</span>
+		                            <i className="fa fa-money"></i> <span>Store</span>
+		                        </Link>
+		                    </li>
+		                    <li className="sidebar-menu-title Stats">
+		                        <Link to="/Stats" onClick={()=>this.sideMenuClick("Stats")}>
+		                            <i className="fa fa-bar-chart"></i> <span>Stats</span>
 		                        </Link>
 		                    </li>
 		                    

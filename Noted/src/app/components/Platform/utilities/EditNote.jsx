@@ -8,6 +8,8 @@ import {connect} from "react-redux";
 import {platformChange} from "../../../actions/actions.jsx";
 import {withRouter} from 'react-router-dom';
 
+import {HOST} from "../../../../server/defaults";
+
 class EditNote extends React.Component {
 	constructor(props){
 		super(props);
@@ -30,7 +32,7 @@ class EditNote extends React.Component {
 	        
 	    });*/
 	    $.ajax({
-			url: "http://165.165.131.69:8081/practical.tex",
+			url: HOST+"/stuff/practical.tex",
 			cache: false,
 			type: "GET",
 			dataType: 'text',

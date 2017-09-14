@@ -41,6 +41,11 @@ app.get("/logoblackclear",function(req,res) {
 	// body...
   res.sendFile(path.join(__dirname, 'public/img/logoblackclear.png'))
 });
+app.get("/pdf",function(req,res) {
+	// body...
+	console.log("gimme pdf")
+  res.sendFile(path.join(__dirname, 'stuff/searching.pdf'))
+});
 // send all auth requests to login.html so browserHistory in React Router works
 app.get('/login', function (req, res) {
   res.sendFile(path.join(__dirname, 'login.html'))
