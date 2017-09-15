@@ -1,10 +1,8 @@
-import numpy as np
-from skimage import segmentation, measure, io, color, transform
-import matplotlib.pyplot as plt
-import keras
-from keras.models import load_model
 import keras.backend as K
+import numpy as np
 import scipy.ndimage as ndi
+from keras.models import load_model
+from skimage import segmentation, io, transform
 
 
 def _initial_segmentation(img, beta=10):
@@ -21,13 +19,6 @@ def _initial_segmentation(img, beta=10):
     s = ndi.generate_binary_structure(2, 2)
     label_mask, num = ndi.measurements.label(segments, s)
     return label_mask, num
-
-
-# def _extract_label_img(img, box_index, label_mask):
-#     sub_img = img[box_index]
-#     binary_mask = label_mask[box_index] == label_id
-#     sub_img[:, :] = np.where(binary_mask, sub_img[:, :], 255)
-#     return sub_img
 
 
 def segment(filename, beta=10, modelfile='model.h5', learnt_dim=(45, 45)):
