@@ -3,6 +3,7 @@ import numpy as np
 import scipy.ndimage as ndi
 from keras.models import load_model
 from skimage import segmentation, io, transform
+import matplotlib.pyplot as plt
 
 
 def _initial_segmentation(img, beta=10):
@@ -35,8 +36,13 @@ def segment(filename, character_list, beta=10, modelfile='model.h5', learnt_dim=
         curr_sub_img = img[curr_region]
         probs = model.predict(transform.resize(curr_sub_img, (45, 45), mode='constant').reshape(input_shape),
                                   batch_size=1)
-        character=probs.argmax(axis=-1)
-        print(character)
+        max_probs_index=probs.argmax(axis=-1).shape
+        print(max_probs_index)
+        break
+        if probs[max_probs_index]>=0.65:
+            plt.imshow(curr_sub_img, cmap='gray')
+            plt.show()
+
 
 
 segment('test_nt_tut.jpg', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
