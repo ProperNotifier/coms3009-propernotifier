@@ -103,7 +103,7 @@
 		}
 		@media screen and (max-height: 760px) {
 			.login-body .auth-body .auth-content .auth-content-container{
-				width: 100%;
+				/*width: 100%;*/
 				height: 350px;
 			}
 			.login-body .auth-body .auth-content .auth-content-container .acc-top{
@@ -214,7 +214,7 @@
 		}
 		@media screen and (max-height: 760px) {
 			.verify-body .auth-body .auth-content .auth-content-container{
-				width: 100%;
+				/*width: 100%;*/
 			}
 			.verify-body .auth-body .auth-content .auth-content-container .acc-top{
 			}
@@ -333,7 +333,7 @@
 		}
 		@media screen and (max-height: 760px) {
 			.register-body .auth-body .auth-content .auth-content-container{
-				width: 100%;
+				/*width: 100%;*/
 			}
 			.register-body .auth-body .auth-content .auth-content-container .acc-top{
 			}

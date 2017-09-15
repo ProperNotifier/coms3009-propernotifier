@@ -9,6 +9,7 @@ import Header from './Header.jsx';
 import SideBar from './SideBar.jsx';
 import Platform from './Platform.jsx';
 import AuthBody from './Auth.jsx';
+import Upload from "./Platform/utilities/Upload.jsx";
 
 
 import {HOST} from "../../server/defaults";
@@ -30,6 +31,7 @@ class AllComponents extends React.Component {
 	render () {
 		return (
 			<div>
+				<Upload/>
 				<Header/>
 				<SideBar/>
 				<Platform/>
