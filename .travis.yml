@@ -1,14 +1,8 @@
 language: python
 sudo: false
-python:
-  - 2.7
-install:
-  - pip install coveralls
-  - pip install coverage
-  - pip install nose
+python: 3.5
 script:
-  - nosetests nose_helloWorld.py --with-coverage
-notifications:
-  slack: coms3009-noted:kjOHHQyiAOoWS08knpjn110C
+  -python test.py
+
 after_success:
   coveralls

@@ -21,7 +21,7 @@ def _initial_segmentation(img, beta=10):
     return label_mask, num
 
 
-def segment(filename, beta=10, modelfile='model.h5', learnt_dim=(45, 45)):
+def segment(filename, character_list, beta=10, modelfile='model.h5', learnt_dim=(45, 45), ):
     if K.image_data_format() == 'channels_first':
         input_shape = (1, 1, learnt_dim[1], learnt_dim[0])
     else:
@@ -39,4 +39,4 @@ def segment(filename, beta=10, modelfile='model.h5', learnt_dim=(45, 45)):
         print(character)
 
 
-segment('test_nt_tut.jpg')
+segment('test_nt_tut.jpg', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
