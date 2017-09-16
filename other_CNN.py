@@ -23,7 +23,6 @@ else:
 model = Sequential()
 model.add(Conv2D(32, (3, 3), input_shape=input_shape))
 model.add(LeakyReLU())
-model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Conv2D(32, (3, 3)))
 model.add(LeakyReLU())
 model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -41,7 +40,8 @@ model.add(Dense(num_classes, activation='softmax'))
 # TODO: Try optimizers: sgd+Nesterov, adam,
 model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-checkpoint = ModelCheckpoint(filepath='model-{epoch:02d}-{val_acc:.2f}-{val_loss:.2f}.h5', monitor='val_acc')
+checkpoint = ModelCheckpoint(filepath='model-{epoch:02d}-acc:{val_acc:.2f}-loss:{val_loss:.2f}.h5', monitor='val_acc',
+                             save_best_only=True)
 early_stop = EarlyStopping(patience=2)
 tensor_board = TensorBoard(log_dir='/home/tau/Documents/Bsc3/Coms3/Software Design/COMS3009Project/Data/logs',
                            histogram_freq=1, write_grads=True, write_graph=True)
