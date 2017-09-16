@@ -1,18 +1,18 @@
-from keras.preprocessing.image import ImageDataGenerator
-from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D
-from keras.layers import Activation, Dropout, Flatten, Dense
 from keras import backend as K
+from keras.layers import Activation, Dropout, Flatten, Dense
+from keras.layers import Conv2D, MaxPooling2D
+from keras.models import Sequential
+from keras.preprocessing.image import ImageDataGenerator
 
 # dimensions of our images.
 img_width, img_height = 45, 45
-num_classes = 10
-train_data_dir = 'Data/Train'
-validation_data_dir = 'Data/Validate'
-num_train_samples = 10000
-num_validation_samples = 4000
+num_classes = 82
+train_data_dir = '/home/tau/Documents/Bsc3/Coms3/Software Design/COMS3009Project/Data/extracted_images/train'
+validation_data_dir = '/home/tau/Documents/Bsc3/Coms3/Software Design/COMS3009Project/Data/extracted_images/test'
+num_train_samples = 281947
+num_validation_samples = 94027
 epochs = 10
-batch_size = 64
+batch_size = 512
 
 if K.image_data_format() == 'channels_first':
     input_shape = (1, img_width, img_height)
@@ -54,4 +54,4 @@ validation_generator = test_datagen.flow_from_directory(validation_data_dir, tar
 model.fit_generator(train_generator, steps_per_epoch=num_train_samples // batch_size, epochs=epochs,
                     validation_data=validation_generator, validation_steps=num_validation_samples // batch_size)
 
-model.save('model.h5')
+model.save('model1.h5')
