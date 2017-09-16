@@ -1,6 +1,7 @@
 from keras import backend as K
-from keras.layers import Activation, Dropout, Flatten, Dense
-from keras.layers import Conv2D, MaxPooling2D
+from keras.callbacks import ModelCheckpoint, EarlyStopping, TensorBoard
+from keras.layers import Activation, Dropout, Flatten, Dense, Conv2D, MaxPooling2D
+from keras.layers.advanced_activations import LeakyReLU
 from keras.models import Sequential
 from keras.preprocessing.image import ImageDataGenerator
 
@@ -18,40 +19,53 @@ if K.image_data_format() == 'channels_first':
     input_shape = (1, img_width, img_height)
 else:
     input_shape = (img_width, img_height, 1)
-print(input_shape)
+
 model = Sequential()
 model.add(Conv2D(32, (3, 3), input_shape=input_shape))
 model.add(Activation('relu'))
+# model.add(LeakyReLU())
 model.add(MaxPooling2D(pool_size=(2, 2)))
-
 model.add(Conv2D(32, (3, 3)))
 model.add(Activation('relu'))
+# model.add(LeakyReLU())
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Conv2D(64, (3, 3)))
 model.add(Activation('relu'))
+model.add(LeakyReLU())
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Flatten())
 model.add(Dense(64))
+# model.add(LeakyReLU())
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='softmax'))
 
+# TODO: Try optimizers: sgd+Nesterov, adam,
 model.compile(loss='sparse_categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
+checkpoint = ModelCheckpoint(filepath='model-{epoch:02d}-{val_acc:.2f}-{val_loss:.2f}.h5', monitor='val_acc')
+early_stop = EarlyStopping(patience=2)
+tensor_board = TensorBoard(log_dir='/home/tau/Documents/Bsc3/Coms3/Software Design/COMS3009Project/Data/logs',
+                           histogram_freq=1, write_grads=True, write_graph=True)
+callbacks = [checkpoint, early_stop, tensor_board]
+
 # Augment training data
-train_datagen = ImageDataGenerator(rescale=1. / 255, shear_range=0.2, zoom_range=0.2, horizontal_flip=True)
+train_datagen = ImageDataGenerator(rotation_range=25, rescale=1. / 255, shear_range=0.2, zoom_range=0.2)
 # Augment testing data
-test_datagen = ImageDataGenerator(rescale=1. / 255)
+test_datagen = ImageDataGenerator(rescale=1. / 255, rotation_range=25, shear_range=0.2)
 
+# TODO: class_mode='categorical'?
 train_generator = train_datagen.flow_from_directory(train_data_dir, target_size=(img_width, img_height),
-                                                    color_mode='grayscale', batch_size=batch_size, class_mode='binary')
-
+                                                    color_mode='grayscale', batch_size=batch_size,
+                                                    class_mode='binary')
 validation_generator = test_datagen.flow_from_directory(validation_data_dir, target_size=(img_width, img_height),
-                                                        color_mode='grayscale', batch_size=batch_size, class_mode='binary')
+                                                        color_mode='grayscale', batch_size=batch_size,
+                                                        class_mode='binary')
 
 model.fit_generator(train_generator, steps_per_epoch=num_train_samples // batch_size, epochs=epochs,
-                    validation_data=validation_generator, validation_steps=num_validation_samples // batch_size)
+                    validation_data=validation_generator, validation_steps=num_validation_samples // batch_size,
+                    callbacks=callbacks)
 
-model.save('model1.h5')
+model.save('model2.h5')
