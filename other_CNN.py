@@ -1,6 +1,6 @@
 from keras import backend as K
 from keras.callbacks import ModelCheckpoint, EarlyStopping, TensorBoard
-from keras.layers import Activation, Dropout, Flatten, Dense, Conv2D, MaxPooling2D
+from keras.layers import Dropout, Flatten, Dense, Conv2D, MaxPooling2D
 from keras.layers.advanced_activations import LeakyReLU
 from keras.models import Sequential
 from keras.preprocessing.image import ImageDataGenerator
@@ -22,28 +22,24 @@ else:
 
 model = Sequential()
 model.add(Conv2D(32, (3, 3), input_shape=input_shape))
-model.add(Activation('relu'))
-# model.add(LeakyReLU())
+model.add(LeakyReLU())
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Conv2D(32, (3, 3)))
-model.add(Activation('relu'))
-# model.add(LeakyReLU())
+model.add(LeakyReLU())
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Conv2D(64, (3, 3)))
-model.add(Activation('relu'))
 model.add(LeakyReLU())
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Flatten())
 model.add(Dense(64))
-# model.add(LeakyReLU())
-model.add(Activation('relu'))
+model.add(LeakyReLU())
 model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='softmax'))
 
 # TODO: Try optimizers: sgd+Nesterov, adam,
-model.compile(loss='sparse_categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 checkpoint = ModelCheckpoint(filepath='model-{epoch:02d}-{val_acc:.2f}-{val_loss:.2f}.h5', monitor='val_acc')
 early_stop = EarlyStopping(patience=2)
