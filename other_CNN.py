@@ -51,7 +51,6 @@ train_datagen = ImageDataGenerator(rotation_range=25, rescale=1. / 255, shear_ra
 # Augment testing data
 test_datagen = ImageDataGenerator(rescale=1. / 255, rotation_range=25, shear_range=0.2)
 
-# TODO: class_mode='categorical'?
 train_generator = train_datagen.flow_from_directory(train_data_dir, target_size=(img_width, img_height),
                                                     color_mode='grayscale', batch_size=batch_size,
                                                     class_mode='categorical')
