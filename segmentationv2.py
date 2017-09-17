@@ -24,9 +24,9 @@ def _initial_segmentation(img, beta=10):
 
 
 def slice_to_rec(object_slice):
-    top_left=(object_slice[1].start, object_slice[0].start)
-    height=object_slice[0].stop-object_slice[0].start
-    width=object_slice[1].stop-object_slice[1].start
+    top_left = (object_slice[1].start, object_slice[0].start)
+    height = object_slice[0].stop - object_slice[0].start
+    width = object_slice[1].stop - object_slice[1].start
     return top_left, height, width
 
 
@@ -54,13 +54,13 @@ def segment(filename, character_list, beta=10, modelfile='model.h5', learnt_dim=
 
             plt.figure(2)
             plt.imshow(img, cmap='gray')
-            xy, height, width=slice_to_rec(curr_region)
+            xy, height, width = slice_to_rec(curr_region)
             print(xy, width, height)
-            rec = mpatches.Rectangle(xy,width, height, edgecolor='red', facecolor='none')
+            rec = mpatches.Rectangle(xy, width, height, edgecolor='red', facecolor='none')
             print(rec.get_xy())
             plt.axes().add_patch(rec)
             plt.show()
             break
 
 
-segment('test_nt_tut.jpg', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+segment('test_nt_tut.jpg', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], modelfile='model1-acc:0.80-loss:0.65.h5')
