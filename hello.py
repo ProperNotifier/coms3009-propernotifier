@@ -5,4 +5,4 @@ def read_stdin(number):
         mode=int(number) #raw_input('Input:'))
         return mode
     except ValueError:
-	return "Not a number"
+        return "Not a number"
