@@ -1,5 +1,8 @@
+from pathlib import Path
+
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
+from skimage import io
 
 from segmentationv2 import Segmentor
 
@@ -10,13 +13,16 @@ def display_bbox(bbox, color='green'):
     plt.axes().add_patch(box)
 
 
-seg = Segmentor('model-05-acc:0.87-loss:0.46.h5', (45, 45))
-json_out = seg.segment('test_nt_tut.jpg')
-print(json_out)
+dir = "/home/tau/Documents/Bsc3/Coms3/Software Design/COMS3009Project/Data/Pages/Other/"
+rootdir = Path(dir)
+file_list = [f for f in rootdir.glob('**/*.jpg') if f.is_file()]
 
-# plt.imshow(io.imread('test_nt_tut.jpg'), cmap='gray')
-# for b in bbox_list1:
-#     display_bbox(b)
-# for b in bbox_list2:
-#     display_bbox(b, color='red')
-# plt.show()
+seg = Segmentor('model-05-acc:0.87-loss:0.46.h5', (45, 45))
+
+file = file_list[5]
+json_out, bbox_list = seg.segment(file)
+print(json_out)
+plt.imshow(io.imread(file), cmap='gray')
+for bbox in bbox_list:
+    display_bbox(bbox)
+plt.show()

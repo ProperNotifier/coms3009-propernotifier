@@ -45,7 +45,7 @@ class Segmentor:
         for ws, rw in it:
             if ws == 2 and rw == 2:
                 segments[it.multi_index] = 0
-        # connected_struct = ndi.generate_binary_structure(2, 2)
+
         labels, num_labels = ndi.measurements.label(segments)
         proposed_bboxes = self.get_proposals(labels)
         return proposed_bboxes
@@ -104,7 +104,8 @@ class Segmentor:
         return best_bbox
 
     def segment(self, filename, beta=10):
-        img = io.imread(filename)
+        img = io.imread(filename, as_grey=True)
+        print(img.shape)
         proposed_bboxes = self._initial_segmentation(img, beta)
         num = len(proposed_bboxes) - (len(proposed_bboxes) // 1.25)
         offset = int(num // 2)
@@ -123,6 +124,7 @@ class Segmentor:
 
         final_bounding_boxes = []
         for i, curr_bbox in enumerate(proposed_bboxes):
+            print(str(i) + " / " + str(len(proposed_bboxes)))
             candidates_list = [curr_bbox]
             if curr_bbox.get_width() <= avg_width - 3 * width_stdev \
                     and curr_bbox.get_height() <= avg_height - 3 * height_stdev \
@@ -139,11 +141,11 @@ class Segmentor:
                     and curr_bbox.get_height() <= avg_height:
                 l = curr_bbox.left
                 r = curr_bbox.right
-                t = max(math.floor(curr_bbox.top - 2 * curr_bbox.get_height()), 0)
-                b = min(math.floor(curr_bbox.bottom + 2 * curr_bbox.get_height()), img.shape[0])
+                t = max(math.floor(curr_bbox.top - curr_bbox.get_height()), 0)
+                b = min(math.floor(curr_bbox.bottom + curr_bbox.get_height()), img.shape[0])
                 bigger_bbox = boundingBox(l, r, t, b)
                 candidates_list.append(bigger_bbox)
-                for j in range(avg_width - 2 * width_stdev, avg_width + width_stdev, int(0.75 * width_stdev)):
+                for j in range(avg_width - width_stdev, avg_width, int(0.75 * width_stdev)):
                     for k in range(avg_height - height_stdev, avg_height, int(0.75 * height_stdev)):
                         dims = (k, j)
                         steps = (max(dims[0] // 2, 1), max(dims[1] // 2, 1))
@@ -155,13 +157,13 @@ class Segmentor:
             # Tall but thin
             elif curr_bbox.get_width() <= avg_width \
                     and curr_bbox.get_height() >= avg_height + 2 * height_stdev:
-                l = max(curr_bbox.left - 2 * curr_bbox.get_width(), 0)
-                r = min(curr_bbox.right + 2 * curr_bbox.get_width(), img.shape[1])
+                l = max(curr_bbox.left - curr_bbox.get_width(), 0)
+                r = min(curr_bbox.right + curr_bbox.get_width(), img.shape[1])
                 t = curr_bbox.top
                 b = curr_bbox.bottom
                 bigger_bbox = boundingBox(l, r, t, b)
                 candidates_list.append(bigger_bbox)
-                for j in range(avg_height - 2 * height_stdev, avg_height + height_stdev, int(0.75 * height_stdev)):
+                for j in range(avg_height - height_stdev, avg_height, int(0.75 * height_stdev)):
                     for k in range(avg_width - width_stdev, avg_width, int(0.75 * width_stdev)):
                         dims = (j, k)
                         steps = (max(dims[0] // 2, 1), max(dims[1] // 2, 1))
@@ -174,14 +176,14 @@ class Segmentor:
             elif curr_bbox.get_width() <= avg_width \
                     and curr_bbox.get_height() <= avg_height \
                     and curr_bbox.get_area() <= avg_area:
-                l = max(curr_bbox.left - 2 * curr_bbox.get_width(), 0)
-                r = min(curr_bbox.right + 2 * curr_bbox.get_width(), img.shape[1])
-                t = max(math.floor(curr_bbox.top - 2 * curr_bbox.get_height()), 0)
-                b = min(math.floor(curr_bbox.bottom + 2 * curr_bbox.get_height()), img.shape[0])
+                l = max(curr_bbox.left - curr_bbox.get_width(), 0)
+                r = min(curr_bbox.right + curr_bbox.get_width(), img.shape[1])
+                t = max(math.floor(curr_bbox.top - curr_bbox.get_height()), 0)
+                b = min(math.floor(curr_bbox.bottom + curr_bbox.get_height()), img.shape[0])
                 bigger_bbox = boundingBox(l, r, t, b)
                 candidates_list.append(bigger_bbox)
-                for j in range(avg_height - 2 * height_stdev, avg_height, int(0.75 * height_stdev)):
-                    for k in range(avg_width - 2 * width_stdev, avg_width, int(0.75 * width_stdev)):
+                for j in range(avg_height - height_stdev, avg_height, int(0.75 * height_stdev)):
+                    for k in range(avg_width - width_stdev, avg_width, int(0.75 * width_stdev)):
                         dims = (j, k)
                         steps = (max(dims[0] // 2, 1), max(dims[1] // 2, 1))
                         windows = self.slide_windows(bigger_bbox, window_dims=dims, step_size=steps)
@@ -198,8 +200,8 @@ class Segmentor:
                 b = min(math.floor(curr_bbox.bottom + 0.5 * curr_bbox.get_height()), img.shape[0])
                 bigger_bbox = boundingBox(l, r, t, b)
                 candidates_list.append(bigger_bbox)
-                for j in range(avg_height - height_stdev, avg_height + height_stdev, int(0.75 * height_stdev)):
-                    for k in range(avg_width - width_stdev, avg_width + height_stdev, int(0.75 * width_stdev)):
+                for j in range(avg_height - height_stdev, avg_height, int(0.75 * height_stdev)):
+                    for k in range(avg_width - width_stdev, avg_width, int(0.75 * width_stdev)):
                         dims = (j, k)
                         steps = (max(dims[0] // 2, 1), max(dims[1] // 2, 1))
                         windows = self.slide_windows(bigger_bbox, window_dims=dims, step_size=steps)
@@ -213,9 +215,9 @@ class Segmentor:
                     b = min(math.floor(curr_bbox.bottom + 0.5 * curr_bbox.get_height()), img.shape[0])
                     bigger_bbox = boundingBox(l, r, t, b)
                     candidates_list.append(bigger_bbox)
-                    for j in range(avg_height - 2 * height_stdev, avg_height + 2 * height_stdev,
+                    for j in range(avg_height - height_stdev, avg_height,
                                    int(0.75 * height_stdev)):
-                        for k in range(avg_width - 2 * width_stdev, avg_width + 2 * height_stdev,
+                        for k in range(avg_width - width_stdev, avg_width,
                                        int(0.75 * width_stdev)):
                             dims = (j, k)
                             steps = (max(dims[0] // 2, 1), max(dims[1] // 2, 1))
@@ -228,4 +230,4 @@ class Segmentor:
             if best:
                 final_bounding_boxes.append(best)
         # TODO: Call Ernests/Mellows Clasifier on each element to set labels
-        return json.dumps([o.dump() for o in proposed_bboxes])
+        return json.dumps([o.dump() for o in proposed_bboxes]), proposed_bboxes
