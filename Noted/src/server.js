@@ -3,15 +3,18 @@ var app       =    express();
 var http      =    require('http');
 var server    =    http.createServer(app);
 var bodyParser= require('body-parser');
+var fileUpload = require('express-fileupload');
 var fs = require('fs');
 
 var path = require('path');
 var users = require('./server/users.js'); 
 var mailer = require('./server/mailer.js'); 
-var logfile="server/log.txt";
+var file = require('./server/file.js'); 
+var logfile= 'src/server/log.txt';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 process.on('uncaughtException', function (error) {
    console.log(error.stack);
@@ -19,13 +22,14 @@ process.on('uncaughtException', function (error) {
 	   data+=error.stack;
 	   data+="\n===============UNCAUGHTEXCEPTION END===============\n";
 
-	fs.appendFile(logfile, data, function(err) {
-	    if(err) {
-	        return console.log(err);
-	    }
+  fs.appendFile(logfile, data, function(err) {
+      if(err) {
+          console.log(err.stack);
+          return console.log(err);
+      }
 
-	    console.log("The file was saved!");
-	}); 
+      console.log("log append!");
+  }); 
 });
 
 app.get("/users",users.list);
@@ -34,6 +38,7 @@ app.post('/verifyme',users.verify);
 app.post("/loginuser",users.login);
 app.post("/registeruser",users.register);
 app.post('/registeredverify', mailer.mail);
+app.post('/uploadimages/:id', file.file);
 
 app.use(express.static(path.join(__dirname)));
 

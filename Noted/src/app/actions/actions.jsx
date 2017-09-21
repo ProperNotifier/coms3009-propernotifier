@@ -39,3 +39,10 @@ export const verify= function (json) {
 		payload:json
 	}
 }
+
+export const uploadmodal= function (state) {
+	return{
+		type:"UPLOAD_MODAL_STATE",
+		payload:state
+	}
+}

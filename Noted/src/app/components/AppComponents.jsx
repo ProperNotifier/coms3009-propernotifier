@@ -31,7 +31,7 @@ class AllComponents extends React.Component {
 	render () {
 		return (
 			<div>
-				<Upload/>
+				{this.props.upload=="open"?<Upload/>:""}
 				<Header/>
 				<SideBar/>
 				<Platform/>
@@ -42,7 +42,8 @@ class AllComponents extends React.Component {
 
 function mapStateToProps(state) {
 	return({
-		platform:state.onPlatform
+		platform:state.onPlatform,
+		upload:state.uploadmodal
 		
 	});
 }

@@ -1124,6 +1124,7 @@ a {
 		position: absolute;
 		right: 30px;
 		top: 30px;
+		cursor: pointer;
 
 	}
 	.upload-container .upload-container-elements .bottom-holder{
@@ -1156,6 +1157,9 @@ a {
 		display: inline-block;
 		text-transform:lowercase;		
 	}
+	.upload-container .upload-container-elements .bottom-holder .picture-list{
+		display: flow-root;
+	}
 	.upload-container .upload-container-elements .bottom-holder .add-picture{
 		display: block;
 		margin: auto;
@@ -1163,6 +1167,7 @@ a {
 		color: white;
 		width: 70px;
 		cursor: pointer;
+		text-align: center;
 	}
 	.upload-container .upload-container-elements .bottom-holder .upload-btn{
 		color: white;
@@ -1170,6 +1175,18 @@ a {
 		border-radius: 10px;
 	    float: right;
 	    margin-right: 40px;
+	}
+	.upload-container .upload-container-elements .bottom-holder .picture-list .upload-image-item{
+		color: white;
+		background-color: #818181;
+		border-radius: 10px;
+		margin-bottom: 10px;
+	}
+	.upload-container .upload-container-elements .bottom-holder .picture-list .upload-image-item img{
+		width: 100px;
+		height: 100px;
+		margin: auto;
+		display: block;
 	}
 
 		@media screen and (max-width: 600px) {

@@ -1,10 +1,12 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {connect} from "react-redux";
 import SideBarToggle from './Header/SideBarToggle.jsx';
 import DropdownProfile from './Header/DropdownProfile.jsx';
 import $ from 'jquery';
 
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
+import {changeAuth,uploadmodal} from "../actions/actions.jsx";
 class Header extends React.Component {
 	widthShow(){
 		alert("UPLOAD IMAGE");
@@ -23,7 +25,7 @@ class Header extends React.Component {
 	                        <li className="dropdown header-menu notifications-menu">
 	                            <a href="#" className="dropdown-toggle" data-toggle="dropdown">
 	                                <i className="fa fa-bell"></i>
-	                                <span className="label label-warning">4</span>
+	                                <span className="label notification-badge label-warning">4</span>
 	                            </a>
 	                            <ul className="dropdown-menu header-dropdown-menu" style={{"marginTop": "10px"}}>
 	                                <li className="header">You have 10 notifications</li>
@@ -61,7 +63,7 @@ class Header extends React.Component {
 	                            </ul>
 	                        </li>
 	                        <li className="dropdown header-menu messages-menu">
-	                            <a href="#" className="dropdown-toggle" onClick={()=>this.widthShow()} data-toggle="dropdown">
+	                            <a href="#" className="dropdown-toggle" onClick={()=>this.props.uploadmodal("open")} data-toggle="dropdown">
 	                                <i className="fa fa-upload"></i>
 	                            </a>
 	                        </li>
@@ -88,5 +90,9 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps)(Header);
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({uploadmodal:uploadmodal},dispatch);
+}
+
+export default connect(mapStateToProps,matchDispatchToProps)(Header);
 //render(<App/>, document.getElementById('app'));

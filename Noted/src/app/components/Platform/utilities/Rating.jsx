@@ -130,11 +130,11 @@ class Rating extends React.Component {
 		}
 		return (  
 			<div className="notes-ratings">
-				<label style={style} onClick={()=>this.starClick(5)} className={"star fa "+ this.state.s5} for="star-5"></label>
-				<label style={style} onClick={()=>this.starClick(4)} className={"star fa "+ this.state.s4} for="star-4"></label>
-				<label style={style} onClick={()=>this.starClick(3)} className={"star fa "+ this.state.s3} for="star-3"></label>
-				<label style={style} onClick={()=>this.starClick(2)} className={"star fa "+ this.state.s2} for="star-2"></label>
-				<label style={style} onClick={()=>this.starClick(1)} className={"star fa "+ this.state.s1} for="star-1"></label>
+				<label style={style} onClick={()=>this.starClick(5)} className={"star fa "+ this.state.s5} id="star-5"></label>
+				<label style={style} onClick={()=>this.starClick(4)} className={"star fa "+ this.state.s4} id="star-4"></label>
+				<label style={style} onClick={()=>this.starClick(3)} className={"star fa "+ this.state.s3} id="star-3"></label>
+				<label style={style} onClick={()=>this.starClick(2)} className={"star fa "+ this.state.s2} id="star-2"></label>
+				<label style={style} onClick={()=>this.starClick(1)} className={"star fa "+ this.state.s1} id="star-1"></label>
 			</div>
 	    );
 	}
