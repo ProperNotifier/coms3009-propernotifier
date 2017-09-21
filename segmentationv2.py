@@ -231,3 +231,4 @@ class Segmentor:
                 final_bounding_boxes.append(best)
         # TODO: Call Ernests/Mellows Clasifier on each element to set labels
         return json.dumps([o.dump() for o in proposed_bboxes]), proposed_bboxes
+

@@ -62,8 +62,4 @@ class boundingBox:
             self.bottom) + " label: " + str(self.label) + " certainty: " + str(self.certainty)
 
     def dump(self):
-        return {"BoundingBoxList": {'left': self.left,
-                                    'right': self.right,
-                                    'top': self.top,
-                                    'bottom': self.bottom,
-                                    'label': self.label}}
+        return {'left': self.left, 'right': self.right, 'top': self.top, 'bottom': self.bottom,'label': self.label}
