@@ -6,6 +6,8 @@ install:
   - pip install coveralls
   - pip install coverage
   - pip install nose
+  - npm install
+  - npm install --dev
 script:
   - nosetests nose_helloWorld.py --with-coverage
   - node script.js
