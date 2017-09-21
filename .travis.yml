@@ -1,6 +1,14 @@
 language: python
-sudo: false
+sudo: true
 python: 3.5
-script: python test.py
-
-after_success: coveralls
+install:
+  - pip install --upgrade pip
+  - pip install coveralls
+  - pip install coverage
+  - pip install nose
+  - pip install Pillow
+script: nosetests nose_temp_API.py nose_helloWorld.py --with-coverage
+notifications:
+  slack: coms3009-noted:kjOHHQyiAOoWS08knpjn110C
+after_success:
+  coveralls

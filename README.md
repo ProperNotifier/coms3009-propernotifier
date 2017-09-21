@@ -1,6 +1,6 @@
 # coms3009-propernotifier
-[![Build Status](https://travis-ci.org/ProperNotifier/coms3009-propernotifier.svg?branch=master)](https://travis-ci.org/ProperNotifier/coms3009-propernotifier)
-[![Coverage Status](https://coveralls.io/repos/github/ProperNotifier/coms3009-propernotifier/badge.svg?branch=master)](https://coveralls.io/github/ProperNotifier/coms3009-propernotifier?branch=master)
+[![Build Status](https://travis-ci.org/ProperNotifier/coms3009-propernotifier.svg?branch=Segmentaion)](https://travis-ci.org/ProperNotifier/coms3009-propernotifier)
+[![Coverage Status](https://coveralls.io/repos/github/ProperNotifier/coms3009-propernotifier/badge.svg?branch=Segmentaion)](https://coveralls.io/github/ProperNotifier/coms3009-propernotifier?branch=Segmentaion)
 
 Project for COMS3009, Software Design, at the University of the Witwatersrand
 
