@@ -13,7 +13,7 @@ matrix:
     notifications:
       slack: coms3009-noted:kjOHHQyiAOoWS08knpjn110C
     after_success:
-    coveralls
+      coveralls
     
   - language: node_js
     node_js:
