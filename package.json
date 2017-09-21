@@ -2,12 +2,11 @@
   "name": "testjs",
   "version": "1.0.0",
   "description": "trying unit tests with unitjs and mocha",
-  "main": "a.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"no test specified\" && exit 0"
   },
   "repository": {
     "type": "git",
