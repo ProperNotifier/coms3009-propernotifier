@@ -7,7 +7,7 @@ install:
   - pip install coverage
   - pip install nose
   - npm install
-  - npm install --dev
+  - npm install --only=dev
 script:
   - nosetests nose_helloWorld.py --with-coverage
   - node script.js
