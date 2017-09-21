@@ -6,6 +6,7 @@ install:
   - pip install coveralls
   - pip install coverage
   - pip install nose
+  - pip install pyyaml
   - npm install
   - npm install --only=dev
 script:
