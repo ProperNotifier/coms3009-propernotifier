@@ -12,6 +12,11 @@ class UploadImagePreview extends React.Component {
 		}
 		// this.props.platformChange("Edit Notes");
 		// $(".sidebar-menu-title.active").removeClass("active");
+		$(document).on("click",".upload-container .upload-container-elements .bottom-holder .tags-holder span",function(argument) {
+			// body...
+			$(this).toggleClass("selected")
+			// alert($(this).html())
+		})
 	}
 	render () {
 		return (  

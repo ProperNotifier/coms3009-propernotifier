@@ -1155,7 +1155,11 @@ a {
 		margin-right: 2px;
 		margin-bottom: 5px;
 		display: inline-block;
-		text-transform:lowercase;		
+		text-transform:lowercase;
+		cursor: pointer;		
+	}
+	.upload-container .upload-container-elements .bottom-holder .tags-holder span.selected{
+		background-color: #333;			
 	}
 	.upload-container .upload-container-elements .bottom-holder .picture-list{
 		display: flow-root;
