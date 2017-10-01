@@ -1,0 +1,29 @@
+body {
+	background-color: #DDDDDD;
+	-webkit-user-select: none; /* turn off text selection  / Webkit */
+	-moz-user-select: none;    /* Firefox */
+	-ms-user-select: none;     /* IE 10  */
+	-o-user-select: none;      /* Opera */
+	user-select: none;
+}
+#boxHolder {
+	border:2px solid grey;
+	float: left;
+	background-color: pink;
+	margin-top: 0px;
+	padding-top: 0px;
+	position: absolute;
+}
+.box {
+	fill: none;
+	background-color: none;
+	position: absolute;
+	height: 100px;
+	width: 100px;
+	z-index: 99999;
+	border:2px solid grey;
+}
+
+.box:hover {
+	border:4px solid lime;
+}

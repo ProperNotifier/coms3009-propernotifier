@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="box.css">
+		<script src="test.js"></script>
+		<script src="box.js"></script>
+	</head>
+	<body>
+		<!--div id="canvasHolder">
+			<canvas id="canvas" width="600" height="600"></canvas>
+		</div-->
+		<button id="clearButton"> Click </button><br />
+		<button id="getJSONb"> Get JSON </button><br />
+		<button id="loadJSONb"> Load JSON </button><br />
+		<input type="radio" id="bxch0" name="bxch" value="0" onchange="bxState(0);" checked="true" />
+	    <label for="bxch0">Drag</label>
+
+	    <input type="radio" id="bxch1" name="bxch" value="1" onchange="bxState(1);" />
+	    <label for="bxch1">Move</label>
+
+	    <input type="radio" id="bxch2" name="bxch" value="2" onchange="bxState(2);" />
+	    <label for="bxch2">Add</label>
+
+		<input type="radio" id="bxch3" name="bxch" value="3" onchange="bxState(3);" />
+		<label for="bxch3">Delete</label>
+
+		<div id="boxHolder" class="boxHolder">
+			<!--div id='box1' class='box'></div-->
+		</div>
+	</body>
+</html>
