@@ -1,0 +1,8 @@
+
+===============ERROR START===============
+Error: ER_DUP_ENTRY: Duplicate entry '1122997@students.wits.ac.za' for key 'user_email'
+===============ERROR END===============
+
+===============ERROR START===============
+Error: ER_DUP_ENTRY: Duplicate entry 'mimzmarshymamzie@gmail.com' for key 'user_email'
+===============ERROR END===============

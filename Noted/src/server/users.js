@@ -3,6 +3,7 @@
  */
 var mysql     =    require('mysql');
 var fs = require('fs');
+var uploadDir="../uploads/";
 
 var pool      =    mysql.createPool({
    connectionLimit : 100, //important
@@ -42,7 +43,7 @@ exports.list = function(req, res){
 
          
                 //res.render('customers',{page_title:"Customers - Node.js",data:rows});
-                res.json(rows);
+                res.json(rows).send(200);
                 // console.log(rows);
                            
          });
@@ -113,7 +114,7 @@ exports.getuser = function(req, res){
 exports.login = function(req, res){
   // var id = req.params.id;
   var input = JSON.parse(JSON.stringify(req.body));
-
+console.log("login")
   pool.getConnection(function(err,connection){
        if (err) {
          connection.release();
@@ -269,7 +270,7 @@ exports.verify=function(req, res){
 //       console.log('UPDATE USERS SET user_verified=1')
        let query = `UPDATE USERS SET user_verified=1
             WHERE user_email=?`
-console.log(query+email);
+//console.log(query+email);
          connection.query(query,[email],function(err,rows){
             connection.release();
             if(err){
@@ -282,8 +283,22 @@ console.log(query+email);
       }
          
                 //res.render('customers',{page_title:"Customers - Node.js",data:rows});
-                res.json(rows);
-                // console.log(rows);
+                
+                let query = `SELECT user_id as id FROM USERS 
+                              WHERE user_email=?`;
+                connection.query(query,[email],function(err,rows){
+                  console.log(rows[0].id);
+                  var dir=uploadDir+rows[0].id;
+                  if (!fs.existsSync(dir)){
+                      fs.mkdirSync(dir);
+                      console.log("Done")
+                  }else
+                  {
+                      console.log("Directory already exist");
+                  }
+                });
+
+
                            
          });
 

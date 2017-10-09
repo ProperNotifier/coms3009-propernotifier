@@ -10,7 +10,7 @@ var path = require('path');
 var users = require('./server/users.js'); 
 var mailer = require('./server/mailer.js'); 
 var file = require('./server/file.js'); 
-var logfile= 'src/server/log.txt';
+var logfile= './server/log.txt';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,7 +21,7 @@ process.on('uncaughtException', function (error) {
 	let data="\n===============UNCAUGHTEXCEPTION START===============\n";
 	   data+=error.stack;
 	   data+="\n===============UNCAUGHTEXCEPTION END===============\n";
-
+/*
   fs.appendFile(logfile, data, function(err) {
       if(err) {
           console.log(err.stack);
@@ -29,7 +29,7 @@ process.on('uncaughtException', function (error) {
       }
 
       console.log("log append!");
-  }); 
+  });*/ 
 });
 
 app.get("/users",users.list);

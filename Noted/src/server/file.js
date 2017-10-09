@@ -13,7 +13,7 @@ exports.file=function(req,res) {
 			let now=(new Date()).getTime();
 			let fileName=id+""+i+""+now+"."+sampleFile.mimetype.split("/")[1]
 			console.log(fileName)
-			sampleFile.mv('src/uploads/'+fileName, function(err) {
+			sampleFile.mv('uploads/'+fileName, function(err) {
 				if (err){
 					res.status(500).send("not uploaded")
 					console.log(err);
