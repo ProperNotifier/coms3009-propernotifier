@@ -1,4 +1,5 @@
 var HOST=require("./defaults.js").HOST;
+var uploadDir="uploads/";
 exports.file=function(req,res) {
 	// body...
 	let id=req.params.id;  
@@ -13,7 +14,7 @@ exports.file=function(req,res) {
 			let now=(new Date()).getTime();
 			let fileName=id+""+i+""+now+"."+sampleFile.mimetype.split("/")[1]
 			console.log(fileName)
-			sampleFile.mv('uploads/'+fileName, function(err) {
+			sampleFile.mv(uploadDir+id+"/"+fileName, function(err) {
 				if (err){
 					res.status(500).send("not uploaded")
 					console.log(err);
