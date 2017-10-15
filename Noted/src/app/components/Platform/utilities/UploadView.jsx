@@ -88,7 +88,7 @@ class Upload extends React.Component {
 				//alert(index)
 			})
 
-			var request = new XMLHttpRequest();
+			/*var request = new XMLHttpRequest();
 			request.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 				 console.log(this.responseText);
@@ -106,7 +106,7 @@ class Upload extends React.Component {
 			  };
 
 			request.open("POST", HOST+"/uploadimages/"+user_id,true);
-			request.send(formData);
+			request.send(formData);*/
 		}
 	}
 	render () {
