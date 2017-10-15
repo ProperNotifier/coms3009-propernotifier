@@ -9,7 +9,7 @@ import Header from './Header.jsx';
 import SideBar from './SideBar.jsx';
 import Platform from './Platform.jsx';
 import AuthBody from './Auth.jsx';
-import Upload from "./Platform/utilities/Upload.jsx";
+import Upload from "./Platform/Upload.jsx";
 
 
 import {HOST} from "../../server/defaults";

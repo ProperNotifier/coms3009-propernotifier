@@ -15,6 +15,11 @@ var logfile= './server/log.txt';
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 process.on('uncaughtException', function (error) {
    console.log(error.stack);
@@ -43,8 +48,12 @@ app.post('/uploadimages/:id', file.file);
 app.use(express.static(path.join(__dirname)));
 
 app.get("/logoblackclear",function(req,res) {
-	// body...
+  // body...
   res.sendFile(path.join(__dirname, 'public/img/logoblackclear.png'))
+});
+app.get("/loading",function(req,res) {
+  // body...
+  res.sendFile(path.join(__dirname, 'public/img/loading.gif'))
 });
 app.get("/pdf",function(req,res) {
 	// body...

@@ -1108,15 +1108,37 @@ a {
 	.upload-container {
 		z-index: 1032;
 		width: 100%;
-		height: 100%;
+		height: auto;
 		position: absolute;
 		top:0;
 		left: 0;
 		background-color: rgba(0,0,0,0.7);
+		min-height: 100%;
+		padding-bottom: 30px;
 
 	}
 	.upload-container .upload-container-elements .top-line{
 		width: 100%;
+	}
+	.upload-container .upload-container-elements .top-line .loading-bar-container{
+		width: 100%;
+		margin-top: 30px;
+		text-align: center;
+	}
+	.upload-container .upload-container-elements .top-line .loading-bar-container .loading-bar-holder{
+		margin: auto;
+		display: block;
+	}
+	.upload-container .upload-container-elements .top-line .loading-bar-container .loading-bar-holder .loading-bar{
+		width: 100px;
+		height: 2px;
+		display: inline-flex;
+		border-radius: 500px;
+		margin-left: 5px;
+		background-color: white;
+	}
+	.upload-container .upload-container-elements .top-line .loading-bar-container .loading-bar-holder .loaded{
+		background-color: #b32828;
 	}
 	.upload-container .upload-container-elements .top-line .close-btn{
 		font-size: 20px;
@@ -1131,6 +1153,7 @@ a {
 		margin-top: 60px;
 		width: 100%;
 		height: 100%;
+		color: white;
 	}
 	.upload-container .upload-container-elements .bottom-holder .detail-line,
 	.upload-container .upload-container-elements .bottom-holder .detail-line input,
@@ -1180,7 +1203,17 @@ a {
 	    float: right;
 	    margin-right: 40px;
 	}
-	.upload-container .upload-container-elements .bottom-holder .picture-list .upload-image-item{
+	.upload-container .upload-btn{
+		color: white;
+		background-color: #818181;
+		border-radius: 10px;
+	    float: right;
+	    margin-right: 40px;
+	}
+	.upload-container .melabor-holder label{
+	    margin-right: 15px;
+	}
+	/*.upload-container .upload-container-elements .bottom-holder .picture-list .upload-image-item{
 		color: white;
 		background-color: #818181;
 		border-radius: 10px;
@@ -1191,11 +1224,126 @@ a {
 		height: 100px;
 		margin: auto;
 		display: block;
+	}*/
+	.upload-container .upload-container-elements .bottom-holder .picture-list .upload-image-item{
+		color: white;
+		background-color: #818181;
+		border-radius: 10px;
+		margin-bottom: 10px;
+		width: 100%;
+		height: auto;
 	}
+	.upload-container .upload-container-elements .bottom-holder .picture-list .upload-image-item img{
+		width: 100%;
+		height: auto;
+		margin: auto;
+		display: block;
+	}
+	.upload-container .upload-container-elements .circle-mask {
+	    border-radius: 50%;
+	    width: 450px;
+	    height: 450px;
+	    background-color: #b32828;/*#181818;*/
+	    margin: auto;
+	    margin-top: 50px;
+	    color: whitesmoke;
+	    font-family: Righteous;
+	    font-size: 80px;
+		font-weight: bold;
+	}
+	.upload-container .upload-container-elements .circle-mask.animate{
+		-webkit-animation: flickerLoad 5s linear infinite;
+		-moz-animation: flickerLoad 5s linear infinite;
+		-o-animation:flickerLoad 5s linear infinite;
+		animation:flickerLoad 5s linear infinite; 
+	}
+	.upload-container .upload-container-elements .circle-mask img{
+	    width: 450px;
+	    height: 450px;
+	}
+    @keyframes flickerLoad {
+      0% {opacity: 0.0;}
+      12.5%{opacity: 0.50;}
+      25%{opacity: 1.00;}
+      37.5%{opacity: 0.50;}
+      50% {opacity: 0.0;}
+      62.5%{opacity: 0.50;}
+      75%{opacity: 1.0;}
+      87.5%{opacity: 0.50;}
+      100%{opacity: 0.0;}
+     }
+
+      @-webkit-keyframes flickerLoad {
+      0% {opacity: 0.0;}
+      12.5%{opacity: 0.50;}
+      25%{opacity: 1.00;}
+      37.5%{opacity: 0.50;}
+      50% {opacity: 0.0;}
+      62.5%{opacity: 0.50;}
+      75%{opacity: 1.0;}
+      87.5%{opacity: 0.50;}
+      100%{opacity: 0.0;}
+     }
+      @-moz-keyframes flickerLoad {
+      0% {opacity: 0.0;}
+      12.5%{opacity: 0.50;}
+      25%{opacity: 1.00;}
+      37.5%{opacity: 0.50;}
+      50% {opacity: 0.0;}
+      62.5%{opacity: 0.50;}
+      75%{opacity: 1.0;}
+      87.5%{opacity: 0.50;}
+      100%{opacity: 0.0;}
+     }
+
+      @-o-keyframes flickerLoad {
+      0% {opacity: 0.0;}
+      12.5%{opacity: 0.50;}
+      25%{opacity: 1.00;}
+      37.5%{opacity: 0.50;}
+      50% {opacity: 0.0;}
+      62.5%{opacity: 0.50;}
+      75%{opacity: 1.0;}
+      87.5%{opacity: 0.50;}
+      100%{opacity: 0.0;}
+     }
+	#boxHolder {
+		border:2px solid grey;
+		float: left;
+		background-color: pink;
+		margin-top: 0px;
+		padding-top: 0px;
+		position: relative;
+		margin: auto;
+	}
+	.box {
+		fill: none;
+		background-color: none;
+		position: absolute;
+		height: 100px;
+		width: 100px;
+		border:2px solid grey;
+	}
+
+	.box:hover {
+		border:4px solid lime;
+	}
+
 
 		@media screen and (max-width: 600px) {
 			.upload-container .upload-container-elements .bottom-holder .upload-btn{
 			    margin-right: 0px;
 			}
+		    .upload-container .upload-container-elements .circle-mask {
+			    width: 150px;
+			    height: 150px;
+			    font-size: 50px;
+
+		    }
+		    .upload-container .upload-container-elements .circle-mask img {
+			    width: 150px;
+			    height: 150px;
+
+		    }
 		}
 /*UPLOAD END*/
