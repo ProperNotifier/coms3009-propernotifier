@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.11.7)  16 OCT 2017 22:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.11.7)  16 OCT 2017 11:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -442,23 +442,26 @@ Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
 \RaggedLeftParindent=\skip54
 \RaggedRightParindent=\skip55
 \JustifyingParindent=\skip56
+)
+(/usr/share/texlive/texmf-dist/tex/latex/ushort/ushort.sty
+ushort.sty by M. Vaeth: Release: 2.2 
+Package: ushort 2001/06/13 v2.2
 ) (./test.aux)
 \openout1 = `test.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+ (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count93
 \scratchdimen=\dimen113
@@ -506,40 +509,40 @@ LaTeX Font Info:    ... okay on input line 7.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package ragged2e Info: ABD: executing \RaggedRight on input line 7.
+Package ragged2e Info: ABD: executing \RaggedRight on input line 8.
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 7.
+LaTeX Info: Redefining \selectfont on input line 8.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 9.
+(Font)              <12> on input line 10.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 9.
+(Font)              <8> on input line 10.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 9.
+(Font)              <6> on input line 10.
 
-Overfull \hbox (1.88605pt too wide) detected at line 10
+Overfull \hbox (1.88605pt too wide) detected at line 11
 \OML/cmm/m/it/12 W[] WWW[] W W[] W WW W WW WW W W WW W[] WW[] W WWW
  []
 
 
-Overfull \hbox (137.9548pt too wide) detected at line 24
+Overfull \hbox (137.9548pt too wide) detected at line 25
 \OML/cmm/m/it/12 W[] W[] W W[] WWW[] W[] W WWWW[]WW[] W[]W W[] WWWW[] W WW[]W[]
  W[] W W
  []
 
 
-Overfull \hbox (265.74724pt too wide) detected at line 25
+Overfull \hbox (265.74724pt too wide) detected at line 26
 \OML/cmm/m/it/12 W W W[] WW[] W W[]WW[]WW[] WW W[] WWWW[]W WW[] W[] WWW[] WWW W
 [] W[]W[]W WW[]W[] W
  []
 
 
-Overfull \hbox (197.097pt too wide) detected at line 29
+Overfull \hbox (197.097pt too wide) detected at line 28
 \OML/cmm/m/it/12 W W[] W WW WW[] W[] W W WW[] W W[] W WW WW[]W W[] WW[] W WWW[]
  W[] W W
  []
 
 
-Overfull \hbox (301.92068pt too wide) detected at line 30
+Overfull \hbox (301.92068pt too wide) detected at line 29
 \OML/cmm/m/it/12 W W W[]W[]W[] WW WW WWW WW W W[]W WWW WWW WW[] W WW[] W WW W[]
  WW W[]W WW[] W
  []
@@ -547,35 +550,35 @@ Overfull \hbox (301.92068pt too wide) detected at line 30
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (176.20416pt too wide) detected at line 33
+Overfull \hbox (176.20416pt too wide) detected at line 32
 \OML/cmm/m/it/12 W[]W W[] W W[]WW[]W[] W[] W WW W WWWW[] W W W[] WWWW W W[] WW 
 WW[] W
  []
 
 
-Overfull \hbox (51.79826pt too wide) detected at line 35
+Overfull \hbox (51.79826pt too wide) detected at line 34
 \OML/cmm/m/it/12 WW W[] WWW[] W W W[] W[] W[] W WW W[] WWW[] WW W W[]W W
  []
 
 
-Overfull \hbox (54.32927pt too wide) detected at line 36
+Overfull \hbox (54.32927pt too wide) detected at line 35
 \OML/cmm/m/it/12 W W[]W[]W[] W[] W WW WW[] W[] W[] W WWW W[] W WW W WW[] WW W
  []
 
 [2] (./test.aux) ) 
 Here is how much of TeX's memory you used:
- 2810 strings out of 494910
- 35774 string characters out of 6179836
- 111072 words of memory out of 5000000
- 6098 multiletter control sequences out of 15000+600000
+ 2859 strings out of 494910
+ 36550 string characters out of 6179836
+ 111873 words of memory out of 5000000
+ 6143 multiletter control sequences out of 15000+600000
  6982 words of font info for 25 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 24i,6n,35p,268b,121s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 24i,8n,35p,267b,121s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi1
 2.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on test.pdf (2 pages, 37010 bytes).
+Output written on test.pdf (2 pages, 34827 bytes).
 PDF statistics:
  27 PDF objects out of 1000 (max. 8388607)
  18 compressed objects within 1 object stream

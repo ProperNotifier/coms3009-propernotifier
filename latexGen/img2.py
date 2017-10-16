@@ -61,7 +61,9 @@ def parse_line(row):
 	subscript = ""
 	for block in row:
 		if block['right']-block['left'] > 100: # if it's a long line
-			mt_str += (superscript+subscript+" newline "+sp) # fix this ),:
+			underline = True
+			if len(superscript) > 0 or len(subscript) > 0:
+				mt_str += (superscript+subscript+sp) # fix this ),:
 			supers = False
 			subscr = False
 			superscript = ""
@@ -101,8 +103,10 @@ def parse_line(row):
 				subscr = False
 				superscript = ""
 				subscript = ""
+	if underline and len(mt_str) > 0:
+		mt_str = "\\ushort{"+mt_str+"}"
 	return mt_str
-with open ("test_nt.json", "r") as myfile:
+with open ("test_nt_tut.json", "r") as myfile:
     data=myfile.readlines()[0].replace("\\\"", "\"")
     data = data[1:-1]
 
@@ -115,16 +119,19 @@ my_rows = assign_char(data, my_av)
 
 colors = ["red","orange","lime","cyan","blue"]
 indx = 0
-my_latex = "\documentclass[12pt]{article}\n\\usepackage{xcolor}\n\\usepackage[utf8]{inputenc}\n\\usepackage[margin=0.5in]{geometry}\n\\usepackage[english]{babel}\n\\usepackage[document]{ragged2e}\n\\begin{document}\n\section{Heading on Level 1 (section)}\n"
+my_latex = "\documentclass[12pt]{article}\n\\usepackage{xcolor}\n\\usepackage[utf8]{inputenc}\n\\usepackage[margin=0.5in]{geometry}\n\\usepackage[english]{babel}\n\\usepackage[document]{ragged2e}\n\\usepackage{ushort}\n\\begin{document}\n\section{Heading on Level 1 (section)}\n"
 
 for row in my_rows:
 	color = colors[indx%5]
 	draw.rectangle((0, my_av[indx]['top'], 1600, my_av[indx]['bottom']), fill=None, outline=color)
 	indx+=1
-	my_latex += ("\color{"+color+"}\["+parse_line(row)+"\]\n")
+	this_line = parse_line(row)
+	if len(this_line) > 0:
+		my_latex += ("\color{"+color+"}\["+this_line+"\]\n")
 	for block in row:
 		draw.rectangle(((block['left'], block['top']), (block['right'], block['bottom'])), fill=None, outline=color)
-	# draw.text((block['left'], block['top']), "3", fill="red")
+		if block['label'] != None:
+			draw.text((block['left'], block['top']), block['label'], fill="black")
 source_img.save("out_file.jpg", "JPEG")
 
 file = open("test.tex","w")
