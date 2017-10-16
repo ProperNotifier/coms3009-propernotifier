@@ -1,60 +1,26 @@
-class boundingBox:
-    def __init__(self, l, r, t, b):
-        if l < r and t < b:
-            self.left = min(int(l), int(r))
-            self.right = max(int(r), int(l))
-            self.top = min(int(t), int(b))
-            self.bottom = max(int(t), int(b))
-        else:
-            print("error")
-        self.label = None
-        self.certainty = 0
-
-    def add_certainty(self, certainty):
-        if self.certainty < certainty:
-            self.certainty = certainty
-
-    def add_label(self, label):
+class BoundingBox:
+    def __init__(self, l, r, t, b, label=None, certainty=0):
+        self.left = min(int(l), int(r))
+        self.right = max(int(r), int(l))
+        self.top = min(int(t), int(b))
+        self.bottom = max(int(t), int(b))
         self.label = label
+        self.certainty = certainty
+
+    def join(self, bbox):
+            left = min(self.left, bbox.left)
+            right = max(self.right, bbox.right)
+            top=min(self.top, bbox.top)
+            bottom=max(self.bottom, bbox.bottom)
+            return BoundingBox(left, right, top, bottom, self.label)
 
     def get_area(self):
         return (abs(self.top - self.bottom)) * abs((self.right - self.left))
 
-    def completely_contains(self, bbox):
-        if self.left <= bbox.left and self.right >= bbox.right and self.top <= bbox.top and self.bottom >= bbox.bottom:
-            return True
-        else:
-            return False
-
-    def intersects(self, bbox):
-        if bbox.left >= self.right or bbox.right <= self.left:
-            return False
-        if bbox.bottom <= self.top or bbox.top >= self.bottom:
-            return False
-
-        return True
-
-    def get_intersection(self, bbox):
-        l = max(bbox.left, self.left)
-        r = min(bbox.right, self.right)
-        t = min(bbox.top, self.top)
-        b = max(bbox.bottom, self.bottom)
-        return boundingBox(l, r, t, b)
-
-    def get_union(self, bbox):
-        l = min(bbox.left, self.left)
-        r = max(bbox.right, self.right)
-        t = min(bbox.top, self.top)
-        b = max(bbox.bottom, self.bottom)
-        return boundingBox(l, r, t, b)
-
-    def shape(self):
-        return (self.get_height(), self.get_width())
-
-    def get_height(self):
+    def height(self):
         return self.bottom - self.top
 
-    def get_width(self):
+    def width(self):
         return abs(self.right - self.left)
 
     def __str__(self):
@@ -62,4 +28,4 @@ class boundingBox:
             self.bottom) + " label: " + str(self.label) + " certainty: " + str(self.certainty)
 
     def dump(self):
-        return {'left': self.left, 'right': self.right, 'top': self.top, 'bottom': self.bottom,'label': self.label}
+        return {'left': self.left, 'right': self.right, 'top': self.top, 'bottom': self.bottom, 'label': self.label}
