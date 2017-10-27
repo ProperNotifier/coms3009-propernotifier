@@ -48,6 +48,7 @@ def assign_char(my_data, rows):
 
 def parse_line(row):
 	sp = " \quad "
+	line_divide = "\n \\noindent\\makebox[\\linewidth]{\\rule{\\textwidth}{1pt}} \n"
 	mt_str = ""
 	char_width = 10
 	char_height = 20
@@ -112,6 +113,9 @@ with open ("test_nt_tut.json", "r") as myfile:
 
 data = json.loads(data)
 
+with open("parsed.json", "r") as myfile:
+	data = json.load(myfile)
+
 draw = ImageDraw.Draw(source_img)
 my_av = get_av(data)
 
@@ -119,7 +123,7 @@ my_rows = assign_char(data, my_av)
 
 colors = ["red","orange","lime","cyan","blue"]
 indx = 0
-my_latex = "\documentclass[12pt]{article}\n\\usepackage{xcolor}\n\\usepackage[utf8]{inputenc}\n\\usepackage[margin=0.5in]{geometry}\n\\usepackage[english]{babel}\n\\usepackage[document]{ragged2e}\n\\usepackage{ushort}\n\\begin{document}\n\section{Heading on Level 1 (section)}\n"
+my_latex = "\documentclass[12pt]{article}\n\\usepackage{xcolor}\n\\usepackage[normalem]{ulem}\n\\usepackage[utf8]{inputenc}\n\\usepackage[margin=0.5in]{geometry}\n\\usepackage[english]{babel}\n\\usepackage[document]{ragged2e}\n\\usepackage{ushort}\n\\begin{document}\n\section{Heading on Level 1 (section)}\n"
 
 for row in my_rows:
 	color = colors[indx%5]

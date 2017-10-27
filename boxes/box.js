@@ -22,17 +22,25 @@ $(document).ready(function() {
 			resizeBox( (e.pageX - bxst.left), (e.pageY - bxst.top), true, $(e.target).attr('id'));
 			boxPaint = true;
 		} else if(boxState == 2) {
+			$(this).prop('disabled', true);
 			var left = (e.pageX - bxst.left)-50;
 			var top = (e.pageY - bxst.top)-50;
-			$('#boxHolder').append( "<div id='box"+boxSize+"' class='box' style='left: "+left+"px; top: "+top+"'></div>" );
+			$('#boxHolder').append( "<div id='box"+boxSize+"' class='box' style='left: "+left+"px; top: "+top+"'><textarea class='boxtext'rows='1' cols='4'>\\quad</textarea></div>" );
 			$('#box'+boxSize).css("top", top);
+			$('.box').click(function(e) {
+				if(boxState == 3) {
+					$(this).remove();
+					boxSize;
+				}
+			});
 			$('#box'+boxSize).click(function(e) {
 				if(boxState == 3) {
 					$(this).remove();
-					boxSize--;
+					boxSize;
 				}
 			});
 			boxSize++;
+			$(this).prop('disabled', false);
 		}
 	});
 
@@ -51,7 +59,7 @@ $(document).ready(function() {
 	});
 
 	$('#clearButton').click(function() {
-		//
+		$("#boxHolder").empty();
 	});
 
 	$('#getJSONb').click(function () {
@@ -62,7 +70,8 @@ $(document).ready(function() {
 			var y = parseInt( $(this).css("top") );
 			var w = parseInt( $(this).css("width") );
 			var h = parseInt( $(this).css("height") );
-			obj = {"left": x, "right": x+w, "bottom": y+h, "top":y, "label": null};
+			var text = $(this).find("textarea").val();
+			obj = {"left": x, "right": x+w, "bottom": y+h, "top":y, "label": text};
 			bxArray.push(obj);
 		});
 		bxJSON = JSON.stringify(bxArray);
@@ -76,7 +85,8 @@ $(document).ready(function() {
 			var t = bxArray[i].top;// + bxst.top;
 			var h = bxArray[i].bottom - bxArray[i].top;
 			var w = bxArray[i].right - bxArray[i].left;
-			$('#boxHolder').append( "<div id='box"+boxSize+"' class='box' ></div>" );
+			var text = bxArray[i].label;
+			$('#boxHolder').append( "<div id='box"+boxSize+"' class='box' ><textarea class='boxtext'rows='1' cols='4'>"+text+"</textarea></div>" );
 			$('#box'+boxSize).css("top", t);
 			$('#box'+boxSize).css("left", l);
 			$('#box'+boxSize).css("height", h);
@@ -84,7 +94,7 @@ $(document).ready(function() {
 			$('#box'+boxSize).click(function(e) {
 				if(boxState == 3) {
 					$(this).remove();
-					boxSize--;
+					boxSize;
 				}
 			});
 			boxSize++;
@@ -137,4 +147,8 @@ function resizeBox(x, y, dragging, id) {
 
 function bxState(state) {
 	boxState = state;
+	if(boxState == 4)
+		$(".boxtext").css("display", "block")
+	else
+		$(".boxtext").css("display", "none");
 }

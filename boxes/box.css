@@ -27,3 +27,16 @@ body {
 .box:hover {
 	border:4px solid lime;
 }
+
+.box:hover .boxtext {
+	color: lime;
+	font-weight: bold;
+	font-size: 20px;
+}
+.boxtext {
+	resize: none;
+	border: none;
+	background: none;
+	color: grey;
+	display: none;
+}
