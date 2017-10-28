@@ -11,5 +11,6 @@ Rules for latex generator
 10) very long - (more than 75% width) get line_divide
 11) division... id by long_divide ... look for chars strictly above, strictly bellow, with width intersection
 12) sums: pretend they're full size: look for anything bellow, anything above and super/subscript
-
+13) exp and sub are not considered
+14) for lond_divide frac: store numerator and denominator: anything above or bellow that still intersect the bar
 \frac{H_{k+1} - H_{k}}{k}
