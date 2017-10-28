@@ -1,6 +1,6 @@
-from PIL import Image, ImageFont, ImageDraw, ImageEnhance
+#from PIL import Image, ImageFont, ImageDraw, ImageEnhance
 import json
-source_img = Image.open("test_nt_tut.jpg").convert("RGBA")
+#source_img = Image.open("test_nt_tut.jpg").convert("RGBA")
 im_height = 2337 # height of pixels
 im_width = 1637 # width of pixels
 
@@ -137,27 +137,27 @@ def gen_tex(my_json):
 	with open(my_json, "r") as myfile:
 		data = json.load(myfile)
 
-	draw = ImageDraw.Draw(source_img)
+	#draw = ImageDraw.Draw(source_img)
 	my_av = get_av(data)
 
 	my_rows = assign_char(data, my_av)
 
-	colors = ["red","orange","lime","cyan","blue"]
-	indx = 0
+	#colors = ["red","orange","lime","cyan","blue"]
+	#indx = 0
 	my_latex = "\documentclass[12pt]{article}\n\\usepackage{xcolor}\n\\usepackage[normalem]{ulem}\n\\usepackage[utf8]{inputenc}\n\\usepackage[margin=0.5in]{geometry}\n\\usepackage[english]{babel}\n\\usepackage[document]{ragged2e}\n\\usepackage{ushort}\n\\begin{document}\n\t\\begin{center}\n"
 
 	for row in my_rows:
-		color = colors[indx%5]
-		draw.rectangle((0, my_av[indx]['top'], 1600, my_av[indx]['bottom']), fill=None, outline=color)
-		indx+=1
+		#color = colors[indx%5]
+		#draw.rectangle((0, my_av[indx]['top'], 1600, my_av[indx]['bottom']), fill=None, outline=color)
+		#indx+=1
 		this_line = parse_line(row)
 		if len(this_line) > 0:
 			my_latex += ("\t\t"+this_line+"\\newline\n")
-		for block in row:
-			draw.rectangle(((block['left'], block['top']), (block['right'], block['bottom'])), fill=None, outline=color)
-			if block['label'] != None:
-				draw.text((block['left'], block['top']), block['label'], fill="black")
-	source_img.save("out_file.jpg", "JPEG")
+		#for block in row:
+		#	draw.rectangle(((block['left'], block['top']), (block['right'], block['bottom'])), fill=None, outline=color)
+		#	if block['label'] != None:
+		#		draw.text((block['left'], block['top']), block['label'], fill="black")
+	#source_img.save("out_file.jpg", "JPEG")
 
 	file = open("test.tex","w")
 	file.write(my_latex+"\t\\end{center}\n\\end{document}")
