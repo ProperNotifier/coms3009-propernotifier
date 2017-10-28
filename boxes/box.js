@@ -3,7 +3,12 @@ var boxPaint;
 var boxDrags;
 var boxState; //0: drag, 1: move, 2: add, 3: delete
 //var bxJSON = "[]";
+var bxArray;
 $(document).ready(function() {
+	$.getJSON("parsed.json", function(json) {
+		bxArray = json;
+		//console.log(json); // this will show the info it in firebug console
+	});
 	boxState = $('input[name=bxch]:checked').val();
 	var bxst = $('#boxHolder').offset();
 
@@ -79,7 +84,7 @@ $(document).ready(function() {
 	});
 
 	$('#loadJSONb').click(function () {
-		var bxArray = JSON.parse(bxJSON);
+		//var bxArray = JSON.parse(bxJSON);
 		for (var i=0; i<bxArray.length; i++) {
 			var l = bxArray[i].left;// + bxst.left;
 			var t = bxArray[i].top;// + bxst.top;
