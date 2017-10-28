@@ -121,49 +121,6 @@ def parse_line(row):
 				supers = False
 				subscr = False
 			my_prev = block
-		'''if block['right']-block['left'] > 100 and block['label']=="-": # if it's a long line
-			underline = True
-			if len(superscript) > 0 or len(subscript) > 0:
-				mt_str += (superscript+subscript+sp) # fix this ),:
-			supers = False
-			subscr = False
-			superscript = ""
-			subscript = ""
-			my_prev = None
-		elif my_prev == None: # if it's the 1st char
-			mt_str += (superscript+subscript+block['label'])
-			my_prev = block
-			supers = False
-			subscr = False
-			superscript = ""
-			subscript = ""
-		else:
-			if block['left'] - my_prev['right'] >= char_width: # add a space
-				mt_str+=(superscript+subscript+sp+block['label'])
-				my_prev = block
-				supers = False
-				subscr = False
-				superscript = ""
-				subscript = ""
-			elif block['top']-my_prev['top'] >= char_height/2:
-				if subscr == False:
-					subscript="_{"+block['label']+"}"
-				else:
-					subscript = subscript[0:-1]+block['label']+"}"
-				subscr = True
-			elif my_prev['bottom']-block['bottom'] >= char_height/2:
-				if supers == False:
-					superscript="^{"+block['label']+"}"
-				else:
-					superscript = superscript[0:-1]+block['label']+"}"
-				supers = True
-			else:
-				mt_str+=(superscript+subscript+block['label'])
-				my_prev = block
-				supers = False
-				subscr = False
-				superscript = ""
-				subscript = ""'''
 	if lngdvd != None:
 		word += " \\frac{"+nmrtr+"}{"+dnmtr+"} "
 	word += (subscript + superscript)
@@ -175,37 +132,34 @@ def parse_line(row):
 	if underline and len(mt_str) == 0:
 		mt_str = line_divide
 	return mt_str
-with open ("test_nt_tut.json", "r") as myfile:
-    data=myfile.readlines()[0].replace("\\\"", "\"")
-    data = data[1:-1]
 
-data = json.loads(data)
+def gen_tex(my_json):
+	with open(my_json, "r") as myfile:
+		data = json.load(myfile)
 
-with open("parsed.json", "r") as myfile:
-	data = json.load(myfile)
+	draw = ImageDraw.Draw(source_img)
+	my_av = get_av(data)
 
-draw = ImageDraw.Draw(source_img)
-my_av = get_av(data)
+	my_rows = assign_char(data, my_av)
 
-my_rows = assign_char(data, my_av)
+	colors = ["red","orange","lime","cyan","blue"]
+	indx = 0
+	my_latex = "\documentclass[12pt]{article}\n\\usepackage{xcolor}\n\\usepackage[normalem]{ulem}\n\\usepackage[utf8]{inputenc}\n\\usepackage[margin=0.5in]{geometry}\n\\usepackage[english]{babel}\n\\usepackage[document]{ragged2e}\n\\usepackage{ushort}\n\\begin{document}\n\t\\begin{center}\n"
 
-colors = ["red","orange","lime","cyan","blue"]
-indx = 0
-my_latex = "\documentclass[12pt]{article}\n\\usepackage{xcolor}\n\\usepackage[normalem]{ulem}\n\\usepackage[utf8]{inputenc}\n\\usepackage[margin=0.5in]{geometry}\n\\usepackage[english]{babel}\n\\usepackage[document]{ragged2e}\n\\usepackage{ushort}\n\\begin{document}\n\t\\begin{center}\n"
+	for row in my_rows:
+		color = colors[indx%5]
+		draw.rectangle((0, my_av[indx]['top'], 1600, my_av[indx]['bottom']), fill=None, outline=color)
+		indx+=1
+		this_line = parse_line(row)
+		if len(this_line) > 0:
+			my_latex += ("\t\t"+this_line+"\\newline\n")
+		for block in row:
+			draw.rectangle(((block['left'], block['top']), (block['right'], block['bottom'])), fill=None, outline=color)
+			if block['label'] != None:
+				draw.text((block['left'], block['top']), block['label'], fill="black")
+	source_img.save("out_file.jpg", "JPEG")
 
-for row in my_rows:
-	color = colors[indx%5]
-	draw.rectangle((0, my_av[indx]['top'], 1600, my_av[indx]['bottom']), fill=None, outline=color)
-	indx+=1
-	this_line = parse_line(row)
-	if len(this_line) > 0:
-		my_latex += ("\t\t"+this_line+"\\newline\n")
-	for block in row:
-		draw.rectangle(((block['left'], block['top']), (block['right'], block['bottom'])), fill=None, outline=color)
-		if block['label'] != None:
-			draw.text((block['left'], block['top']), block['label'], fill="black")
-source_img.save("out_file.jpg", "JPEG")
-
-file = open("test.tex","w")
-file.write(my_latex+"\t\\end{center}\n\\end{document}")
-file.close()
+	file = open("test.tex","w")
+	file.write(my_latex+"\t\\end{center}\n\\end{document}")
+	file.close()
+	return True
