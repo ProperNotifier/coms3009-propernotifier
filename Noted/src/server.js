@@ -46,6 +46,7 @@ app.post("/getnotebook/:id",users.notebook);
 app.post('/registeredverify', mailer.mail);
 app.post('/uploadimages/:id', file.file);
 app.post('/uploadjson/:id', file.json);
+app.post('/rate',users.rate);
 
 app.use(express.static(path.join(__dirname)));
 

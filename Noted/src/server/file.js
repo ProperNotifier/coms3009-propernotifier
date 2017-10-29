@@ -87,6 +87,9 @@ exports.json=function(req,res) {
 		       connection.query(query,insertdata,function(err,rows) {
 		            if(err){
 	        	      	 console.log("Error Inserting : %s ",err );
+				
+	        	      	 res.status(100).send("error")
+	        	      	 return;
 		            }
 		            // rows.insertId;
 		            var object={
@@ -106,7 +109,7 @@ exports.json=function(req,res) {
 
 					py.stderr.on('data', (data) => {
 					  console.log(`stderr: ${data}`);
-					  res.status(200).send("error")
+					  res.status(100).send("error")
 					});
 
 					py.stdout.on('end', function(){

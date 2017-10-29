@@ -13,12 +13,15 @@ class Notebook extends React.Component {
 	}
 	componentDidMount(){
 		var user_id=this.getCookie("id")
+		var self=this;
 		$.post(HOST+"/getnotebook/"+user_id, {
 	            //post data to the server
 	        },
 	        function(response){
 	        	//make use of the response here
-	        	alert("Notebook")
+	        	if(response!="error"){
+				self.setState({books:response});
+			}	
 	        }
 	    );
 	    
