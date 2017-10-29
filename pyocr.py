@@ -28,16 +28,12 @@ def _database(conn):
     db.close()
 
 
-def _segment(conn, lck):
+def _segment(conn):
     from segmentation import Segmentor
     seg = Segmentor()
     im = conn.recv()
     out = seg.segment(im)
-    lck.acquire()
-    try:
-        print(out)
-    finally:
-        lck.release()
+    conn.send(out)
 
 
 def _classify(conn, lck):
@@ -46,7 +42,6 @@ def _classify(conn, lck):
     bboxes = conn.recv()
     im = conn.recv()
     out = classifier.classify(bboxes, im)
-    conn.send(out)
     lck.acquire()
     try:
         print(out)
@@ -74,7 +69,7 @@ def run_main():
     parent_conn2, child_conn2 = mp.Pipe()
     lock = mp.Lock()
 
-    seg_process = mp.Process(target=_segment, args=(child_conn1, lock))
+    seg_process = mp.Process(target=_segment, args=(child_conn1,))
     rec_process = mp.Process(target=_classify, args=(child_conn2, lock))
     seg_process.start()
     rec_process.start()
@@ -85,20 +80,21 @@ def run_main():
         if lines_in == 1:
             img = _convert_base64_img(line)
             parent_conn1.send(img)
-        elif lines_in == 2:
-            parent_conn2.send(_json_to_bboxes(line))
+            initial_json = parent_conn1.recv()
+            seg_process.join()
+            parent_conn2.send(_json_to_bboxes(initial_json))
             parent_conn2.send(img)
+        elif lines_in == 2:
+            with open('temp_file', 'w') as f:
+                f.write(line)
+            latex_gen.gen_tex("temp_file")
+            os.remove("temp_file")
             break
 
     # parent_conn3, child_conn3 = mp.Pipe()
     # db_process = mp.Process(target=_database, args=(child_conn3,))
     # db_process.start()
 
-    final_json = parent_conn2.recv()
-    with open('temp_file', 'w') as f:
-        f.write(final_json)
-    latex_gen.gen_tex("temp_file")
-    os.remove("temp_file")
 
     # sql = "INSERT INTO Pages (?) VALUES (%s)" % ('test.tex')
     # parent_conn3.send(sql)
@@ -110,6 +106,7 @@ def run_main():
 
     os.remove('test.log')
     os.remove('test.aux')
+
     # if errcode == 0:
     #     sql = "INSERT INTO Books (?) VALUES (%s)" % ('test.pdf')
     #     parent_conn3.send(sql)
