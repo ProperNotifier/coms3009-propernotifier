@@ -1,0 +1,16 @@
+Rules for latex generator
+1) Everything in a row has some intersection
+2) basic characters are placed in order
+3) subscript: no spaces, can't have super script
+4) superscript: no spaces, no sub-subscript or weird things like that
+5) underline: identified as minus with long width (at least 30% of page)
+6) only alph-numeric in super
+7) normal text must have about the same height
+8) items in math equation must not have spaces between them
+9) characters with underline must be formatted by user
+10) very long - (more than 75% width) get line_divide
+11) division... id by long_divide ... look for chars strictly above, strictly bellow, with width intersection
+12) sums: pretend they're full size: look for anything bellow, anything above and super/subscript
+13) exp and sub are not considered
+14) for lond_divide frac: store numerator and denominator: anything above or bellow that still intersect the bar
+\frac{H_{k+1} - H_{k}}{k}

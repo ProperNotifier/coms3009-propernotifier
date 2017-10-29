@@ -9,7 +9,8 @@ install:
   - pip install Pillow
   - pip3 install scipy numpy scikit-image
   
-script: nosetests test_bbox.py test_seg.py nose_temp_API.py --with-coverage
+script: 
+  - nosetests latexGen/nose_latex_gen.py test_bbox.py test_seg.py nose_temp_API.py --with-coverage
 notifications:
   slack: coms3009-noted:kjOHHQyiAOoWS08knpjn110C
 after_success:
