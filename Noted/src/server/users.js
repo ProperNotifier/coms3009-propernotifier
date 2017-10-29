@@ -416,7 +416,7 @@ exports.rate=function(req,res) {
                     rating_rating=?
                   `
 
-         connection.query(query,[input.book_id,input.rated_by,input.rating,input.rating],function(err,rows){
+         connection.query(query,[input.book_id,input.rated_by,input.rating,parseInt(input.rating)],function(err,rows){
             connection.release();
             if(err){
                console.log("Error Selecting : %s ",err );

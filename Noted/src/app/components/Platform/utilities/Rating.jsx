@@ -124,7 +124,7 @@ class Rating extends React.Component {
 		$.post(HOST+"/rate", {
 	            //post data to the server
 	            rated_by:user_id,
-	            book_id:this.state.noteid,
+	            book_id:this.props.id,
 	            rating:starRate
 	        },
 	        function(response){

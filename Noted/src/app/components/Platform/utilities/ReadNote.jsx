@@ -38,7 +38,7 @@ class EditNote extends React.Component {
 		$.post(HOST+"/getnote", {
 	            //post data to the server
 	            user_id:user_id,
-	            book_id:this.state.noteid
+	            book_id:self.state.noteid
 	        },
 	        function(response){
 	        	//make use of the response here
