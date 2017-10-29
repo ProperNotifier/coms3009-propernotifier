@@ -7,8 +7,9 @@ install:
   - pip install coverage
   - pip install nose
   - pip install Pillow
+  - pip3 install scipy numpy scikit-image
   
-script: nosetests test_bbox.py nose_temp_API.py --with-coverage
+script: nosetests test_bbox.py test_seg.py nose_temp_API.py --with-coverage
 notifications:
   slack: coms3009-noted:kjOHHQyiAOoWS08knpjn110C
 after_success:
