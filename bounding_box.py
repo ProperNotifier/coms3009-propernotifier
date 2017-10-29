@@ -1,11 +1,10 @@
 class BoundingBox:
-    def __init__(self, l, r, t, b, label=None, certainty=0):
+    def __init__(self, l, r, t, b, label=None):
         self.left = min(int(l), int(r))
         self.right = max(int(r), int(l))
         self.top = min(int(t), int(b))
         self.bottom = max(int(t), int(b))
         self.label = label
-        self.certainty = certainty
 
     def join(self, bbox):
             left = min(self.left, bbox.left)
@@ -25,7 +24,7 @@ class BoundingBox:
 
     def __str__(self):
         return " left: " + str(self.left) + " right: " + str(self.right) + " top: " + str(self.top) + " bottom: " + str(
-            self.bottom) + " label: " + str(self.label) + " certainty: " + str(self.certainty)
+            self.bottom) + " label: " + str(self.label)
 
     def dump(self):
         return {'left': self.left, 'right': self.right, 'top': self.top, 'bottom': self.bottom, 'label': self.label}

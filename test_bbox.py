@@ -1,7 +1,6 @@
 from nose.tools import *
 from bounding_box import *
 
-
 class TestBoundingBox:
     def test_join(self):
         bbox1 = BoundingBox(10, 50, 10, 60)
@@ -26,5 +25,5 @@ class TestBoundingBox:
 
     def test_str(self):
         bbox = BoundingBox(10, 50, 10, 60)
-        string=" left: 10 right: 50 top: 10 bottom: 60 label: None certainty: 0"
+        string=" left: 10 right: 50 top: 10 bottom: 60 label: None"
         eq_(bbox.__str__(), string)
