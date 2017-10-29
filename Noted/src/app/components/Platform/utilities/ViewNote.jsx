@@ -50,6 +50,7 @@ class ViewNote extends React.Component {
 	        },
 	        function(response){
 	        	//make use of the response here
+	        	alert(response)
 	        	if(response!="error"){
 					self.setState({books:response});
 				}	
