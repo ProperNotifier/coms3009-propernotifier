@@ -3,9 +3,11 @@ var uploadDir="uploads/";
 var fs = require('fs');
 var spawn = require('child_process').spawn;
 const POOL = require("./users").POOL;
-var pythonIMAGE="../../../../Seg/coms3009-propernotifier/pyocr.py";//image.py";
-var pythonJSON=pythonIMAGE;
-var py=spawn("python3",[pythonIMAGE]);
+
+var pyOCRDir="../../../../Seg/coms3009-propernotifier/";
+var pythonIMAGE=pyOCRDir+"pyocr.py";//image.py";
+var pythonJSON=pyOCRDir+"latex_gen.py";
+
 exports.file=function(req,res) {
 	// body...
 	let id=req.params.id;  
@@ -26,7 +28,7 @@ exports.file=function(req,res) {
 			var dataString="";
 			// console.log("UP fileEncoding "+sampleFile.encoding)
 			// console.log("UP fileData "+sampleFile.data)
-			//var py=spawn("python3",[pythonIMAGE]);
+			var py=spawn("python3",[pythonIMAGE]);
 			py.stdout.on('data', function(data){
 			  dataString += data.toString();
 			  console.log('Summing...',dataString);
@@ -55,7 +57,7 @@ exports.file=function(req,res) {
 			});
 			py.stdin.write(new Buffer(sampleFile.data).toString('base64'));
 			// py.stdin.write(fileName);
-			//py.stdin.end();
+			py.stdin.end();
 			
 		}
 		console.log("==================")
@@ -97,16 +99,15 @@ exports.json=function(req,res) {
 		            }
 		            // rows.insertId;
 		            var object={
-		            	userId:id,
-		            	bookId:rows.insertId,
-		            	data:JSON.parse(newJSON)
+		            	"userId":id,
+		            	"bookId":rows.insertId,
+		            	"data":JSON.parse(newJSON)
 		            }
 					var dataString="";
 					var objectString=JSON.stringify(object);
 					// console.log("UP fileEncoding "+sampleFile.encoding)
 					// console.log("UP fileData "+sampleFile.data)
-console.log(object);
-				//	var py=spawn("python3",[pythonJSON]);
+					var py=spawn("python3",[pythonJSON]);
 					py.stdout.on('data', function(data){
 					  dataString += data.toString();
 					  console.log('Summing...');

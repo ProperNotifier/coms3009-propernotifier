@@ -158,8 +158,12 @@ class Upload extends React.Component {
 	}
 	bxState(state) {
 		let boxState = state;
-		this.setState({boxState:boxState})
 		console.log("boxState now "+boxState);
+		if(boxState == 4)
+			$(".boxtext").css("display", "block")
+		else
+			$(".boxtext").css("display", "none");
+		this.setState({boxState:boxState})
 	}	
 	getCookie(cname) {
 	    var name = cname + "=";
@@ -182,7 +186,8 @@ class Upload extends React.Component {
 			var y = parseInt( $(this).css("top") );
 			var w = parseInt( $(this).css("width") );
 			var h = parseInt( $(this).css("height") );
-			obj = {"left": x, "right": x+w, "bottom": y+h, "top":y, "label": null};
+			var char =$(this).find("textarea").val();
+			obj = {"left": x, "right": x+w, "bottom": y+h, "top":y, "label": char};
 			bxArray.push(obj);
 		});
 		var bxJSON = JSON.stringify(bxArray);
@@ -246,6 +251,9 @@ class Upload extends React.Component {
 
 								<input type="radio" id="bxch3" name="bxch" value="3" onChange={()=>this.bxState(3)} checked={this.state.boxState==3} />
 								<label htmlFor="bxch3">Delete</label>
+
+								<input type="radio" id="bxch3" name="bxch" value="3" onChange={()=>this.bxState(4)} checked={this.state.boxState==4} />
+								<label htmlFor="bxch3">Edit</label>
 				        	</form>
 							<div id="boxHolder" className="boxHolder" onMouseOver={this.bhOver.bind(this)} onMouseDown={this.bhMousedown} onMouseMove={this.bhMousemove} onMouseUp={()=>this.boxPaint()} onMouseLeave={this.boxPaint()}>
 							{
@@ -254,13 +262,14 @@ class Upload extends React.Component {
 									var t = box.top;// + bxst.top;
 									var h = box.bottom - box.top;
 									var w = box.right - box.left;
+									var text = box.label;
 									var style={
 										top:t,
 										left:l,
 										height:h,
 										width:w
 									}
-									return <div key={index} style={style} onClick={()=>this.deleteBox(index)} onMouseDown={this.boxDown} onMouseMove={this.boxMove} onMouseUp={()=>this.boxDrags()} onMouseLeave={this.boxDrags()} id={'box'+index} className='box' ></div>
+									return <div key={index} style={style} onClick={()=>this.deleteBox(index)} onMouseDown={this.boxDown} onMouseMove={this.boxMove} onMouseUp={()=>this.boxDrags()} onMouseLeave={this.boxDrags()} id={'box'+index} className='box' ><textarea className='boxtext'rows='1' cols='4'>{text}</textarea></div>
 								})
 							}
 
