@@ -165,7 +165,14 @@ exports.tex=function(req,res) {
 			console.log(tex)
 
 			let now=(new Date()).getTime();
-			let fileName=id+now+".json";
+			let fileName=uploadDir+user_id+"/"+texfilename+".tex";
+			fs.writeFile(fileList, tex, function(err) {
+		        if(err){
+		        	res.status(100).send("error")
+		        } 
+		        console.log('Data replaced \n', data);
+		        res.status(200).send("DONE")
+		    });
 	}
 }
 function LOG(data){
