@@ -1,5 +1,6 @@
 import random
 from pathlib import Path
+from skimage import io
 
 from nose.tools import *
 from segmentation import *
@@ -10,7 +11,8 @@ class TestSegmentation:
         self.seg = Segmentor()
 
     def test_seg(self):
-        bboxes = self.seg.segment("test_nt_tut.jpg")
+        im=io.imread("test_nt_tut.jpg")
+        bboxes = self.seg.segment(im)
 
     def test_slice_to_bbox(self):
         slices = (slice(10, 30), slice(5, 25))
