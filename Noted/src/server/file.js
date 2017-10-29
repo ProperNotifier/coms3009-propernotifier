@@ -166,7 +166,7 @@ exports.tex=function(req,res) {
 
 			let now=(new Date()).getTime();
 			let fileName=uploadDir+user_id+"/"+texfilename+".tex";
-			fs.writeFile(fileList, tex, function(err) {
+			fs.writeFile(fileName, tex, function(err) {
 		        if(err){
 		        	res.status(100).send("error")
 		        } 
