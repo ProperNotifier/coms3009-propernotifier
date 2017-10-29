@@ -10,7 +10,7 @@ install:
   - pip3 install --upgrade -r requirements.txt
   
 script: 
-  - nosetests latexGen/nose_latex_gen.py test_bbox.py test_seg.py test_classifier.py nose_temp_API.py --with-coverage
+  - nosetests nose_latex_gen.py test_bbox.py test_seg.py test_classifier.py nose_temp_API.py --with-coverage
 notifications:
   slack: coms3009-noted:kjOHHQyiAOoWS08knpjn110C
 after_success:
