@@ -3,9 +3,9 @@ var uploadDir="uploads/";
 var fs = require('fs');
 var spawn = require('child_process').spawn;
 const POOL = require("./users").POOL;
-var pythonIMAGE="image.py";
-var pythonJSON="json.py";
-
+var pythonIMAGE="../../../../Seg/coms3009-propernotifier/pyocr.py";//image.py";
+var pythonJSON=pythonIMAGE;
+var py=spawn("python3",[pythonIMAGE]);
 exports.file=function(req,res) {
 	// body...
 	let id=req.params.id;  
@@ -26,15 +26,18 @@ exports.file=function(req,res) {
 			var dataString="";
 			// console.log("UP fileEncoding "+sampleFile.encoding)
 			// console.log("UP fileData "+sampleFile.data)
-			var py=spawn("python",[pythonIMAGE]);
+			//var py=spawn("python3",[pythonIMAGE]);
 			py.stdout.on('data', function(data){
 			  dataString += data.toString();
-			  console.log('Summing...');
+			  console.log('Summing...',dataString);
 			});
 
 			py.stderr.on('data', (data) => {
 			  console.log(`stderr: ${data}`);
-			  res.status(200).send("error")
+//                        py.stdin.write(new Buffer(sampleFile.data).toString('base64'));
+                        // py.stdin.write(fileName);
+                       py.stdin.end();
+//			  res.status(200).send("error")
 			});
 
 			py.stdout.on('end', function(){
@@ -52,7 +55,7 @@ exports.file=function(req,res) {
 			});
 			py.stdin.write(new Buffer(sampleFile.data).toString('base64'));
 			// py.stdin.write(fileName);
-			py.stdin.end();
+			//py.stdin.end();
 			
 		}
 		console.log("==================")
@@ -83,8 +86,9 @@ exports.json=function(req,res) {
 		       let insertdata=[id,title,description,price]
 		       let query = `INSERT INTO BOOKS
 	                      SET book_owner_id=?, book_name=?, book_description=?, book_price=?`;				
-				
+				console.log("Aout to db")
 		       connection.query(query,insertdata,function(err,rows) {
+				console.log("DB");
 		            if(err){
 	        	      	 console.log("Error Inserting : %s ",err );
 				
@@ -101,7 +105,8 @@ exports.json=function(req,res) {
 					var objectString=JSON.stringify(object);
 					// console.log("UP fileEncoding "+sampleFile.encoding)
 					// console.log("UP fileData "+sampleFile.data)
-					var py=spawn("python",[pythonJSON]);
+console.log(object);
+				//	var py=spawn("python3",[pythonJSON]);
 					py.stdout.on('data', function(data){
 					  dataString += data.toString();
 					  console.log('Summing...');

@@ -99,7 +99,9 @@ class Upload extends React.Component {
 			}
 			request.onload = function(oEvent) {
 			    if (request.status == 200) {
-			      // console.log("Uploaded!");
+			      // console.log("Uploaded!");[3~File uploaded!File uploaded!
+			      console.log(this.responseText)
+			      //alert("Waiting")
 				  self.props.parentState(self.state.input[0],this.responseText,title,description,price,true);//SEND INFO; 
 			      self.setState({description:"",price:"",title:"",input:[]});
 			      // self.closeModal();
