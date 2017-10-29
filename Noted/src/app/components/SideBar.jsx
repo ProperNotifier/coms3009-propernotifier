@@ -68,11 +68,11 @@ class SideBar extends React.Component {
 		                            <i className="fa fa-money"></i> <span>Store</span>
 		                        </Link>
 		                    </li>
-		                    <li className="sidebar-menu-title Stats">
+		                    {false && <li className="sidebar-menu-title Stats">
 		                        <Link to="/Stats" onClick={()=>this.sideMenuClick("Stats")}>
 		                            <i className="fa fa-bar-chart"></i> <span>Stats</span>
 		                        </Link>
-		                    </li>
+		                    </li>}
 		                    
 		                </ul>
 	            </section>

@@ -1,6 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 
+import {HOST} from "../../../../server/defaults";
 class Rating extends React.Component {
 	constructor(props){
 		super(props);
@@ -119,6 +120,19 @@ class Rating extends React.Component {
 				s5="fa-star  ";
 			}
 			this.setState({starRate,s1,s2,s3,s4,s5});
+			var user_id=this.props.user;
+		$.post(HOST+"/rate", {
+	            //post data to the server
+	            rated_by:user_id,
+	            book_id:this.state.noteid,
+	            rating:starRate
+	        },
+	        function(response){
+	        	//make use of the response here
+	        	console.log(response)	
+	        	console.log("RATED")	
+	        }
+	    );
 		}
 	}
 	render () {

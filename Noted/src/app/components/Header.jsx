@@ -22,7 +22,7 @@ class Header extends React.Component {
     				<SideBarToggle/>
 	                <div className="navbar-right">
 	                    <ul className="nav navbar-nav">
-	                        <li className="dropdown header-menu notifications-menu">
+	                        {false && <li className="dropdown header-menu notifications-menu">
 	                            <a href="#" className="dropdown-toggle" data-toggle="dropdown">
 	                                <i className="fa fa-bell"></i>
 	                                <span className="label notification-badge label-warning">4</span>
@@ -61,7 +61,7 @@ class Header extends React.Component {
 	                                </li>
 	                                <li className="footer"><a href="#">View all</a></li>
 	                            </ul>
-	                        </li>
+	                        </li>}
 	                        <li className="dropdown header-menu messages-menu">
 	                            <a href="#" className="dropdown-toggle" onClick={()=>this.props.uploadmodal("open")} data-toggle="dropdown">
 	                                <i className="fa fa-upload"></i>

@@ -22,7 +22,7 @@ class ViewNote extends React.Component {
             var cat_id=a.substring(a.indexOf("=")+1);
         }
         //Preview pages
-		let numPages= 3;
+		let numPages= 1;
 		let pages=[];
 		for (var i = 1; i <= numPages; i++) {
 			pages.push(i);
@@ -31,9 +31,14 @@ class ViewNote extends React.Component {
 			editor:null,
 			noteid:cat_id,
 			title:"",
+			date:"",
+			price:"",
+			author:"",
+			rating:"",
 			preview:pages,
 			description:"",
-			pdf:HOST+"/pdf"
+			pdf:"",
+			user_id:""
 		}
 		// this.props.platformChange("Edit Notes");
 		$(".sidebar-menu-title.active").removeClass("active");
@@ -42,6 +47,7 @@ class ViewNote extends React.Component {
 		// myCodeMirror.setValue(`\\document[10pt]{article}`);
 		// let l=myCodeMirror.mirror.getValue();
 		var self=this;
+		var user_id=this.getCookie("id");
 
 		$.post(HOST+"/getnote", {
 	            //post data to the server
@@ -50,13 +56,34 @@ class ViewNote extends React.Component {
 	        },
 	        function(response){
 	        	//make use of the response here
-	        	alert(response)
+	        	console.log(response)
 	        	if(response!="error"){
-					self.setState({books:response});
+	        		var note=response[0];
+	        		var state={
+						title:note.title,
+						date:note.date.split("T")[0],
+						price:note.price,
+						author:note.firstname+" "+name.surname,
+						rating:note.ratings,
+						description:note.description,
+						pdf:note.pdf,
+						user_id:user_id
+	        		}
+					self.setState(state);
 				}	
 	        }
 	    );
 
+	}
+	getCookie(cname) {
+	    var name = cname + "=";
+	    var ca = document.cookie.split(';');
+	    for(var i=0; i<ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0)==' ') c = c.substring(1);
+	        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+	    }
+	    return "";
 	}
 	onRead(){
 		this.props.platformChange(this.state.title);
@@ -77,7 +104,7 @@ class ViewNote extends React.Component {
 			    			<h1 className="notes-name" style={{'textTransform':"capitalize"}}>{this.state.author}</h1>
 			    			<p className="notes-date"> Date: {this.state.date}</p>
 			    			<p className="notes-price"> R{this.state.price}</p>
-			    			<Ratings id={this.state.noteid} rating={3} mode="rate"/>
+			    			<Ratings id={this.state.noteid} user={this.state.user_id} rating={this.state.rating} mode="rate"/>
 			    			<h3 className="col-md-12 notes-title">{this.state.title}</h3>
 
 					        <div className="viewer-buttons-holder">
@@ -95,7 +122,7 @@ class ViewNote extends React.Component {
 		          		<h3>Preview</h3>
 		          		<div className="preview-pdf">
 		          	
-				    	{
+				    	{this.state.pdf.length>1 &&
 				    		this.state.preview.map((page)=>{
 						    	return(
 						    		<div className="pdf-page">

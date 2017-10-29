@@ -411,7 +411,7 @@ exports.rate=function(req,res) {
        console.log('connected as id ' + connection.threadId);
 
         let query=`INSERT INTO RATINGS SET
-                    book_id=?,rated_by=?,rating=?
+                    book_id=?,rated_by=?,rating_rating=?
                    ON DUPLICATE KEY UPDATE 
                     rating=?
                   `

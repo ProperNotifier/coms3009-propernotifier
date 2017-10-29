@@ -127,7 +127,7 @@ exports.json=function(req,res) {
 							  if (err) throw err
 							  //console.log('Successfully renamed - AKA moved!')
 								var query='UPDATE BOOKS SET book_pdf_directory=?,book_latex_directory=?,book_available=?';
-								var insertdata=[HOST+"/"+newTexPath,HOST+"/"+newPdfPath,1]
+								var insertdata=[HOST+"/"+newPdfPath,HOST+"/"+newTexPath,1]
 								connection.query(query,insertdata,function(err,rows){
 									if(err){
 					        	      	 console.log("Error Updating : %s ",err );								
