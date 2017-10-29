@@ -47,6 +47,7 @@ app.post("/getnote",users.note);
 app.post('/registeredverify', mailer.mail);
 app.post('/uploadimages/:id', file.file);
 app.post('/uploadjson/:id', file.json);
+app.post('/savetex', file.tex);
 app.post('/rate',users.rate);
 
 app.use(express.static(path.join(__dirname)));

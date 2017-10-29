@@ -13,8 +13,16 @@ import {HOST} from "../../../../server/defaults";
 class EditNote extends React.Component {
 	constructor(props){
 		super(props);
+        var a = window.location.toString();
+        if (a.indexOf("=")<0) {
+            var cat_id="";
+        } else {
+            var cat_id=a.substring(a.indexOf("=")+1);
+        }
+
 		this.state={
-			editor:null
+			editor:null,
+			noteid:cat_id
 		}
 		// this.props.platformChange("Edit Notes");
 		$(".sidebar-menu-title.active").removeClass("active");
@@ -31,8 +39,9 @@ class EditNote extends React.Component {
 	    /*$.get("localhost:8081/server.txt", function(data, status){
 	        
 	    });*/
+	    var user_id=this.getCookie("id");
 	    $.ajax({
-			url: HOST+"/stuff/practical.tex",
+			url: HOST+"/uploads/"+user_id+"/"+user_id+this.state.noteid+".tex",
 			cache: false,
 			type: "GET",
 			dataType: 'text',
@@ -53,8 +62,45 @@ class EditNote extends React.Component {
 		})
 
 	}
+	getCookie(cname) {
+	    var name = cname + "=";
+	    var ca = document.cookie.split(';');
+	    for(var i=0; i<ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0)==' ') c = c.substring(1);
+	        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+	    }
+	    return "";
+	}
 	saveClick(){
-		// var myCodeMirror = this.state.editor.getValue();
+		var myCodeMirror = this.state.editor.getValue();
+		var user_id=this.getCookie("id");
+		var texfile=user_id+""+this.state.noteid;
+	    $.ajax({
+			url: HOST+"/savetex",
+			cache: false,
+			type: "POST",
+			data:{
+				user_id:user_id,
+				texfilename:texfile,
+				tex:myCodeMirror
+			},
+			success: function(data,status){
+				//make use of the response
+				console.log("Data: " + data + "\nStatus: " + status);
+			},
+			error:function(argument,status) {
+				// body...
+
+				console.log(argument)
+				console.log("error: " + argument.message + "\nStatus: " + status);
+			}
+		});
+
+	}
+	cancelClick(){
+		this.props.platformChange("Notebook");
+		this.props.history.goBack()
 	}
 	render () {
 		return (  
@@ -62,7 +108,7 @@ class EditNote extends React.Component {
 		        <textarea id="latex-editor"/>
 		        <div className="editor-buttons-holder">
 		    		<div onClick={this.saveClick.bind(this)} className="btn">Save</div>
-		    		<div className="btn">Cancel</div>
+		    		<div onClick={this.cancelClick.bind(this)} className="btn">Cancel</div>
 		        </div>
 
             </div>

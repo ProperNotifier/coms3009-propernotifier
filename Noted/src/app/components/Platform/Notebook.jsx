@@ -48,10 +48,6 @@ class Notebook extends React.Component {
 		    		})
 		    	}
 		        
-		        <NotesPreview id={12} name={"Parallel"} date={"2017/12/12"} price={47} author={"Mahlekenyane Elliot"} rating={4} mode="edit"/>
-		        <NotesPreview id={12} name={"Parallel"} date={"2017/12/12"} price={47} author={"Mahlekenyane Elliot"} rating={1} mode="edit"/>
-		        <NotesPreview id={12} name={"Parallel"} date={"2017/12/12"} price={47} author={"Mahlekenyane Elliot"} rating={2} mode="edit"/>
-		        <NotesPreview id={12} name={"Parallel"} date={"2017/12/12"} price={47} author={"Mahlekenyane Elliot"} rating={5} mode="edit"/>
             </div>
 	    );
 	}

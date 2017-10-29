@@ -155,6 +155,19 @@ exports.json=function(req,res) {
 	}
 }
 
+exports.tex=function(req,res) {
+	if (!req.body)
+    	console.log('No files were uploaded.');
+    else{
+			let user_id=req.body.user_id;
+			let texfilename=req.body.texfilename;
+			let tex=req.body.tex;
+			console.log(tex)
+
+			let now=(new Date()).getTime();
+			let fileName=id+now+".json";
+	}
+}
 function LOG(data){
 
   let logfile="log.txt";

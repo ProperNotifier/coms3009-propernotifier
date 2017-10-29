@@ -331,7 +331,7 @@ exports.notebook = function(req, res){
        console.log('connected as id ' + connection.threadId);
           let query=`SELECT b.book_id as id, b.book_name as name, b.book_description as description, b.book_price as price, 
             b.book_dateposted as date,u.user_id as user_id,u.user_firstname as firstname, u.user_surname as surname, 
-                AVG(r.rating_rating) as ratings,
+               (SELECT AVG(r.rating_rating) FROM RATINGS r WHERE r.book_id=b.book_id) as ratings,
                         IF(
                             (SELECT COUNT(rated_by) FROM RATINGS r 
                             WHERE r.book_id = b.book_id AND r.rated_by=?) > 0 ,'true','false'

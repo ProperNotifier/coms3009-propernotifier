@@ -30,7 +30,7 @@ class NotesPreview extends React.Component {
 			    			<p> Date: {this.props.date}</p>
 			    			<p> R{this.props.price}</p>
 
-			    			<Ratings id={this.state.noteid} rating={this.props.rating} mode="display"/>
+			    			{this.props.ratings>0 &&<Ratings id={this.state.noteid} rating={this.props.ratings} mode="display"/>}
 
 			    			<h3 style={{'textTransform':"capitalize"}}>{this.props.author}</h3>
 			    		</div>
