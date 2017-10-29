@@ -413,7 +413,7 @@ exports.rate=function(req,res) {
         let query=`INSERT INTO RATINGS SET
                     book_id=?,rated_by=?,rating_rating=?
                    ON DUPLICATE KEY UPDATE 
-                    rating=?
+                    rating_rating=?
                   `
 
          connection.query(query,[input.book_id,input.rated_by,input.rating,input.rating],function(err,rows){
