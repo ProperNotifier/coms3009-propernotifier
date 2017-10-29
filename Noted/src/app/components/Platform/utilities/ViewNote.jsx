@@ -41,6 +41,7 @@ class ViewNote extends React.Component {
 	componentDidMount(){
 		// myCodeMirror.setValue(`\\document[10pt]{article}`);
 		// let l=myCodeMirror.mirror.getValue();
+		var self=this;
 
 		$.post(HOST+"/getnote", {
 	            //post data to the server
@@ -50,8 +51,8 @@ class ViewNote extends React.Component {
 	        function(response){
 	        	//make use of the response here
 	        	if(response!="error"){
-				self.setState({books:response});
-			}	
+					self.setState({books:response});
+				}	
 	        }
 	    );
 

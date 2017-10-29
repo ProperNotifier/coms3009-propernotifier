@@ -460,8 +460,8 @@ exports.note = function(req, res){
    
 
        console.log('connected as id ' + connection.threadId);
-          let query=`SELECT b.book_id as id, b.book_name as name, b.book_description as description, b.book_price as price, 
-            b.book_dateposted as date,,u.user_id as user_id,u.user_firstname as firstname, u.user_surname as surname, 
+          let query=`SELECT b.book_id as id, b.book_name as title, b.book_description as description, b.book_price as price, 
+            b.book_dateposted as date,b.book_pdf_directory as pdf,b.book_latex_directory as latex,u.user_id as user_id,u.user_firstname as firstname, u.user_surname as surname, 
                 AVG(r.rating_rating) as ratings,
                         IF(
                             (SELECT COUNT(rated_by) FROM RATINGS r 
