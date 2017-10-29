@@ -1,5 +1,4 @@
 import json
-import os
 import sys
 import multiprocessing as mp
 import base64
@@ -7,25 +6,6 @@ from io import BytesIO
 from PIL import Image
 import numpy as np
 from bounding_box import BoundingBox
-import latex_gen
-import subprocess
-
-
-def _database(conn):
-    import MySQLdb
-    db = MySQLdb.connect(passwd="password", db="root")
-    cursor = db.cursor()
-    while True:
-        query = conn.recv()
-        if query == 'stop':
-            break
-        try:
-            cursor.execute(query)
-            db.commit()
-        except:
-            db.rollback()
-
-    db.close()
 
 
 def _segment(conn):
@@ -74,44 +54,14 @@ def run_main():
     seg_process.start()
     rec_process.start()
 
-    lines_in = 0
     for line in sys.stdin:
-        lines_in += 1
-        if lines_in == 1:
-            img = _convert_base64_img(line)
-            parent_conn1.send(img)
-            initial_json = parent_conn1.recv()
-            seg_process.join()
-            parent_conn2.send(_json_to_bboxes(initial_json))
-            parent_conn2.send(img)
-        elif lines_in == 2:
-            with open('temp_file', 'w') as f:
-                f.write(line)
-            latex_gen.gen_tex("temp_file")
-            os.remove("temp_file")
-            break
-
-    # parent_conn3, child_conn3 = mp.Pipe()
-    # db_process = mp.Process(target=_database, args=(child_conn3,))
-    # db_process.start()
-
-
-    # sql = "INSERT INTO Pages (?) VALUES (%s)" % ('test.tex')
-    # parent_conn3.send(sql)
-
-    process = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', 'test.tex'],
-                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-    process.communicate()
-
-    os.remove('test.log')
-    os.remove('test.aux')
-
-    # if errcode == 0:
-    #     sql = "INSERT INTO Books (?) VALUES (%s)" % ('test.pdf')
-    #     parent_conn3.send(sql)
-    #
-    # parent_conn3.send('stop')
+        img = _convert_base64_img(line)
+        parent_conn1.send(img)
+        initial_json = parent_conn1.recv()
+        seg_process.join()
+        parent_conn2.send(_json_to_bboxes(initial_json))
+        parent_conn2.send(img)
+        break
 
 
 if __name__ == '__main__':
