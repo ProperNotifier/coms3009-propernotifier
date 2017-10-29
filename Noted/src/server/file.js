@@ -74,7 +74,7 @@ exports.json=function(req,res) {
 
 			let now=(new Date()).getTime();
 			let fileName=id+now+".json";
-			/*POOL.getConnection(function(err,connection){
+			POOL.getConnection(function(err,connection){
 		       if (err) {
 		         connection.release();
 		         // res.json({"code" : 100, "status" : "Error in connection database"});
@@ -87,7 +87,7 @@ exports.json=function(req,res) {
 		       connection.query(query,insertdata,function(err,rows) {
 		            if(err){
 	        	      	 console.log("Error Inserting : %s ",err );
-		            }*/
+		            }
 		            // rows.insertId;
 		            var object={
 		            	userId:id,
@@ -118,8 +118,8 @@ exports.json=function(req,res) {
 					py.stdin.write(objectString);
 					// py.stdin.write(fileName);
 					py.stdin.end();
-		        /*});
-		   });*/
+		        });
+		   });
 			
 		console.log("==================")
 		
