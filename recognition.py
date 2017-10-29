@@ -41,10 +41,7 @@ class Classifier:
             self.input_shape = (1, self.learnt_dim[1], self.learnt_dim[0], 1)
 
     def _resize(self, img):
-        try:
-            return transform.resize(np.ascontiguousarray(img), output_shape=self.learnt_dim, mode='constant')
-        except ValueError:
-            print("Can't resize")
+        return transform.resize(np.ascontiguousarray(img), output_shape=self.learnt_dim, mode='constant')
 
     def _sub_img_predict(self, bbox, img):
         slices = (slice(bbox.top, bbox.bottom), slice(bbox.left, bbox.right))
