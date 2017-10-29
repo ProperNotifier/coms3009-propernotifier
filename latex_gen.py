@@ -5,7 +5,6 @@ import json
 import os
 import sys
 import subprocess
-import MySQLdb
 
 im_height = 2337  # height of pixels
 im_width = 1637  # width of pixels
@@ -145,7 +144,7 @@ def parse_line(row):
     return mt_str
 
 
-def gen_tex(my_json):
+def gen_tex(my_json, uid, bid):
     with open(my_json, "r") as myfile:
         data = json.load(myfile)
 
@@ -170,42 +169,33 @@ def gen_tex(my_json):
             #	if block['label'] != None:
             #		draw.text((block['left'], block['top']), block['label'], fill="black")
     # source_img.save("out_file.jpg", "JPEG")
-
-    file = open("test.tex", "w")
+    filename = str(uid) + str(bid)
+    file = open(filename, "w")
     file.write(my_latex + "\t\\end{center}\n\\end{document}")
     file.close()
-    return True
+    return filename
 
 
 def run_main():
+    filename = ''
     for line in sys.stdin:
-        json_dicts=json.loads(line)
+        json_dicts = json.loads(line)
         user_id = json_dicts['userId']
         book_id = json_dicts['bookId']
-        print(user_id, book_id)
-        with open('temp_file', 'w') as f:
+        temp_file = 'temp' + str(user_id) + str(book_id)
+        with open(temp_file, 'w') as f:
             json.dump(json_dicts['data'], f)
-        gen_tex("temp_file")
-        os.remove("temp_file")
+        filename = gen_tex(temp_file, user_id, book_id)
+        os.remove(temp_file)
         break
 
-    process = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', 'test.tex'],
+    process = subprocess.Popen(['pdflatex', '-interaction=nonstopmode', filename],
                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     process.communicate()
 
-    os.remove('test.log')
-    os.remove('test.aux')
+    os.remove(filename + '.log')
+    os.remove(filename + '.aux')
 
-    # db = MySQLdb.connect(passwd="password", db="root")
-    # cursor = db.cursor()
-    # try:
-    #     cursor.execute("INSERT INTO Pages (?) VALUES (%s)" % ('test.tex'))
-    #     cursor.execute("INSERT INTO Books (?) VALUES (%s)" % ('test.pdf'))
-    #     db.commit()
-    # except:
-    #     db.rollback()
-    #
-    # db.close()
 
 if __name__ == '__main__':
     run_main()
