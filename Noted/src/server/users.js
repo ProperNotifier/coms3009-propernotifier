@@ -462,7 +462,7 @@ exports.note = function(req, res){
        console.log('connected as id ' + connection.threadId);
           let query=`SELECT b.book_id as id, b.book_name as title, b.book_description as description, b.book_price as price, 
             b.book_dateposted as date,b.book_pdf_directory as pdf,b.book_latex_directory as latex,u.user_id as user_id,u.user_firstname as firstname, u.user_surname as surname, 
-                AVG(r.rating_rating) as ratings,
+                (SELECT AVG(r.rating_rating) FROM RATINGS r WHERE r.book_id=?) as ratings,
                         IF(
                             (SELECT COUNT(rated_by) FROM RATINGS r 
                             WHERE r.book_id = b.book_id AND r.rated_by=?) > 0 ,'true','false'
@@ -472,7 +472,7 @@ exports.note = function(req, res){
                       LEFT JOIN RATINGS r ON b.book_id = r.rated_by
                         WHERE b.book_available=1 AND b.book_id=?
                         GROUP BY b.book_id
-                      ORDER BY b.book_dateposted DESC `
+                      ORDER BY b.book_dateposted DESC; `
             /*`SELECT b.book_id as id, b.book_name as name, b.book_description as description, b.book_price as price, 
               b.book_dateposted as date,u.user_id as user_id,u.user_firstname as firstname, u.user_surname as surname, 
                   COUNT(r.rated_by) as ratings,
@@ -498,7 +498,7 @@ exports.note = function(req, res){
                 book_pdf_directory
                 book_latex_directory*/
 
-         connection.query(query,[input.user_id,input.book_id],function(err,rows){
+         connection.query(query,[input.book_id,input.user_id,input.book_id],function(err,rows){
             connection.release();
             if(err){
                console.log("Error Selecting : %s ",err );
