@@ -26,7 +26,10 @@ class Upload extends React.Component {
 			imageJSON:"",
 			bar1:"",
 			bar2:"",
-			bar3:""
+			bar3:"",
+			title:"",
+			description:"",
+			price:""
 			//[{preview:,value:}]
 		}
 		// this.props.platformChange("Edit Notes");
@@ -42,8 +45,8 @@ class Upload extends React.Component {
 	loading(state){
 		this.setState({loading:state})
 	}
-	upload(image,json,id){
-		this.setState({image:image,imageJSON:json,imageId:id,uploadState:"edit",bar1:"loaded",loading:false})
+	upload(image,json,title,description,price){
+		this.setState({image:image,imageJSON:json,imageId:"id",title:title,description:description,price:price,uploadState:"edit",bar1:"loaded",loading:false})
 	}
 	theMelabor(id){
 		this.setState({imageId:id,uploadState:"done",bar2:"loaded",loading:false})
@@ -79,12 +82,14 @@ class Upload extends React.Component {
 			    		</div>
 			    		<div onClick={this.closeModal.bind(this)} className="close-btn fa fa-close"></div>
 			    	</div>
-			    	{this.state.loading && 
-				       <div className="circle-mask flicker">
-                            <img src="public/img/logowhiteclear.png"/>
-                       </div>}
+			    	{
+			    		this.state.loading && 
+				    		<div className="circle-mask flicker">
+	                            <img src="public/img/logowhiteclear.png"/>
+	                        </div>
+                    }
 			        {!this.state.loading && this.state.uploadState=="upload" &&<UploadView loading={this.loading} parentState={this.upload}/>}
-			        {!this.state.loading && this.state.uploadState=="edit" &&<TheMelabor loading={this.loading} parentState={this.theMelabor} image={this.state.image} imageJSON={this.state.imageJSON} imageId={this.state.imageId}/>}
+			        {!this.state.loading && this.state.uploadState=="edit" &&<TheMelabor loading={this.loading} parentState={this.theMelabor} image={this.state.image} imageJSON={this.state.imageJSON} title={this.state.title} description={this.state.description} price={this.state.price} imageId={this.state.imageId}/>}
 			    	{!this.state.loading && this.state.uploadState=="done" &&
 				    	<div style={{textAlign:"center",color:"white"}}>
 					       <div className="circle-mask">

@@ -45,6 +45,7 @@ class Upload extends React.Component {
 	        reader.onload = function (e) {
 	            // $('.imagepreview').attr('src', e.target.result);
 	            let obj={preview:e.target.result,value:val,file:input.files[0]}
+	            
 	            inputs.push(obj);
 	            self.setState({input:inputs});
 	        }
@@ -74,31 +75,34 @@ class Upload extends React.Component {
 	onUploadClick(){
 		
 		
-		if(this.state.input.length>0){
+		if((this.state.input.length>0) && (this.state.title.length>0) && (this.state.description.length>0) && (this.state.price.length>0)){
 			let index=0;
 			var user_id=this.getCookie("id");
 			let formData=new FormData();
 			let self=this;
 			this.props.loading(true); //SHOW LOADER
 			// alert(this.getCookie("id"))
-			this.props.parentState(self.state.input[0],"json","id");//SEND INFO; 
 			this.state.input.map((obj)=>{
 				index=(index+1)
 				formData.append(index,self.state.input[index-1].file)
 				//alert(index)
 			})
+			let title=this.state.title;
+			let description=this.state.description;
+			let price=this.state.price;
 
-			/*var request = new XMLHttpRequest();
+			var request = new XMLHttpRequest();
 			request.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-				 console.log(this.responseText);
+				 // console.log(this.responseText);
 				}
 			}
 			request.onload = function(oEvent) {
 			    if (request.status == 200) {
 			      // console.log("Uploaded!");
+				  self.props.parentState(self.state.input[0],this.responseText,title,description,price);//SEND INFO; 
 			      self.setState({description:"",price:"",title:"",input:[]});
-			      self.closeModal();
+			      // self.closeModal();
 			    } else {
 			      // console.log("Error " + request.status + " occurred when trying to upload your file.<br \/>");
 			      alert("Error uploading")
@@ -106,7 +110,7 @@ class Upload extends React.Component {
 			  };
 
 			request.open("POST", HOST+"/uploadimages/"+user_id,true);
-			request.send(formData);*/
+			request.send(formData);
 		}
 	}
 	render () {

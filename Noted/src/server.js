@@ -42,8 +42,10 @@ app.get("/user/:id",users.getuser);
 app.post('/verifyme',users.verify);
 app.post("/loginuser",users.login);
 app.post("/registeruser",users.register);
+app.post("/getnotebook/:id",users.notebook);
 app.post('/registeredverify', mailer.mail);
 app.post('/uploadimages/:id', file.file);
+app.post('/uploadjson/:id', file.json);
 
 app.use(express.static(path.join(__dirname)));
 
