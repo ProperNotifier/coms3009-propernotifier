@@ -30,8 +30,9 @@ class ViewNote extends React.Component {
 		this.state={
 			editor:null,
 			noteid:cat_id,
-			title:"Abstract Mathematics III",
+			title:"",
 			preview:pages,
+			description:"",
 			pdf:HOST+"/pdf"
 		}
 		// this.props.platformChange("Edit Notes");
@@ -41,9 +42,18 @@ class ViewNote extends React.Component {
 		// myCodeMirror.setValue(`\\document[10pt]{article}`);
 		// let l=myCodeMirror.mirror.getValue();
 
-	    /*$.get("localhost:8081/server.txt", function(data, status){
-	        
-	    });*/
+		$.post(HOST+"/getnote", {
+	            //post data to the server
+	            user_id:user_id,
+	            book_id:this.state.noteid
+	        },
+	        function(response){
+	        	//make use of the response here
+	        	if(response!="error"){
+				self.setState({books:response});
+			}	
+	        }
+	    );
 
 	}
 	onRead(){
@@ -62,9 +72,9 @@ class ViewNote extends React.Component {
 		        	</div>
 		        	<div className="col-xs-12 col-md-8 col-sm-6">
 			    		<div className=" col-md-12 notes-details">
-			    			<h1 className="notes-name" style={{'textTransform':"capitalize"}}>Mahlekenyane Tseole</h1>
-			    			<p className="notes-date"> Date: 20/01/2017</p>
-			    			<p className="notes-price"> R50</p>
+			    			<h1 className="notes-name" style={{'textTransform':"capitalize"}}>{this.state.author}</h1>
+			    			<p className="notes-date"> Date: {this.state.date}</p>
+			    			<p className="notes-price"> R{this.state.price}</p>
 			    			<Ratings id={this.state.noteid} rating={3} mode="rate"/>
 			    			<h3 className="col-md-12 notes-title">{this.state.title}</h3>
 
@@ -77,9 +87,7 @@ class ViewNote extends React.Component {
 		        </div>
 		        <div className="col-xs-12 col-sm-8 col-md-7">
 		          <p className="notes-description">
-		          	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
-
-Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum.
+		          	{this.state.description}
 		          </p>
 		          <div className="preview-section">
 		          		<h3>Preview</h3>

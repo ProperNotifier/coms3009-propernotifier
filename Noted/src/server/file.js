@@ -36,10 +36,6 @@ exports.file=function(req,res) {
 
 			py.stderr.on('data', (data) => {
 			  console.log(`stderr: ${data}`);
-//                        py.stdin.write(new Buffer(sampleFile.data).toString('base64'));
-                        // py.stdin.write(fileName);
-                       py.stdin.end();
-//			  res.status(200).send("error")
 			});
 
 			py.stdout.on('end', function(){
@@ -120,9 +116,33 @@ exports.json=function(req,res) {
 
 					py.stdout.on('end', function(){
 					  console.log('DONE',dataString);
+						var oldTexPath = id+rows.insertId+".tex"
+						var newTexPath = uploadDir+id+rows.insertId+".tex"
+						fs.rename(oldTexPath, newTexPath, function (err) {
+						  if (err) throw err
+						  console.log('Successfully renamed - AKA moved!')
+							var oldPdfPath = id+rows.insertId+".pdf"
+							var newPdfPath = uploadDir+id+rows.insertId+".pdf"
+							fs.rename(oldPdfPath, newPdfPath, function (err) {
+							  if (err) throw err
+							  //console.log('Successfully renamed - AKA moved!')
+								var query='UPDATE BOOKS SET book_pdf_directory=?,book_latex_directory=?,book_available=?';
+								var insertdata=[HOST+"/"+newTexPath,HOST+"/"+newPdfPath,1]
+								connection.query(query,insertdata,function(err,rows){
+									if(err){
+					        	      	 console.log("Error Updating : %s ",err );								
+					        	      	 res.status(100).send("error")
+					        	      	 return;
+						            }
+						            res.status(200).send(dataString)
+
+								})
+
+							})
+						})
 
 
-							res.status(200).send(dataString)
+							
 					});
 					py.stdin.write(objectString);
 					// py.stdin.write(fileName);

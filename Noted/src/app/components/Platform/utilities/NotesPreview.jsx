@@ -13,7 +13,7 @@ class NotesPreview extends React.Component {
 		super(props);
 		this.state={
 			noteid:this.props.id,
-			tags:["abstract","mathematics","groups"]
+			tags:[]//["abstract","mathematics","groups"]
 		}
 	} 
 	render () {

@@ -41,8 +41,10 @@ class Notebook extends React.Component {
 		    <div>
 		    	{
 		    		this.state.books.map((item,i)=>{
+		    			var name=item.firstname+" "+item.surname;
+		    			alert(item.ratings)
 		    			return(
-		    				<NotesPreview key={i} id={item.id} name={item.name} date={item.date} price={item.price} author={item.author} rating={item.rating} mode="edit"/>
+		    				<NotesPreview key={i} id={item.id} name={item.name} date={item.date} price={item.price} author={name} rating={parseInt(item.ratings)} mode="edit"/>
 		    			)
 		    		})
 		    	}

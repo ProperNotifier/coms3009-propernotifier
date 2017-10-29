@@ -1326,8 +1326,15 @@ a {
 		border:2px solid grey;
 	}
 
-	.box:hover {
+	.box:hover, .boxtext {
 		border:4px solid lime;
+	}
+	.boxtext {
+		resize: none;
+		border: none;
+		background: none;
+		color: grey;
+		display: none;
 	}
 
 
