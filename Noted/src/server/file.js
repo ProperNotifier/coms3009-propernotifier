@@ -91,7 +91,7 @@ exports.json=function(req,res) {
 		            // rows.insertId;
 		            var object={
 		            	userId:id,
-		            	bookId:2,//rows.insertId,
+		            	bookId:rows.insertId,
 		            	data:JSON.parse(newJSON)
 		            }
 					var dataString="";
