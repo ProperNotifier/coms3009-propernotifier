@@ -339,7 +339,7 @@ exports.notebook = function(req, res){
                       FROM BOOKS b 
                       LEFT JOIN USERS u ON b.book_owner_id=u.user_id 
                       LEFT JOIN RATINGS r ON b.book_id = r.rated_by
-                        WHERE b.book_available=0 AND b.book_owner_id=?
+                        WHERE b.book_available=1 AND b.book_owner_id=?
                         GROUP BY b.book_id
                       ORDER BY b.book_dateposted DESC `
             /*`SELECT b.book_id as id, b.book_name as name, b.book_description as description, b.book_price as price, 

@@ -116,13 +116,13 @@ exports.json=function(req,res) {
 
 					py.stdout.on('end', function(){
 					  console.log('DONE',dataString);
-						var oldTexPath = id+rows.insertId+".tex"
-						var newTexPath = uploadDir+id+rows.insertId+".tex"
+						var oldTexPath = id+rows.insertId
+						var newTexPath = uploadDir+id+"/"+id+rows.insertId+".tex"
 						fs.rename(oldTexPath, newTexPath, function (err) {
 						  if (err) throw err
 						  console.log('Successfully renamed - AKA moved!')
 							var oldPdfPath = id+rows.insertId+".pdf"
-							var newPdfPath = uploadDir+id+rows.insertId+".pdf"
+							var newPdfPath = uploadDir+id+"/"+id+rows.insertId+".pdf"
 							fs.rename(oldPdfPath, newPdfPath, function (err) {
 							  if (err) throw err
 							  //console.log('Successfully renamed - AKA moved!')
