@@ -186,8 +186,7 @@ class Upload extends React.Component {
 			var y = parseInt( $(this).css("top") );
 			var w = parseInt( $(this).css("width") );
 			var h = parseInt( $(this).css("height") );
-			var char =$(this).find("textarea").val();
-			obj = {"left": x, "right": x+w, "bottom": y+h, "top":y, "label": char};
+			obj = {"left": x, "right": x+w, "bottom": y+h, "top":y, "label": null};
 			bxArray.push(obj);
 		});
 		var bxJSON = JSON.stringify(bxArray);
@@ -262,14 +261,13 @@ class Upload extends React.Component {
 									var t = box.top;// + bxst.top;
 									var h = box.bottom - box.top;
 									var w = box.right - box.left;
-									var text = box.label;
 									var style={
 										top:t,
 										left:l,
 										height:h,
 										width:w
 									}
-									return <div key={index} style={style} onClick={()=>this.deleteBox(index)} onMouseDown={this.boxDown} onMouseMove={this.boxMove} onMouseUp={()=>this.boxDrags()} onMouseLeave={this.boxDrags()} id={'box'+index} className='box' ><textarea className='boxtext'rows='1' cols='4'>{text}</textarea></div>
+									return <div key={index} style={style} onClick={()=>this.deleteBox(index)} onMouseDown={this.boxDown} onMouseMove={this.boxMove} onMouseUp={()=>this.boxDrags()} onMouseLeave={this.boxDrags()} id={'box'+index} className='box' ></div>
 								})
 							}
 
@@ -296,24 +294,6 @@ function matchDispatchToProps(dispatch) {
 
 export default withRouter(connect(mapStateToProps,matchDispatchToProps)(Upload));
 
-//var bxJSON = "[]";
-$(document).ready(function() {
-
-	$('#getJSONb').click(function () {
-		var bxArray = [];
-		var obj;
-		$('#boxHolder').children('div').each(function () {
-			var x = parseInt( $(this).css("left") );
-			var y = parseInt( $(this).css("top") );
-			var w = parseInt( $(this).css("width") );
-			var h = parseInt( $(this).css("height") );
-			obj = {"left": x, "right": x+w, "bottom": y+h, "top":y, "label": null};
-			bxArray.push(obj);
-		});
-		bxJSON = JSON.stringify(bxArray);
-		console.log(bxJSON);
-	});
-});
 function moveBox(x, y, dragging, id) {
 	if(dragging) {
 		var height = parseInt( $('#'+id).css("height") );
