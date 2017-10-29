@@ -45,8 +45,12 @@ class Upload extends React.Component {
 	loading(state){
 		this.setState({loading:state})
 	}
-	upload(image,json,title,description,price){
-		this.setState({image:image,imageJSON:json,imageId:"id",title:title,description:description,price:price,uploadState:"edit",bar1:"loaded",loading:false})
+	upload(image,json,title,description,price,successful){
+		if(successful){
+			this.setState({image:image,imageJSON:json,imageId:"id",title:title,description:description,price:price,uploadState:"edit",bar1:"loaded",loading:false})
+		}else{
+			this.setState({image:image,imageJSON:json,imageId:"id",title:title,description:description,price:price,uploadState:"upload",bar1:"",loading:false})
+		}
 	}
 	theMelabor(id){
 		this.setState({imageId:id,uploadState:"done",bar2:"loaded",loading:false})

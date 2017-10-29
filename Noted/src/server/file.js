@@ -81,7 +81,7 @@ exports.json=function(req,res) {
 		         return;
 		       }
 		       let insertdata=[id,title,description,price]
-		       let query = `INSERT INTO ISSUE
+		       let query = `INSERT INTO BOOKS
 	                      SET book_owner_id=?, book_name=?, book_description=?, book_price=?`;				
 				
 		       connection.query(query,insertdata,function(err,rows) {

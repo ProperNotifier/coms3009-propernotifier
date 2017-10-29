@@ -100,12 +100,13 @@ class Upload extends React.Component {
 			request.onload = function(oEvent) {
 			    if (request.status == 200) {
 			      // console.log("Uploaded!");
-				  self.props.parentState(self.state.input[0],this.responseText,title,description,price);//SEND INFO; 
+				  self.props.parentState(self.state.input[0],this.responseText,title,description,price,true);//SEND INFO; 
 			      self.setState({description:"",price:"",title:"",input:[]});
 			      // self.closeModal();
 			    } else {
 			      // console.log("Error " + request.status + " occurred when trying to upload your file.<br \/>");
 			      alert("Error uploading")
+			      self.props.parentState(self.state.input[0],this.responseText,title,description,price,false);
 			    }
 			  };
 
