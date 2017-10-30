@@ -1,8 +1,6 @@
-import random
-from pathlib import Path
+from nose.tools import *
 from skimage import io
 
-from nose.tools import *
 from segmentation import *
 
 
