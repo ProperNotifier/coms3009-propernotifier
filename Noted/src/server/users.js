@@ -786,6 +786,51 @@ exports.savebook = function(req, res){
   });
   
 };
+exports.deletebook = function(req, res){
+  var id = req.params.id;
+  var input = JSON.parse(JSON.stringify(req.body));
+  pool.getConnection(function(err,connection){
+       if (err) {
+         connection.release();
+         res.json({"code" : 100, "status" : "Error in connection database"})
+         return;
+       }
+   
+
+       console.log('connected as id ' + connection.threadId);
+          let query=`UPDATE BOOKS b SET b.book_available=0
+                        WHERE b.book_id=?; `
+
+         connection.query(query,[input.book_id],function(err,rows){
+            connection.release();
+            if(err){
+               console.log("Error Selecting : %s ",err );
+                let data="\n===============ERROR START===============\n";
+                   data+=err;
+                   data+="\n===============ERROR END===============\n";
+                log(data);
+
+            }
+
+                //res.render('customers',{page_title:"Customers - Node.js",data:rows});
+                res.json(rows);
+                console.log("rows answer");
+                console.log(rows);
+                           
+         });
+
+       connection.on('error', function(err) {      
+             res.json({"code" : 100, "status" : "Error in connection database"});
+        let data="\n===============DATABASE CONN ERROR START===============\n";
+           data+="Error in connection database";
+           data+="\n===============DATABASE CONN ERROR END===============\n";
+        log(data);
+
+             return;     
+       });
+  });
+  
+};
 function log(data){
 
 	let log="log.txt";

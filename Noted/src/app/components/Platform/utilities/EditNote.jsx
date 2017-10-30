@@ -107,6 +107,7 @@ class EditNote extends React.Component {
 		var myCodeMirror = this.state.editor.getValue();
 		var user_id=this.getCookie("id");
 		var texfile=user_id+""+this.state.noteid;
+		var self=this;
 	    $.ajax({
 			url: HOST+"/savetex",
 			cache: false,
@@ -130,6 +131,7 @@ class EditNote extends React.Component {
 			        function(response){
 			        	//make use of the response here
 			        	console.log(response)
+			        	self.cancelClick()
 			        	/*if(response!="error"){
 			        		var note=response[0];
 			        		var state={
@@ -154,6 +156,20 @@ class EditNote extends React.Component {
 	cancelClick(){
 		this.props.platformChange("Notebook");
 		this.props.history.goBack()
+	}
+	deleteClick(){
+		$.post(HOST+"/deletebook", {
+	            //post data to the server
+	            //user_id:user_id,
+	            book_id:this.state.noteid
+	        },
+	        function(response){
+	        	//make use of the response here
+	        	console.log(response)
+				this.props.platformChange("Notebook");
+				this.props.history.goBack()	
+	        }
+	    );
 	}
 	render () {
 		return ( 
@@ -181,8 +197,9 @@ class EditNote extends React.Component {
 			    <div className="editor">
 			        <textarea id="latex-editor"/>
 			        <div className="editor-buttons-holder">
+			    		<div onClick={this.cancelClick.bind(this)} style={{backgroundColor:"red"}} className="btn">Delete</div>
 			    		<div onClick={this.saveClick.bind(this)} className="btn">Save</div>
-			    		<div onClick={this.cancelClick.bind(this)} className="btn">Cancel</div>
+			    		<div onClick={this.deleteClick.bind(this)} className="btn">Cancel</div>
 			        </div>
 
 	            </div>

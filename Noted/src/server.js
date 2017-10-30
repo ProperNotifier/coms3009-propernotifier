@@ -48,6 +48,7 @@ app.post("/getnotebook/:id",users.notebook);
 app.post("/getnote",users.note);
 app.post("/getbook",users.book);
 app.post("/savebook",users.savebook);
+app.post("/deletebook",users.deletebook);
 app.post('/registeredverify', mailer.mail);
 app.post('/uploadimages/:id', file.file);
 app.post('/uploadjson/:id', file.json);
