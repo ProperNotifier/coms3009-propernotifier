@@ -185,13 +185,16 @@ exports.tex=function(req,res) {
 
 					sp.stdout.on('end', function(){
 					  console.log('DONE');
-							res.status(200).send(dataString)
+					  fs.rename(texfilename+".pdf", uploadDir+user_id+"/"+texfilename+".pdf", function (err) {
+						  if (err) throw err
+							res.status(200).send("done")
+						})
 					});
 					// py.stdin.write(new Buffer(sampleFile.data).toString('base64'));
 					// py.stdin.write(fileName);
 					// py.stdin.end();
 
-		        res.status(200).send("DONE")
+		        // res.status(200).send("DONE")
 		    });
 	}
 }
