@@ -36,12 +36,7 @@ class EditNote extends React.Component {
 		    matchBrackets: true,
 			mode:"stex"
 		});
-		// myCodeMirror.setValue(`\\document[10pt]{article}`);
-		// let l=myCodeMirror.mirror.getValue();
-
-	    /*$.get("localhost:8081/server.txt", function(data, status){
-	        
-	    });*/
+		var self=this;
 		$.post(HOST+"/getbook", {
 	            //post data to the server
 	            //user_id:user_id,
