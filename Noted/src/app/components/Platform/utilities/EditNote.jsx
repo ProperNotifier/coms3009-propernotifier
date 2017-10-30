@@ -22,7 +22,10 @@ class EditNote extends React.Component {
 
 		this.state={
 			editor:null,
-			noteid:cat_id
+			noteid:cat_id,
+			title:"",
+			price:"",
+			description:""
 		}
 		// this.props.platformChange("Edit Notes");
 		$(".sidebar-menu-title.active").removeClass("active");
@@ -39,6 +42,25 @@ class EditNote extends React.Component {
 	    /*$.get("localhost:8081/server.txt", function(data, status){
 	        
 	    });*/
+		$.post(HOST+"/getbook", {
+	            //post data to the server
+	            //user_id:user_id,
+	            book_id:this.state.noteid
+	        },
+	        function(response){
+	        	//make use of the response here
+	        	console.log(response)
+	        	if(response!="error"){
+	        		var note=response[0];
+	        		var state={
+						title:note.title,
+						price:note.price,
+						description:note.description
+	        		}
+					self.setState(state);
+				}	
+	        }
+	    );
 	    var user_id=this.getCookie("id");
 	    $.ajax({
 			url: HOST+"/uploads/"+user_id+"/"+user_id+this.state.noteid+".tex",
@@ -47,7 +69,7 @@ class EditNote extends React.Component {
 			dataType: 'text',
 			success: function(data,status){
 				//make use of the response
-				console.log("Data: " + data + "\nStatus: " + status);
+				console.log("Retrived latex");
 				myCodeMirror.setValue(data);
 			},
 			error:function(argument,status) {
@@ -72,6 +94,15 @@ class EditNote extends React.Component {
 	    }
 	    return "";
 	}
+    handleTitle(e) {
+        this.setState({title: e.target.value});
+    }
+    handlePrice(e) {
+        this.setState({price: e.target.value});
+    }
+    handleDescription(e) {
+        this.setState({description: e.target.value});
+    }
 	saveClick(){
 		var myCodeMirror = this.state.editor.getValue();
 		var user_id=this.getCookie("id");
@@ -87,7 +118,29 @@ class EditNote extends React.Component {
 			},
 			success: function(data,status){
 				//make use of the response
-				console.log("Data: " + data + "\nStatus: " + status);
+				console.log("Save latex");
+				$.post(HOST+"/savebook", {
+			            //post data to the server
+			            //user_id:user_id,
+			            book_id:this.state.noteid,
+						title:this.state.title,
+						price:this.state.price,
+						description:this.state.description
+			        },
+			        function(response){
+			        	//make use of the response here
+			        	console.log(response)
+			        	/*if(response!="error"){
+			        		var note=response[0];
+			        		var state={
+								title:note.title,
+								price:note.price,
+								description:note.description
+			        		}
+							self.setState(state);
+						}*/	
+			        }
+			    );
 			},
 			error:function(argument,status) {
 				// body...
@@ -103,15 +156,37 @@ class EditNote extends React.Component {
 		this.props.history.goBack()
 	}
 	render () {
-		return (  
-		    <div className="editor">
-		        <textarea id="latex-editor"/>
-		        <div className="editor-buttons-holder">
-		    		<div onClick={this.saveClick.bind(this)} className="btn">Save</div>
-		    		<div onClick={this.cancelClick.bind(this)} className="btn">Cancel</div>
-		        </div>
+		return ( 
+			<div className="edit-note-container"> 
+			        	<div className="col-md-12 col-xs-12">
+			        		<div className="detail-line">			        		
+			        			<label className="col-xs-12 col-md-2">Title:</label>
+			        			<div className="col-xs-12 col-md-10">
+				        			<input onChange={this.handleTitle.bind(this)} value={this.state.title}/>
+			        			</div>
+			        		</div>
+			        		<div className="detail-line">			        		
+			        			<label className="col-xs-12 col-md-2">Price:</label>
+			        			<div className="col-xs-12 col-md-10">
+				        			<input onChange={this.handlePrice.bind(this)} value={this.state.price}/>
+			        			</div>
+			        		</div>
+			        		<div className="detail-line">
+			        			<label className="col-xs-12 col-md-2">Description:</label>
+			        			<div className="col-xs-12 col-md-10">
+					        		<textarea onChange={this.handleDescription.bind(this)} value={this.state.description} ></textarea>
+				        		</div>
+				        	</div>
+			        	</div>
+			    <div className="editor">
+			        <textarea id="latex-editor"/>
+			        <div className="editor-buttons-holder">
+			    		<div onClick={this.saveClick.bind(this)} className="btn">Save</div>
+			    		<div onClick={this.cancelClick.bind(this)} className="btn">Cancel</div>
+			        </div>
 
-            </div>
+	            </div>
+	        </div>
 	    );
 	}
 }

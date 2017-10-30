@@ -46,6 +46,8 @@ app.post("/store/:id",users.store);
 app.post("/home/:id",users.home);
 app.post("/getnotebook/:id",users.notebook);
 app.post("/getnote",users.note);
+app.post("/getbook",users.book);
+app.post("/savebook",users.savebook);
 app.post('/registeredverify', mailer.mail);
 app.post('/uploadimages/:id', file.file);
 app.post('/uploadjson/:id', file.json);

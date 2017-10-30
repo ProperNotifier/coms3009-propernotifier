@@ -1014,7 +1014,7 @@ a {
 /*EDIT NOTE START*/
 	.editor{
 		clear: both;
-		height: 80%;
+		height: 100%;
 
 	}
 	.editor #latex-editor{
@@ -1035,6 +1035,19 @@ a {
 	    text-transform: uppercase;
 	    margin-left: 10px;
 
+	}
+	.edit-note-container .detail-line,
+	.edit-note-container .detail-line input,
+	.edit-note-container .detail-line label,
+	.edit-note-container .detail-line textarea{
+		width: 100%;
+		color: black;
+	}
+	.edit-note-container .detail-line{
+		margin-bottom:12px; 
+	}
+	.edit-note-container {
+		height: 100%; 
 	}
 	.editor .btn-save{}
 

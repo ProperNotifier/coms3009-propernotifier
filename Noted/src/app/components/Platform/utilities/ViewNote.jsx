@@ -63,7 +63,7 @@ class ViewNote extends React.Component {
 						title:note.title,
 						date:note.date.split("T")[0],
 						price:note.price,
-						author:note.firstname+" "+name.surname,
+						author:note.firstname+" "+note.surname,
 						rating:parseInt(note.ratings),
 						description:note.description,
 						pdf:note.pdf,
