@@ -118,10 +118,10 @@ class EditNote extends React.Component {
 				$.post(HOST+"/savebook", {
 			            //post data to the server
 			            //user_id:user_id,
-			            book_id:this.state.noteid,
-						title:this.state.title,
-						price:this.state.price,
-						description:this.state.description
+			            book_id:self.state.noteid,
+						title:self.state.title,
+						price:self.state.price,
+						description:self.state.description
 			        },
 			        function(response){
 			        	//make use of the response here
@@ -160,7 +160,7 @@ class EditNote extends React.Component {
 	        },
 	        function(response){
 	        	//make use of the response here
-	        	console.log(response)
+	        	alert(response)
 				this.props.platformChange("Notebook");
 				this.props.history.goBack()	
 	        }
