@@ -552,10 +552,10 @@ exports.home = function(req, res){
                       FROM BOOKS b 
                       LEFT JOIN USERS u ON b.book_owner_id=u.user_id 
                       LEFT JOIN RATINGS r ON b.book_id = r.rated_by
-                      LEFT JOIN TRANSACTION t ON t.book_buyer = u.user_id
-                        WHERE b.book_available=1
+                        WHERE b.book_available=1 AND b.book_owner_id=?
                         GROUP BY b.book_id
-                      ORDER BY b.book_dateposted DESC `
+                      ORDER BY b.book_dateposted DESC 
+                      LIMIT 0, 8`
             /*`SELECT b.book_id as id, b.book_name as name, b.book_description as description, b.book_price as price, 
               b.book_dateposted as date,u.user_id as user_id,u.user_firstname as firstname, u.user_surname as surname, 
                   COUNT(r.rated_by) as ratings,

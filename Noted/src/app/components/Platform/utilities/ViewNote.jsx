@@ -36,6 +36,7 @@ class ViewNote extends React.Component {
 			price:"",
 			author:"",
 			rating:0,
+			bought:false,
 			preview:pages,
 			description:"",
 			pdf:"",
@@ -97,8 +98,10 @@ class ViewNote extends React.Component {
 	onBuy(){
 		var self=this;
 		var user_id=this.getCookie("id");
+		this.setState({bought:true})
 
-		$.post(HOST+"/buy", {
+
+		/*$.post(HOST+"/buy", {
 	            //post data to the server
 	            book_buyer:user_id,
 	            book_seller:self.state.ownerid,
@@ -112,7 +115,7 @@ class ViewNote extends React.Component {
 					self.props.history.push("/Home");
 				}	
 	        }
-	    );
+	    );*/
 	}
 	render () {
 		return (  
@@ -133,6 +136,7 @@ class ViewNote extends React.Component {
 					    		<div className="btn" onClick={this.onBuy.bind(this)}>Buy</div>
 					    		<div className="btn" onClick={this.onRead.bind(this)}>Read</div>
 					        </div>
+			    			{this.state.bought && <p style={{color:"orange"}}><b>BOUGHT</b></p>}
 			    		</div>
 		        	</div>
 		        </div>
