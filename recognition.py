@@ -23,7 +23,7 @@ class Classifier:
                            39: '\\forall', 40: '/', 41: '\gamma', 42: '\geq', 43: '>', 44: 'i', 45: '\in',
                            46: '\infty', 47: '\int', 48: 'j', 49: 'k', 50: 'l', 51: '\lambda', 52: '\leq', 53: 'lt',
                            54: '\mu', 55: '\\neq', 56: 'o', 57: 'p', 58: '\phi', 59: '\pi', 60: '\pm', 61: 'q',
-                           62: '\rightarrow', 63: '\sigma', 64: '\sqrt', 65: '\sum', 66: '\theta', 67: '\times', 68: 'u',
+                           62: '\\rightarrow', 63: '\sigma', 64: '\sqrt', 65: '\sum', 66: '\\theta', 67: '\\times', 68: 'u',
                            69: 'v', 70: 'w', 71: 'y', 72: 'z', 73: '{', 74: '}'}
         if k.image_data_format() == 'channels_first':
             self.input_shape = (1, 1, self.learnt_dim[1], self.learnt_dim[0])
@@ -37,7 +37,7 @@ class Classifier:
         slices = (slice(bbox.top, bbox.bottom), slice(bbox.left, bbox.right))
         resized_sub_img = self._resize(img[slices])
         probabilities = self.model.predict(resized_sub_img.reshape(self.input_shape), batch_size=1, verbose=0)[0]
-        bbox.label = self.categories[str(probabilities.argmax(axis=-1))]
+        bbox.label = self.categories[probabilities.argmax(axis=-1)]
 
     def classify(self, bbox_list, img):
         for bbox in bbox_list:
