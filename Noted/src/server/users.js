@@ -636,8 +636,7 @@ exports.store = function(req, res){
                       LEFT JOIN RATINGS r ON b.book_id = r.rated_by
                         WHERE b.book_available=1
                         GROUP BY b.book_id
-                      ORDER BY b.book_dateposted DESC 
-                      LIMIT 0, 8`
+                      ORDER BY b.book_dateposted DESC`
             /*`SELECT b.book_id as id, b.book_name as name, b.book_description as description, b.book_price as price, 
               b.book_dateposted as date,u.user_id as user_id,u.user_firstname as firstname, u.user_surname as surname, 
                   COUNT(r.rated_by) as ratings,
