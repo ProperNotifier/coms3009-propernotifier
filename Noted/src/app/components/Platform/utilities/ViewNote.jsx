@@ -130,7 +130,7 @@ class ViewNote extends React.Component {
 			    			<h3 className="col-md-12 notes-title">{this.state.title}</h3>
 
 					        <div className="viewer-buttons-holder">
-					    		<div className="btn">Buy</div>
+					    		<div className="btn" onClick={this.onBuy.bind(this)}>Buy</div>
 					    		<div className="btn" onClick={this.onRead.bind(this)}>Read</div>
 					        </div>
 			    		</div>
