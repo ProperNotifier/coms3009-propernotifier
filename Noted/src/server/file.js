@@ -171,7 +171,8 @@ exports.tex=function(req,res) {
 		        	res.status(100).send("error")
 		        } 
 		        console.log('Data changed\n');
-		        var sp=spawn("pdflatex -interaction=nonstopmode",[fileName]);
+		        var dataString="";
+		        var sp=spawn("pdflatex",["-interaction=nonstopmode",fileName]);
 					sp.stdout.on('data', function(data){
 					  dataString += data.toString();
 					  console.log('Summing...');
