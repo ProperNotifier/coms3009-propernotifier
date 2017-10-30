@@ -30,6 +30,7 @@ class ViewNote extends React.Component {
 		this.state={
 			editor:null,
 			noteid:cat_id,
+			ownerid:"",
 			title:"",
 			date:"",
 			price:"",
@@ -61,6 +62,7 @@ class ViewNote extends React.Component {
 	        		var note=response[0];
 	        		var state={
 						title:note.title,
+						ownerid:note.user_id,
 						date:note.date.split("T")[0],
 						price:note.price,
 						author:note.firstname+" "+note.surname,
@@ -92,12 +94,32 @@ class ViewNote extends React.Component {
 	saveClick(){
 		// var myCodeMirror = this.state.editor.getValue();
 	}
+	onBuy(){
+		var self=this;
+		var user_id=this.getCookie("id");
+
+		$.post(HOST+"/buy", {
+	            //post data to the server
+	            book_buyer:user_id,
+	            book_seller:,
+	            book_id:this.state.noteid
+	        },
+	        function(response){
+	        	//make use of the response here
+	        	console.log(response)
+	        	if(response!="error"){
+					self.props.platformChange("Home");
+					self.props.history.push("/Home");
+				}	
+	        }
+	    );
+	}
 	render () {
 		return (  
 		    <div className="view-notes-area">
 		        <div className="col-xs-12 notes-information">
 		        	<div className="col-xs-12 col-md-4 col-sm-6">
-		        		<img className="notes-picture" src="public/img/pdf.png"/>
+		        		<img className="notes-picture" src="public/img/logoblackclear.png"/>
 		        	</div>
 		        	<div className="col-xs-12 col-md-8 col-sm-6">
 			    		<div className=" col-md-12 notes-details">

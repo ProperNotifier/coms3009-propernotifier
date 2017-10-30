@@ -552,10 +552,10 @@ exports.home = function(req, res){
                       FROM BOOKS b 
                       LEFT JOIN USERS u ON b.book_owner_id=u.user_id 
                       LEFT JOIN RATINGS r ON b.book_id = r.rated_by
-                        WHERE b.book_available=1 AND b.book_owner_id=?
+                      LEFT JOIN TRANSACTION t ON t.book_buyer = u.user_id
+                        WHERE b.book_available=1
                         GROUP BY b.book_id
-                      ORDER BY b.book_dateposted DESC 
-                      LIMIT 0, 8`
+                      ORDER BY b.book_dateposted DESC `
             /*`SELECT b.book_id as id, b.book_name as name, b.book_description as description, b.book_price as price, 
               b.book_dateposted as date,u.user_id as user_id,u.user_firstname as firstname, u.user_surname as surname, 
                   COUNT(r.rated_by) as ratings,
@@ -808,7 +808,7 @@ exports.deletebook = function(req, res){
                 let data="\n===============ERROR START===============\n";
                    data+=err;
                    data+="\n===============ERROR END===============\n";
-                   
+
                 log(data);
 
             }
@@ -833,6 +833,54 @@ exports.deletebook = function(req, res){
   });
   
 };
+
+exports.buy=function(req,res) {
+  var input = JSON.parse(JSON.stringify(req.body));
+  pool.getConnection(function(err,connection){
+       if (err) {
+         connection.release();
+         res.json({"code" : 100, "status" : "Error in connection database"})
+         return;
+       }
+   
+
+       console.log('connected as id ' + connection.threadId);
+
+        let query=`INSERT INTO TRANSACTION SET
+                    book_id=?,book_seller=?,book_buyer=?
+                  `
+
+         connection.query(query,[input.book_id,input.book_seller,input.book_buyer],function(err,rows){
+            connection.release();
+            if(err){
+               console.log("Error Selecting : %s ",err );
+                let data="\n===============ERROR START===============\n";
+                   data+=err;
+                   data+="\n===============ERROR END===============\n";
+                log(data);
+
+            }
+
+                //res.render('customers',{page_title:"Customers - Node.js",data:rows});
+                res.json("rated");
+                console.log("rows answer");
+                console.log(rows.insertId);
+                           
+         });
+
+       connection.on('error', function(err) {      
+             res.json({"code" : 100, "status" : "Error in connection database"});
+        let data="\n===============DATABASE CONN ERROR START===============\n";
+           data+="Error in connection database";
+           data+="\n===============DATABASE CONN ERROR END===============\n";
+        log(data);
+
+             return;     
+       });
+  });
+
+}
+
 function log(data){
 
 	let log="log.txt";

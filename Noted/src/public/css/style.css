@@ -1342,8 +1342,9 @@ a {
 		border:2px solid grey;
 	}
 
-	.box:hover, .boxtext {
+	.box:hover, .boxtext:hover {
 		border:4px solid lime;
+		color: lime;
 	}
 	.boxtext {
 		resize: none;
@@ -1351,6 +1352,7 @@ a {
 		background: none;
 		color: grey;
 		display: none;
+		border:4px solid lime;
 	}
 
 

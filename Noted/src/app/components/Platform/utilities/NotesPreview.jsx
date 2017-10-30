@@ -22,7 +22,7 @@ class NotesPreview extends React.Component {
 		return (  
 		    <Link to={"/ViewNotes?="+this.state.noteid} onClick={()=>this.props.platformChange("View Notes")} className="notes-item col-xs-6 col-sm-4 col-md-3">
 				<div className="notes-overlay">
-				    <img className="img-back" src="public/img/pdf.png"/>
+				    <img className="img-back" src="public/img/logoblackclear.png"/>
 				    {this.props.mode=="edit"?<Link onClick={()=>this.props.platformChange("Edit Notes")} to={"/EditNotes?="+this.state.noteid} className="edit-button"><div className="btn">Edit</div></Link>:""}
 		    		<div className="notes-details-container">
 			    		<div className=" col-md-12 notes-details" style={{"color": "white"}}>

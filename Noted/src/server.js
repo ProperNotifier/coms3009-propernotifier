@@ -54,6 +54,7 @@ app.post('/uploadimages/:id', file.file);
 app.post('/uploadjson/:id', file.json);
 app.post('/savetex', file.tex);
 app.post('/rate',users.rate);
+app.post('/buy',users.buy);
 
 app.use(express.static(path.join(__dirname)));
 
