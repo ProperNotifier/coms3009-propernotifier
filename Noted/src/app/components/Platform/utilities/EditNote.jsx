@@ -160,7 +160,7 @@ class EditNote extends React.Component {
 	        },
 	        function(response){
 	        	//make use of the response here
-	        	alert(response)
+	        	console.log(response)
 				this.props.platformChange("Notebook");
 				this.props.history.goBack()	
 	        }
@@ -192,9 +192,9 @@ class EditNote extends React.Component {
 			    <div className="editor">
 			        <textarea id="latex-editor"/>
 			        <div className="editor-buttons-holder">
-			    		<div onClick={this.cancelClick.bind(this)} style={{backgroundColor:"red"}} className="btn">Delete</div>
+			    		<div onClick={this.deleteClick.bind(this)} style={{backgroundColor:"red"}} className="btn">Delete</div>
 			    		<div onClick={this.saveClick.bind(this)} className="btn">Save</div>
-			    		<div onClick={this.deleteClick.bind(this)} className="btn">Cancel</div>
+			    		<div onClick={this.cancelClick.bind(this)} className="btn">Cancel</div>
 			        </div>
 
 	            </div>
