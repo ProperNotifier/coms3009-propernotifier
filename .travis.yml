@@ -1,7 +1,17 @@
-language: node_js
-node_js:
-    - "0.12"
+language: python
+sudo: true
+python: 3.5
 install:
-  - npm install
-  - npm install --only=dev
-after_script: NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+  - pip install --upgrade pip
+  - pip install coveralls
+  - pip install coverage
+  - pip install nose
+  - pip install Pillow
+  - pip3 install --upgrade -r requirements.txt
+  
+script: 
+  - nosetests nose_latex_gen.py test_bbox.py test_seg.py test_classifier.py --with-coverage
+notifications:
+  slack: coms3009-noted:kjOHHQyiAOoWS08knpjn110C
+after_success:
+  coveralls

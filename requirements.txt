@@ -1,0 +1,10 @@
+h5py 
+Keras
+numpy
+Pillow
+pip
+scikit-image
+scikit-learn
+scipy
+tensorflow
+mysqlclient
