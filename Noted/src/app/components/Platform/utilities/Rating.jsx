@@ -6,7 +6,7 @@ class Rating extends React.Component {
 	constructor(props){
 		super(props);
 		let mode=this.props.mode;
-		switch(this.props.rating){
+		switch(parseInt(this.props.rating)){
 			case 1:{
 				this.state={
 					starRate:1,

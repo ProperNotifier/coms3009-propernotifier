@@ -104,7 +104,7 @@ class ViewNote extends React.Component {
 			    			<h1 className="notes-name" style={{'textTransform':"capitalize"}}>{this.state.author}</h1>
 			    			<p className="notes-date"> Date: {this.state.date}</p>
 			    			<p className="notes-price"> R{this.state.price}</p>
-			    			{this.state.rating>0 && <Ratings id={this.state.noteid} user={this.state.user_id} rating={this.state.rating} mode="rate"/>}
+			    			<Ratings id={this.state.noteid} user={this.state.user_id} rating={this.state.rating} mode="rate"/>
 			    			<h3 className="col-md-12 notes-title">{this.state.title}</h3>
 
 					        <div className="viewer-buttons-holder">

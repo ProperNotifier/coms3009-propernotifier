@@ -20,8 +20,8 @@ class Notebook extends React.Component {
 	        function(response){
 	        	//make use of the response here
 	        	if(response!="error"){
-				self.setState({books:response});
-			}	
+					self.setState({books:response});
+				}	
 	        }
 	    );
 	    

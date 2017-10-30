@@ -13,9 +13,24 @@ import Rating from "./utilities/Rating.jsx";
 class Home extends React.Component {
 	constructor(props){
 		super(props);
+		this.state={
+			books:[]
+		}
 		
 	}
 	componentDidMount(){
+		var user_id=this.getCookie("id")
+		var self=this;
+		$.post(HOST+"/home/"+user_id, {
+	            //post data to the server
+	        },
+	        function(response){
+	        	//make use of the response here
+	        	if(response!="error"){
+					self.setState({books:response});
+				}	
+	        }
+	    );
 		
 	}
 	render () {
@@ -73,9 +88,14 @@ class Home extends React.Component {
                         />
                    </div>    
                    <div className="recent-ad-activity col-md-12 col-xs-12">
-				        <NotesPreview mode="view"/>
-				        <NotesPreview mode="view"/>
-				        <NotesPreview mode="view"/>
+			    	{
+			    		this.state.books.map((item,i)=>{
+			    			var name=item.firstname+" "+item.surname;
+			    			return(
+			    				<NotesPreview key={i} id={item.id} name={item.name} date={item.date.split("T")[0]} price={item.price} author={name} rating={parseInt(item.ratings)} mode="view"/>
+			    			)
+			    		})
+			    	}
                    </div>
                    <div className="col-md-12 col-xs-12" ></div>
                    <div className="col-md-12 col-xs-12" ></div>
