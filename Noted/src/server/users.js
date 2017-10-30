@@ -798,8 +798,8 @@ exports.deletebook = function(req, res){
    
 
        console.log('connected as id ' + connection.threadId);
-          let query=`UPDATE BOOKS b SET b.book_available=0
-                        WHERE b.book_id=?; `
+          let query=`UPDATE BOOKS SET book_available=0
+                        WHERE book_id=?; `
 
          connection.query(query,[input.book_id],function(err,rows){
             connection.release();
@@ -814,8 +814,9 @@ exports.deletebook = function(req, res){
 
                 //res.render('customers',{page_title:"Customers - Node.js",data:rows});
                 res.json(rows);
-                console.log("rows answer");
+                console.log("rows answer UPDATE");
                 console.log(rows);
+                console.log("rows answer UPDATE");
                            
          });
 

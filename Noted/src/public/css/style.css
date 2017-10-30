@@ -1368,3 +1368,14 @@ a {
 		    }
 		}
 /*UPLOAD END*/
+
+/*PROFILE START*/
+
+	.profile .detail-line,
+	.profile .detail-line input,
+	.profile .detail-line label,
+	.profile .detail-line textarea{
+		width: 100%;
+		color: black;
+	}
+/*PROFILE END*/
