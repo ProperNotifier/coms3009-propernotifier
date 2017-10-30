@@ -12,7 +12,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 class Classifier:
     def __init__(self):
-        model = "big_model-acc:0.95-loss:0.17.h5"
+        model = "model-48-0.85-0.39.h5"
 
         self.learnt_dim = (45, 45)
         self.model = load_model(model)
