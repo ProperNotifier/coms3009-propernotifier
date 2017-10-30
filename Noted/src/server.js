@@ -3,29 +3,38 @@ var app       =    express();
 var http      =    require('http');
 var server    =    http.createServer(app);
 var bodyParser= require('body-parser');
+var fileUpload = require('express-fileupload');
 var fs = require('fs');
 
 var path = require('path');
 var users = require('./server/users.js'); 
 var mailer = require('./server/mailer.js'); 
-var logfile="server/log.txt";
+var file = require('./server/file.js'); 
+var logfile= './server/log.txt';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 process.on('uncaughtException', function (error) {
    console.log(error.stack);
 	let data="\n===============UNCAUGHTEXCEPTION START===============\n";
 	   data+=error.stack;
 	   data+="\n===============UNCAUGHTEXCEPTION END===============\n";
+/*
+  fs.appendFile(logfile, data, function(err) {
+      if(err) {
+          console.log(err.stack);
+          return console.log(err);
+      }
 
-	fs.appendFile(logfile, data, function(err) {
-	    if(err) {
-	        return console.log(err);
-	    }
-
-	    console.log("The file was saved!");
-	}); 
+      console.log("log append!");
+  });*/ 
 });
 
 app.get("/users",users.list);
@@ -33,13 +42,29 @@ app.get("/user/:id",users.getuser);
 app.post('/verifyme',users.verify);
 app.post("/loginuser",users.login);
 app.post("/registeruser",users.register);
+app.post("/store/:id",users.store);
+app.post("/home/:id",users.home);
+app.post("/getnotebook/:id",users.notebook);
+app.post("/getnote",users.note);
+app.post("/getbook",users.book);
+app.post("/savebook",users.savebook);
+app.post("/deletebook",users.deletebook);
 app.post('/registeredverify', mailer.mail);
+app.post('/uploadimages/:id', file.file);
+app.post('/uploadjson/:id', file.json);
+app.post('/savetex', file.tex);
+app.post('/rate',users.rate);
+app.post('/buy',users.buy);
 
 app.use(express.static(path.join(__dirname)));
 
 app.get("/logoblackclear",function(req,res) {
-	// body...
+  // body...
   res.sendFile(path.join(__dirname, 'public/img/logoblackclear.png'))
+});
+app.get("/loading",function(req,res) {
+  // body...
+  res.sendFile(path.join(__dirname, 'public/img/loading.gif'))
 });
 app.get("/pdf",function(req,res) {
 	// body...

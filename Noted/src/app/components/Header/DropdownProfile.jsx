@@ -5,7 +5,7 @@ import cookie from 'react-cookie';
 
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {changeAuthType} from "../../actions/actions.jsx";
+import {changeAuthType,platformChange} from "../../actions/actions.jsx";
 import {changeAuth} from "../../actions/actions.jsx";
 
 
@@ -28,6 +28,9 @@ class DropdownProfile extends React.Component {
         this.props.changeAuth("USER_AUTH");
         window.open("login.html","_self");
     }
+    onProfile(){
+        this.props.platformChange("Profile");
+    }
 	render () {
 		return (
             <ul className="dropdown-menu header-dropdown-menu" style={{"marginTop": "10px"}}>
@@ -36,12 +39,11 @@ class DropdownProfile extends React.Component {
                     <img src={this.props.user.image} className="img-circle" alt="User Image" />
                     <p>
                         {this.props.user.name} {this.props.user.surname} <br/> {this.props.user.organisation}
-                        <small>Member since Nov. 2012</small>
                     </p>
                 </li>
                 <li className="user-footer">
                     <div className="pull-left">
-                        <a className="btn btn-default btn-flat">Profile</a>
+                        <Link to="/Profile" className="btn btn-default btn-flat" onClick={()=>this.onProfile()}>Profile</Link>
                     </div>
                     <div className="pull-right">
                         <a className="btn btn-default btn-flat" onClick={()=>this.onSignOut()}>Sign out</a>
@@ -60,7 +62,7 @@ function mapStateToProps(state) {
 
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({changeAuthType:changeAuthType,changeAuth:changeAuth},dispatch);
+    return bindActionCreators({changeAuthType:changeAuthType,changeAuth:changeAuth,platformChange:platformChange},dispatch);
 }
 
 export default connect(mapStateToProps,matchDispatchToProps)(DropdownProfile);

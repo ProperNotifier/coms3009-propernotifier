@@ -14,51 +14,55 @@ import PDF from 'react-pdfjs';
 class EditNote extends React.Component {
 	constructor(props){
 		super(props);
-		let numPages= 12;
+		let numPages= 1;
 		let pages=[];
 		for (var i = 1; i <= numPages; i++) {
 			pages.push(i);
 		}
+        var a = window.location.toString();
+        if (a.indexOf("=")<0) {
+            var cat_id="";
+        } else {
+            var cat_id=a.substring(a.indexOf("=")+1);
+        }
 		this.state={
-			pdf:HOST+"/pdf",
+			noteid:cat_id,
+			pdf:"",
 			pages:pages
 		}
 		// this.props.platformChange("Edit Notes");
 	}
 	componentDidMount(){
 		$(".sidebar-menu-title.active").removeClass("active");
-	    /*let HOST="http://localhost:8081";
-	    let self=this;
-	    $.ajax({
-			url: HOST+"/pdf",
-			cache: false,
-			type: "GET",
-			dataType: 'text',
-			success: function(data,status){
-				//make use of the response
-				//console.log("Data: " + data + "\nStatus: " + status);
-				// myCodeMirror.setValue(data);
-				console.log("PDF GOT")
-				self.setState({
-					pdf:data
-				})
-
-			},
-			error:function(argument,status) {
-				// body...
-
-				console.log(argument)
-				console.log("error: " + argument.message + "\nStatus: " + status);
-			}
-		});*/
+		var self=this;
+		$.post(HOST+"/getnote", {
+	            //post data to the server
+	            user_id:user_id,
+	            book_id:self.state.noteid
+	        },
+	        function(response){
+	        	//make use of the response here
+	        	console.log(response)
+	        	if(response!="error"){
+	        		var note=response[0];
+	        		var state={
+						pdf:note.pdf
+	        		}
+					self.setState(state);
+				}	
+	        }
+	    );
 	}
-	saveClick(){
+	closeClick(){
 		// var myCodeMirror = this.state.editor.getValue();
+		this.props.platformChange("View Notes");
+		this.props.history.goBack()
+
 	}
 	render () {
 		return (  
 		    <div className="read-container">
-		    	{
+		    	{this.state.pdf.length>0 &&
 		    		this.state.pages.map((page)=>{
 				    	return(
 				    		<div className="pdf-page">
@@ -72,8 +76,7 @@ class EditNote extends React.Component {
 		    		})
 				}
 		        <div className="editor-buttons-holder">
-		    		<div onClick={this.saveClick.bind(this)} className="btn">Save</div>
-		    		<div className="btn">Cancel</div>
+		    		<div onClick={this.closeClick.bind(this)} className="btn">Close</div>
 		        </div>
 
             </div>

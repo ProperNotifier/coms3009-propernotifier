@@ -12,32 +12,35 @@ class NotesPreview extends React.Component {
 	constructor(props){
 		super(props);
 		this.state={
-			noteid:12
+			noteid:this.props.id,
+			tags:[]//["abstract","mathematics","groups"]
 		}
-	}
+	} 
 	render () {
 		let mode="";
 		this.props.mode=="edit"?(mode="/EditNotes?="):(mode="/ViewNotes?=")
 		return (  
 		    <Link to={"/ViewNotes?="+this.state.noteid} onClick={()=>this.props.platformChange("View Notes")} className="notes-item col-xs-6 col-sm-4 col-md-3">
 				<div className="notes-overlay">
-				    <img className="img-back" src="public/img/pdf.png"/>
+				    <img className="img-back" src="public/img/logoblackclear.png"/>
 				    {this.props.mode=="edit"?<Link onClick={()=>this.props.platformChange("Edit Notes")} to={"/EditNotes?="+this.state.noteid} className="edit-button"><div className="btn">Edit</div></Link>:""}
 		    		<div className="notes-details-container">
 			    		<div className=" col-md-12 notes-details" style={{"color": "white"}}>
-			    			<h1 className="col-md-12 notes-name">Abstract Mathematics III</h1>
-			    			<p> Date: 20/01/2017</p>
-			    			<p> R50</p>
+			    			<h1 className="col-md-12 notes-name">{this.props.name}</h1>
+			    			<p> Date: {this.props.date}</p>
+			    			<p> R{this.props.price}</p>
 
-			    			<Ratings id={this.state.noteid} rating={3} mode="display"/>
+			    			{this.props.ratings>0 &&<Ratings id={this.state.noteid} rating={this.props.ratings} mode="display"/>}
 
-			    			<h3 style={{'textTransform':"capitalize"}}>Mahlekenyane Tseole</h3>
+			    			<h3 style={{'textTransform':"capitalize"}}>{this.props.author}</h3>
 			    		</div>
 			    		
 			    		<div className="notes-tags">
-			    			<span>abstract</span>
-			    			<span>mathematics</span>
-			    			<span>groups</span>
+			    			{
+			    				this.state.tags.map((tag,index)=>{
+			    					return(<span key={index}>{tag}</span>)
+			    				})
+			    			}			    			
 			    		</div>
 		    		</div>
 				</div>		    

@@ -1014,7 +1014,7 @@ a {
 /*EDIT NOTE START*/
 	.editor{
 		clear: both;
-		height: 80%;
+		height: 100%;
 
 	}
 	.editor #latex-editor{
@@ -1035,6 +1035,19 @@ a {
 	    text-transform: uppercase;
 	    margin-left: 10px;
 
+	}
+	.edit-note-container .detail-line,
+	.edit-note-container .detail-line input,
+	.edit-note-container .detail-line label,
+	.edit-note-container .detail-line textarea{
+		width: 100%;
+		color: black;
+	}
+	.edit-note-container .detail-line{
+		margin-bottom:12px; 
+	}
+	.edit-note-container {
+		height: 100%; 
 	}
 	.editor .btn-save{}
 
@@ -1108,15 +1121,37 @@ a {
 	.upload-container {
 		z-index: 1032;
 		width: 100%;
-		height: 100%;
+		height: auto;
 		position: absolute;
 		top:0;
 		left: 0;
 		background-color: rgba(0,0,0,0.7);
+		min-height: 100%;
+		padding-bottom: 30px;
 
 	}
 	.upload-container .upload-container-elements .top-line{
 		width: 100%;
+	}
+	.upload-container .upload-container-elements .top-line .loading-bar-container{
+		width: 100%;
+		margin-top: 30px;
+		text-align: center;
+	}
+	.upload-container .upload-container-elements .top-line .loading-bar-container .loading-bar-holder{
+		margin: auto;
+		display: block;
+	}
+	.upload-container .upload-container-elements .top-line .loading-bar-container .loading-bar-holder .loading-bar{
+		width: 100px;
+		height: 2px;
+		display: inline-flex;
+		border-radius: 500px;
+		margin-left: 5px;
+		background-color: white;
+	}
+	.upload-container .upload-container-elements .top-line .loading-bar-container .loading-bar-holder .loaded{
+		background-color: #b32828;
 	}
 	.upload-container .upload-container-elements .top-line .close-btn{
 		font-size: 20px;
@@ -1124,18 +1159,21 @@ a {
 		position: absolute;
 		right: 30px;
 		top: 30px;
+		cursor: pointer;
 
 	}
 	.upload-container .upload-container-elements .bottom-holder{
 		margin-top: 60px;
 		width: 100%;
 		height: 100%;
+		color: white;
 	}
 	.upload-container .upload-container-elements .bottom-holder .detail-line,
 	.upload-container .upload-container-elements .bottom-holder .detail-line input,
 	.upload-container .upload-container-elements .bottom-holder .detail-line label,
 	.upload-container .upload-container-elements .bottom-holder .detail-line textarea{
 		width: 100%;
+		color: black;
 	}
 	.upload-container .upload-container-elements .bottom-holder .detail-line textarea{
 		height: 200px;
@@ -1143,10 +1181,12 @@ a {
 	.upload-container .upload-container-elements .bottom-holder .detail-line label{
 		color: white;
 	}
-	.upload-container .upload-container-elements .bottom-holder .tags-holder{
+	.upload-container .upload-container-elements .bottom-holder .tags-holder,
+	.profile .tags-holder{
 		width: 100%;
 	}
-	.upload-container .upload-container-elements .bottom-holder .tags-holder span{
+	.upload-container .upload-container-elements .bottom-holder .tags-holder span,
+	.profile .tags-holder span{
 		border-radius: 10px;
 		background-color: #999;		
 		padding: 2px 4px;
@@ -1154,7 +1194,15 @@ a {
 		margin-right: 2px;
 		margin-bottom: 5px;
 		display: inline-block;
-		text-transform:lowercase;		
+		text-transform:lowercase;
+		cursor: pointer;		
+	}
+	.upload-container .upload-container-elements .bottom-holder .tags-holder span.selected,
+	.profile .tags-holder span.selected{
+		background-color: #333;			
+	}
+	.upload-container .upload-container-elements .bottom-holder .picture-list{
+		display: flow-root;
 	}
 	.upload-container .upload-container-elements .bottom-holder .add-picture{
 		display: block;
@@ -1163,6 +1211,7 @@ a {
 		color: white;
 		width: 70px;
 		cursor: pointer;
+		text-align: center;
 	}
 	.upload-container .upload-container-elements .bottom-holder .upload-btn{
 		color: white;
@@ -1171,10 +1220,180 @@ a {
 	    float: right;
 	    margin-right: 40px;
 	}
+	.upload-container .upload-btn{
+		color: white;
+		background-color: #818181;
+		border-radius: 10px;
+	    float: right;
+	    margin-right: 40px;
+	}
+	.upload-container .melabor-holder label{
+	    margin-right: 15px;
+	}
+	/*.upload-container .upload-container-elements .bottom-holder .picture-list .upload-image-item{
+		color: white;
+		background-color: #818181;
+		border-radius: 10px;
+		margin-bottom: 10px;
+	}
+	.upload-container .upload-container-elements .bottom-holder .picture-list .upload-image-item img{
+		width: 100px;
+		height: 100px;
+		margin: auto;
+		display: block;
+	}*/
+	.upload-container .upload-container-elements .bottom-holder .picture-list .upload-image-item{
+		color: white;
+		background-color: #818181;
+		border-radius: 10px;
+		margin-bottom: 10px;
+		width: 100%;
+		height: auto;
+	}
+	.upload-container .upload-container-elements .bottom-holder .picture-list .upload-image-item img{
+		width: 100%;
+		height: auto;
+		margin: auto;
+		display: block;
+	}
+	.upload-container .upload-container-elements .circle-mask {
+	    border-radius: 50%;
+	    width: 450px;
+	    height: 450px;
+	    background-color: #b32828;/*#181818;*/
+	    margin: auto;
+	    margin-top: 50px;
+	    color: whitesmoke;
+	    font-family: Righteous;
+	    font-size: 80px;
+		font-weight: bold;
+	}
+	.upload-container .upload-container-elements .circle-mask.flicker{
+		-webkit-animation: flickerLoad 5s linear infinite;
+		-moz-animation: flickerLoad 5s linear infinite;
+		-o-animation:flickerLoad 5s linear infinite;
+		animation:flickerLoad 5s linear infinite; 
+	}
+	.upload-container .upload-container-elements .circle-mask img{
+	    width: 450px;
+	    height: 450px;
+	}
+    @keyframes flickerLoad {
+      0% {opacity: 0.0;}
+      12.5%{opacity: 0.50;}
+      25%{opacity: 1.00;}
+      37.5%{opacity: 0.50;}
+      50% {opacity: 0.0;}
+      62.5%{opacity: 0.50;}
+      75%{opacity: 1.0;}
+      87.5%{opacity: 0.50;}
+      100%{opacity: 0.0;}
+     }
+
+      @-webkit-keyframes flickerLoad {
+      0% {opacity: 0.0;}
+      12.5%{opacity: 0.50;}
+      25%{opacity: 1.00;}
+      37.5%{opacity: 0.50;}
+      50% {opacity: 0.0;}
+      62.5%{opacity: 0.50;}
+      75%{opacity: 1.0;}
+      87.5%{opacity: 0.50;}
+      100%{opacity: 0.0;}
+     }
+      @-moz-keyframes flickerLoad {
+      0% {opacity: 0.0;}
+      12.5%{opacity: 0.50;}
+      25%{opacity: 1.00;}
+      37.5%{opacity: 0.50;}
+      50% {opacity: 0.0;}
+      62.5%{opacity: 0.50;}
+      75%{opacity: 1.0;}
+      87.5%{opacity: 0.50;}
+      100%{opacity: 0.0;}
+     }
+
+      @-o-keyframes flickerLoad {
+      0% {opacity: 0.0;}
+      12.5%{opacity: 0.50;}
+      25%{opacity: 1.00;}
+      37.5%{opacity: 0.50;}
+      50% {opacity: 0.0;}
+      62.5%{opacity: 0.50;}
+      75%{opacity: 1.0;}
+      87.5%{opacity: 0.50;}
+      100%{opacity: 0.0;}
+     }
+	#boxHolder {
+		border:2px solid grey;
+		float: left;
+		background-color: pink;
+		margin-top: 0px;
+		padding-top: 0px;
+		position: relative;
+		margin: auto;
+	}
+	.box {
+		fill: none;
+		background-color: none;
+		position: absolute;
+		height: 100px;
+		width: 100px;
+		border:2px solid grey;
+	}
+
+	.box:hover, .boxtext:hover {
+		border:4px solid lime;
+		color: lime;
+	}
+	.boxtext {
+		resize: none;
+		border: none;
+		background: none;
+		color: grey;
+		display: none;
+		border:4px solid lime;
+	}
+
 
 		@media screen and (max-width: 600px) {
 			.upload-container .upload-container-elements .bottom-holder .upload-btn{
 			    margin-right: 0px;
 			}
+		    .upload-container .upload-container-elements .circle-mask {
+			    width: 150px;
+			    height: 150px;
+			    font-size: 50px;
+
+		    }
+		    .upload-container .upload-container-elements .circle-mask img {
+			    width: 150px;
+			    height: 150px;
+
+		    }
 		}
 /*UPLOAD END*/
+
+/*PROFILE START*/
+
+	.profile .detail-line,
+	.profile .detail-line input,
+	.profile .detail-line label,
+	.profile .detail-line textarea{
+		width: 100%;
+		color: black;
+	}
+	.profile{
+		max-width: 600px;
+		margin: auto;
+	}
+	.profile .image{
+		width: 100%;
+		
+	}
+	.profile .image img{
+		width: 150px;
+		margin: auto;
+		display: block;
+	}
+/*PROFILE END*/

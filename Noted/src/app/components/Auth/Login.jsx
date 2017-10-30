@@ -35,6 +35,7 @@ class Auth extends React.Component {
 
     	let email=this.state.username;
     	let password=this.state.password;
+        this.setState({error: ''});
         if (email=="") {
             this.setState({error: 'Please enter email'});
 
@@ -52,7 +53,7 @@ class Auth extends React.Component {
                     if ((auth == null) || (auth.length==0)){
                         this.setState({error: 'incorrect email/password'});
                         this.setState({password: ''});
-                        $(".form-padding")[0].reset();
+                        //$(".form-padding")[0].reset();
                     }else {
                         /*cookie.save('avo_user', auth.id, { path: '/' });
                         this.props.loggeduser("USER_LOGGING_IN",auth);
@@ -114,6 +115,7 @@ class Auth extends React.Component {
 		                            className='form-control'
 		                            placeholder='Email or Username'
 		                            required
+                                    value={this.state.username}
 		                            onChange={this.onUsernameChange.bind(this)}
 		                        />
 
@@ -122,6 +124,7 @@ class Auth extends React.Component {
 		                            className='form-control'
 		                            placeholder='Password'
 		                            required
+                                    value={this.state.password}
 		                            onChange={this.onPasswordChange.bind(this)}
 		                        />
 		                        <span className="error-message col-xs-12">{this.state.error}</span>

@@ -8,7 +8,7 @@ import {Redirect,Switch,Route} from 'react-router-dom';
 import Home from "./Platform/Home.jsx";
 import Store from "./Platform/Store.jsx";
 import Notebook from "./Platform/Notebook.jsx";
-import Stats from "./Platform/Stats.jsx";
+import Profile from "./Platform/Profile.jsx";
 import EditNote from "./Platform/utilities/EditNote.jsx";
 import ViewNote from "./Platform/utilities/ViewNote.jsx";
 import ReadNote from "./Platform/utilities/ReadNote.jsx";
@@ -43,7 +43,7 @@ class Platform extends React.Component {
                           <Route path="/Home" component={Home} />
                   			  <Route path="/index.html" component={Home} />
                           <Route path="/Notebook" component={Notebook}/>
-                          <Route path="/Stats" component={Stats} />
+                          <Route path="/Profile" component={Profile} />
                           <Route path="/Store" component={Store} />
                           <Route path="/EditNotes" component={EditNote}/>
                           <Route path="/ViewNotes" component={ViewNote}/>
