@@ -808,6 +808,7 @@ exports.deletebook = function(req, res){
                 let data="\n===============ERROR START===============\n";
                    data+=err;
                    data+="\n===============ERROR END===============\n";
+                   
                 log(data);
 
             }

@@ -153,6 +153,7 @@ class EditNote extends React.Component {
 		this.props.history.goBack()
 	}
 	deleteClick(){
+		var self=this;
 		$.post(HOST+"/deletebook", {
 	            //post data to the server
 	            //user_id:user_id,
@@ -161,8 +162,8 @@ class EditNote extends React.Component {
 	        function(response){
 	        	//make use of the response here
 	        	console.log(response)
-				this.props.platformChange("Notebook");
-				this.props.history.goBack()	
+				self.props.platformChange("Notebook");
+				self.props.history.goBack()	
 	        }
 	    );
 	}

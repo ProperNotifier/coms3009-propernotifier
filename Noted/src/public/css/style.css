@@ -1181,10 +1181,12 @@ a {
 	.upload-container .upload-container-elements .bottom-holder .detail-line label{
 		color: white;
 	}
-	.upload-container .upload-container-elements .bottom-holder .tags-holder{
+	.upload-container .upload-container-elements .bottom-holder .tags-holder,
+	.profile .tags-holder{
 		width: 100%;
 	}
-	.upload-container .upload-container-elements .bottom-holder .tags-holder span{
+	.upload-container .upload-container-elements .bottom-holder .tags-holder span,
+	.profile .tags-holder span{
 		border-radius: 10px;
 		background-color: #999;		
 		padding: 2px 4px;
@@ -1195,7 +1197,8 @@ a {
 		text-transform:lowercase;
 		cursor: pointer;		
 	}
-	.upload-container .upload-container-elements .bottom-holder .tags-holder span.selected{
+	.upload-container .upload-container-elements .bottom-holder .tags-holder span.selected,
+	.profile .tags-holder span.selected{
 		background-color: #333;			
 	}
 	.upload-container .upload-container-elements .bottom-holder .picture-list{
@@ -1377,5 +1380,18 @@ a {
 	.profile .detail-line textarea{
 		width: 100%;
 		color: black;
+	}
+	.profile{
+		max-width: 600px;
+		margin: auto;
+	}
+	.profile .image{
+		width: 100%;
+		
+	}
+	.profile .image img{
+		width: 150px;
+		margin: auto;
+		display: block;
 	}
 /*PROFILE END*/

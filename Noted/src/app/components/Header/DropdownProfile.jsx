@@ -39,7 +39,6 @@ class DropdownProfile extends React.Component {
                     <img src={this.props.user.image} className="img-circle" alt="User Image" />
                     <p>
                         {this.props.user.name} {this.props.user.surname} <br/> {this.props.user.organisation}
-                        <small>Member since Nov. 2012</small>
                     </p>
                 </li>
                 <li className="user-footer">
