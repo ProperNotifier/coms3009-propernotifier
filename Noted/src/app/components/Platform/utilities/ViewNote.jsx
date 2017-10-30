@@ -101,8 +101,8 @@ class ViewNote extends React.Component {
 		$.post(HOST+"/buy", {
 	            //post data to the server
 	            book_buyer:user_id,
-	            book_seller:,
-	            book_id:this.state.noteid
+	            book_seller:self.state.ownerid,
+	            book_id:self.state.noteid
 	        },
 	        function(response){
 	        	//make use of the response here
