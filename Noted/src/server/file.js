@@ -170,7 +170,26 @@ exports.tex=function(req,res) {
 		        if(err){
 		        	res.status(100).send("error")
 		        } 
-		        console.log('Data replaced \n', data);
+		        console.log('Data changed\n');
+		        var sp=spawn("pdflatex -interaction=nonstopmode",[fileName]);
+					sp.stdout.on('data', function(data){
+					  dataString += data.toString();
+					  console.log('Summing...');
+					});
+
+					sp.stderr.on('data', (data) => {
+					  console.log(`stderr: ${data}`);
+					  res.status(100).send("error")
+					});
+
+					sp.stdout.on('end', function(){
+					  console.log('DONE');
+							res.status(200).send(dataString)
+					});
+					// py.stdin.write(new Buffer(sampleFile.data).toString('base64'));
+					// py.stdin.write(fileName);
+					// py.stdin.end();
+
 		        res.status(200).send("DONE")
 		    });
 	}
