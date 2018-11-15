@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "webpack -d --watch",
+    "start": "node ./src/server.js",
     "pack": "webpack -p"
   },
   "author": "Mahlekenyane Tseole",

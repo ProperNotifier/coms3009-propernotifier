@@ -9,8 +9,8 @@ var pool      =    mysql.createPool({
    connectionLimit : 100, //important
    host     : 'localhost',
    user     : 'root',
-   password : 'password',
-   database : 'Noted',
+   password : 'passsql',
+   database : 'AvoFeed',
    debug    :  false
 });
 exports.POOL=pool;

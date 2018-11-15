@@ -1,0 +1,8 @@
+
+===============SENDMAIL ERROR START===============
+Error: getaddrinfo EAI_AGAIN smtp.gmail.com:465
+===============SENDMAIL ERROR END===============
+
+===============SENDMAIL ERROR START===============
+Error: getaddrinfo EAI_AGAIN smtp.gmail.com:465
+===============SENDMAIL ERROR END===============
