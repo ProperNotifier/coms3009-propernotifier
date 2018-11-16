@@ -1,0 +1,40 @@
+
+===============ERROR START===============
+Error: ER_NO_SUCH_TABLE: Table 'AvoFeed.BOOKS' doesn't exist
+===============ERROR END===============
+
+===============ERROR START===============
+Error: ER_NO_SUCH_TABLE: Table 'AvoFeed.BOOKS' doesn't exist
+===============ERROR END===============
+
+===============ERROR START===============
+Error: ER_NO_SUCH_TABLE: Table 'AvoFeed.BOOKS' doesn't exist
+===============ERROR END===============
+
+===============ERROR START===============
+Error: ER_NO_SUCH_TABLE: Table 'AvoFeed.BOOKS' doesn't exist
+===============ERROR END===============
+
+===============ERROR START===============
+Error: ER_NO_SUCH_TABLE: Table 'AvoFeed.BOOKS' doesn't exist
+===============ERROR END===============
+
+===============ERROR START===============
+Error: ER_NO_SUCH_TABLE: Table 'AvoFeed.BOOKS' doesn't exist
+===============ERROR END===============
+
+===============ERROR START===============
+Error: ER_NO_SUCH_TABLE: Table 'AvoFeed.BOOKS' doesn't exist
+===============ERROR END===============
+
+===============ERROR START===============
+Error: ER_NO_SUCH_TABLE: Table 'AvoFeed.BOOKS' doesn't exist
+===============ERROR END===============
+
+===============ERROR START===============
+Error: ER_NO_SUCH_TABLE: Table 'AvoFeed.BOOKS' doesn't exist
+===============ERROR END===============
+
+===============ERROR START===============
+Error: ER_NO_SUCH_TABLE: Table 'AvoFeed.BOOKS' doesn't exist
+===============ERROR END===============

@@ -4,7 +4,7 @@ var fs = require('fs');
 var spawn = require('child_process').spawn;
 const POOL = require("./users").POOL;
 
-var pyOCRDir="../../../../Seg/coms3009-propernotifier/";
+var pyOCRDir="./python/";
 var pythonIMAGE=pyOCRDir+"pyocr.py";//image.py";
 var pythonJSON=pyOCRDir+"latex_gen.py";
 
@@ -75,30 +75,6 @@ exports.json=function(req,res) {
 
 			let now=(new Date()).getTime();
 			let fileName=id+now+".json";
-			POOL.getConnection(function(err,connection){
-		       if (err) {
-		         connection.release();
-		         // res.json({"code" : 100, "status" : "Error in connection database"});
-		         return;
-		       }
-		       let insertdata=[id,title,description,price]
-		       let query = `INSERT INTO BOOKS
-	                      SET book_owner_id=?, book_name=?, book_description=?, book_price=?`;				
-				console.log("Aout to db")
-		       connection.query(query,insertdata,function(err,rows) {
-				console.log("DB");
-		            if(err){
-	        	      	 console.log("Error Inserting : %s ",err );
-				
-	        	      	 res.status(100).send("error")
-	        	      	 return;
-		            }
-		            // rows.insertId;
-		            var object={
-		            	"userId":id,
-		            	"bookId":rows.insertId,
-		            	"data":JSON.parse(newJSON)
-		            }
 					var dataString="";
 					var objectString=JSON.stringify(object);
 					// console.log("UP fileEncoding "+sampleFile.encoding)
@@ -124,20 +100,7 @@ exports.json=function(req,res) {
 							var oldPdfPath = id+rows.insertId+".pdf"
 							var newPdfPath = uploadDir+id+"/"+id+rows.insertId+".pdf"
 							fs.rename(oldPdfPath, newPdfPath, function (err) {
-							  if (err) throw err
-							  //console.log('Successfully renamed - AKA moved!')
-								var query='UPDATE BOOKS SET book_pdf_directory=?,book_latex_directory=?,book_available=?';
-								var insertdata=[HOST+"/"+newPdfPath,HOST+"/"+newTexPath,1]
-								connection.query(query,insertdata,function(err,rows){
-									if(err){
-					        	      	 console.log("Error Updating : %s ",err );								
-					        	      	 res.status(100).send("error")
-					        	      	 return;
-						            }
 						            res.status(200).send(dataString)
-
-								})
-
 							})
 						})
 
@@ -147,8 +110,7 @@ exports.json=function(req,res) {
 					py.stdin.write(objectString);
 					// py.stdin.write(fileName);
 					py.stdin.end();
-		        });
-		   });
+		  //  });
 			
 		console.log("==================")
 		
